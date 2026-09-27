@@ -28,11 +28,11 @@ define config.check_conflicting_properties = True
 define gui.accent_color = '#00cc99'
 
 ## The color used for a text button when it is neither selected nor hovered.
-define gui.idle_color = '#888888'
+define gui.idle_color = '#f1f1f1'
 
 ## The small color is used for small text, which needs to be brighter/darker to
 ## achieve the same effect.
-define gui.idle_small_color = '#aaaaaa'
+define gui.idle_small_color = '#f1f1f1'
 
 ## The color that is used for buttons and bars that are hovered.
 define gui.hover_color = '#66e0c1'
@@ -57,19 +57,19 @@ define gui.interface_text_color = '#ffffff'
 ## Fonts and Font Sizes ########################################################
 
 ## The font used for in-game text.
-define gui.text_font = "DejaVuSans.ttf"
+define gui.text_font = "fonts/Pixelta-A.ttf"
 
 ## The font used for character names.
-define gui.name_text_font = "DejaVuSans.ttf"
+define gui.name_text_font = "fonts/Pixelta-A.ttf"
 
 ## The font used for out-of-game text.
-define gui.interface_text_font = "DejaVuSans.ttf"
+define gui.interface_text_font = "fonts/Pixelta-A.ttf"
 
 ## The size of normal dialogue text.
-define gui.text_size = 33
+define gui.text_size = 50
 
 ## The size of character names.
-define gui.name_text_size = 45
+define gui.name_text_size = 50
 
 ## The size of text in the game's user interface.
 define gui.interface_text_size = 33
@@ -90,8 +90,19 @@ define gui.title_text_size = 75
 define gui.main_menu_background = "gui/main_menu.png"
 define gui.game_menu_background = "gui/game_menu.png"
 
+## Contour du texte de la réplique (épaisseur, couleur, offset_x, offset_y)
+define gui.dialogue_outlines = [ (2, "#000000", 0, 0) ]
 
-## Dialogue ####################################################################
+## Contour du nom du personnage
+define gui.name_outlines = [ (2, "#000000", 0, 0) ]
+
+init python:
+    # 1. Contour sur toutes les répliques
+    style.say_dialogue.outlines = [(2, "#eee6e6", 0, 0)]
+
+    # 2. Contour sur tous les noms de personnages
+    style.say_label.outlines = [(2, "#eee6e6", 0, 0)]
+## Dialogue ####################################################################R
 ##
 ## These variables control how dialogue is displayed on the screen one line at a
 ## time.
@@ -101,13 +112,13 @@ define gui.textbox_height = 278
 
 ## The placement of the textbox vertically on the screen. 0.0 is the top, 0.5 is
 ## center, and 1.0 is the bottom.
-define gui.textbox_yalign = 1.0
+define gui.textbox_yalign = 0.9
 
 
 ## The placement of the speaking character's name, relative to the textbox.
 ## These can be a whole number of pixels from the left or top, or 0.5 to center.
-define gui.name_xpos = 360
-define gui.name_ypos = 0
+define gui.name_xpos = 0
+define gui.name_ypos = -60
 
 ## The horizontal alignment of the character's name. This can be 0.0 for left-
 ## aligned, 0.5 for centered, and 1.0 for right-aligned.
@@ -130,8 +141,8 @@ define gui.namebox_tile = False
 ## The placement of dialogue relative to the textbox. These can be a whole
 ## number of pixels relative to the left or top side of the textbox, or 0.5 to
 ## center.
-define gui.dialogue_xpos = 402
-define gui.dialogue_ypos = 75
+define gui.dialogue_xpos = 10
+define gui.dialogue_ypos = 0
 
 ## The maximum width of dialogue text, in pixels.
 define gui.dialogue_width = 1116

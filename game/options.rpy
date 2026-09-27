@@ -1,4 +1,8 @@
-﻿## This file contains options that can be changed to customize your game.
+﻿init python:
+    # On insère un calque "background" tout au fond, avant 'master'
+    config.layers = [ 'background', 'room_layer', 'master', 'screens', 'transient', 'overlay' ]
+
+## This file contains options that can be changed to customize your game.
 ##
 ## Lines beginning with two '#' marks are comments, and you shouldn't uncomment
 ## them. Lines beginning with a single '#' mark are commented-out code, and you
