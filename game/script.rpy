@@ -1,12 +1,18 @@
 ﻿init python:
     class Room():
-        def __init__(self, id, bg):
+        def __init__(self, id, bg, neighbors=[]):
             self.id = id
             self.bg= bg
             self.hotspots = []
             self.convos = []
-            self.neighbors = []
+            self.neighbors = neighbors
             self.cinematic = None #on mets un string pour trigger un label à l'entrée de la pièce par exemple
+        
+        def add_neighbor(self, nextRoom):
+            self.neighbors.append(nextRoom)
+        
+        def remove_neighbors(self, roomToRemove):
+            self.neighbors.remove(roomToRemove)
 
     class Convos():
         def __init__(self, action, chara):
