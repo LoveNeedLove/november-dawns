@@ -95,8 +95,9 @@ style frame:
 ##
 ## https://www.renpy.org/doc/html/screen_special.html#say
 
-screen say(who, what):
+screen say(who, what) layer 'overlay':
     style_prefix "say"
+    zorder 100
 
     # fond
     frame:
@@ -135,6 +136,31 @@ screen say(who, what):
     ## phone variant - there's no room.
     if not renpy.variant("small"):
         add SideImage() xalign 0.0 yalign 1.0
+
+screen room_screen():
+    zorder 10
+    $room_w = 1300
+    $room_h = 700
+    $dialogue_top_y = 840  # Bord haut du dialogue
+
+    # 1. Le viewport impose les dimensions et le masque (découpage)
+    viewport:
+        xsize room_w
+        ysize room_h
+        xalign 0.5
+        yanchor 1.0
+        ypos dialogue_top_y
+
+
+        # 2. L'imagemap à l'intérieur
+        imagemap:
+            # logique de zoom/animation se jouerait ici pour rester dans le rectangle
+            
+            idle current_room.bg
+
+            for h in current_room.hotspots:
+                if h.is_active():
+                    hotspot h.rect action h.action
 
 
 ## Make the namebox available for styling through the Character object.
@@ -256,10 +282,10 @@ style choice_button_text is default:
 ## The quick menu is displayed in-game to provide easy access to the out-of-game
 ## menus.
 
-screen quick_menu():
+screen quick_menu() layer 'overlay':
 
     ## Ensure this appears on top of other screens.
-    zorder 100
+    zorder 200
 
     if quick_menu:
 

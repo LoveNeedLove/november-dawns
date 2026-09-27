@@ -1,7 +1,19 @@
-﻿init python:
-    # On insère un calque "background" tout au fond, avant 'master'
-    config.layers = [ 'background', 'room_layer', 'master', 'screens', 'transient', 'overlay' ]
+﻿define config.layers = [
+    'master',           # Fond noir / Shaders
+    'transient',        # Système
+    'screens',          # room_screen
+    'front_sprites',    # Personnages (Eileen)
+    'overlay'           # Dialogues, choix, UI prioritaire
+]
 
+init python:
+    # 1. Eileen sur front_sprites
+    config.tag_layer["Eileen"] = "front_sprites"
+
+    # 2. Forcer explicitement le moteur de dialogue sur overlay
+    config.say_layer = "overlay"
+    config.choice_layer = "overlay"
+    
 ## This file contains options that can be changed to customize your game.
 ##
 ## Lines beginning with two '#' marks are comments, and you shouldn't uncomment
