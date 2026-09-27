@@ -96,18 +96,39 @@ style frame:
 ## https://www.renpy.org/doc/html/screen_special.html#say
 
 screen say(who, what):
+    style_prefix "say"
 
-    window:
-        id "window"
+    # fond
+    frame:
+        xalign 0.5
+        yalign 0.9
+        xsize 1400
+        ysize 240
+        background Solid("#33dbe7e1")
+        padding (0, 0)
+
+        # 2. LA BOÎTE BLANCHE POUR LE TEXTE (window id "window")
+        window:
+            id "window"
+            xalign 0.5
+            yalign 0.5
+            xsize 1300
+            ysize 200
+            background Solid("#fffffff1")
+            padding (35, 25, 35, 25)
+
+            text what:
+                id "what"
+                color "#222222" 
+    
 
         if who is not None:
-
             window:
                 id "namebox"
                 style "namebox"
                 text who id "who"
 
-        text what id "what"
+    # Texte sombre pour contraster avec le blanc
 
 
     ## If there's a side image, display it above the text. Do not display on the
