@@ -1,6 +1,6 @@
 init python:
     class Proof:
-        def __init__(self, name, description, iconPath):
+        def __init__(self, name, description, icon):
             self.name = name
             self.description = description
-            self.iconPath = iconPath
+            self.icon = icon # Le path de l'icone
