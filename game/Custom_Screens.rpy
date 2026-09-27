@@ -1,6 +1,6 @@
 init python:
-    def create_Proof(name, description, icon): # Créé un objet preuve, et l'ajoute dans l'inventaire
-        inventory.append(Proof(name, description, icon))
+    def addProofToInventory(name, description, icon, room, posX, posY): # Créé un objet preuve, et l'ajoute dans l'inventaire
+        inventory.append(Proof(name, description, icon, room, posX, posY))
         return
     
     def toggle_Inventory():
@@ -26,7 +26,7 @@ screen livre: # Bouton basique pour récupérer un objet dans son inventaire
         idle "Gray_book.png"
         at custom_zoom
         action [Hide("coucou"),
-                Function(create_Proof, "le livre", "cest un beau livre", "Gray_book.png"),
+                Function(addProofToInventory, "le livre", "cest un beau livre", "Gray_book.png", "Salon", 10, 10),
                 Call("recuperer_item", "livregris")]
 
 transform custom_zoom:
