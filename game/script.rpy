@@ -74,24 +74,17 @@ label room_loop:
     jump room_loop
 
 label start:
+    $ livingRoom = Room("livingRoom", "backgrounds/living_room_1.png")
+    $ current_room = livingRoom
 
-    # Show a background. This uses a placeholder by default, but you can
-    # add a file (named either "bg room.png" or "bg room.jpg") to the
-    # images directory to show it.
+    image Eileen = Solid("#4a6fa5", xsize=400, ysize=900, xalign=0.8, yalign=1.0)
 
-    scene bg room
+    # Affiche la pièce en fond
+    show screen room_screen
 
-    # This shows a character sprite. A placeholder is used, but you can
-    # replace it by adding a file named "eileen happy.png" to the images
-    # directory.
+    # Dialogue de test par-dessus
+    show Eileen
+    e "Feur 67 ?"
 
-    show eileen happy
-    # These display lines of dialogue.
-
-    e "You've created a new Ren'Py game."
-
-    e "Once you add a story, pictures, and music, you can release it to the world!"
-
-    # This ends the game.
-
-    return
+    # Ensuite, on bascule sur la boucle interactive
+    jump room_loop
