@@ -18,11 +18,15 @@ label room_loop:
 
 
 label start:
-    $ livingRoom = Room("livingRoom", "backgrounds/living_room_1.png")
-    $ current_room = livingRoom
+    call initialisation
+
+    $ current_room = R_livingRoom
 
     image Eileen = Solid("#4a6fa5", xsize=400, ysize=900, xalign=0.8, yalign=1.0)
 
+    # Affiche le bouton pour toggle la minimap
+    show screen minimap_toggle
+    
     # Affiche la pièce en fond
     show screen room_screen
 
@@ -53,3 +57,10 @@ label start:
     $ in_cross_examination = True
     # Lancement de la phase d'interrogatoire
     jump cx_display
+
+label room_not_neighbor:
+    image Banane = Solid("#e1ea61", xsize=500, ysize=100, xalign=0.5, yalign=1.0)
+    hide Eileen
+    show Banane
+    e "OMG.... Cette room n'existe PAAAAAAAAS"
+    return
