@@ -1,8 +1,12 @@
 init python:
-    def addProofToInventory(name, description, icon, room, posX, posY): # Créé un objet preuve, et l'ajoute dans l'inventaire
+    def createAndAddProofToInventory(name, description, icon, room, posX, posY): # Créé un objet preuve, et l'ajoute dans l'inventaire
         inventory.append(Proof(name, description, icon, room, posX, posY))
         return
     
+    def addProofToInventory(proof):
+        inventory.append(proof)
+        return
+
     def toggle_Inventory(): # Ouvre ou ferme l'inventaire
         if (store.inventory_open):
             store.inventory_open = False
@@ -15,9 +19,21 @@ init python:
         if (store.minimap_open):
             store.minimap_open = False
             renpy.hide_screen("minimap")
+            renpy.hide_screen("proofs_on_minimap")
         else:
             store.minimap_open = True
             renpy.show_screen("minimap")
+            renpy.show_screen("proofs_on_minimap")
+
+    def toggle_Proof_Info(proofToShow): # Ouvre ou ferme la proof Info
+        if (not store.proof_open):
+            renpy.show_screen("proof_info", proofToShow)
+            store.proof_open = True
+        else:
+            store.proof_open = False
+            print("hiding screen here", None)
+            renpy.hide_screen("proof_info")
+            
 
     def minimap_Travel(destination): # Pour passer d'une salle à une autre, en utilisant la minimap
         if destination in current_room.neighbors:
@@ -32,11 +48,11 @@ screen livre(): # Bouton basique pour récupérer un objet dans son inventaire
         idle "Gray_book.png"
         at custom_zoom
         action [Hide("coucou"),
-                Function(addProofToInventory, "le livre", "cest un beau livre", "Gray_book.png", "Salon", 10, 10),
+                Function(createAndAddProofToInventory, "le livre", "cest un beau livre", "Gray_book.png", "Salon", 10, 10),
                 Call("recuperer_item", "livregris")]
 
 transform custom_zoom:
-    zoom 0.2
+    zoom 0.35
 
 transform main_buttons_zoom:
     zoom 0.5
@@ -83,3 +99,30 @@ screen minimap() layer 'front_sprites': # Montre la minimap
             hotspot (174, 47, 207, 173) action [Function(toggle_Minimap), Function(minimap_Travel, R_F1bathroom)]
             hotspot (381, 48, 300, 171) action [Function(toggle_Minimap), Function(minimap_Travel, R_F1parentsRoom)]
             hotspot (683, 96, 204, 266) action [Function(toggle_Minimap), Function(minimap_Travel, R_F1fransksRoom)]
+
+screen proofs_on_minimap() layer 'front_sprites':
+    zorder 3
+    for proof in store.inventory:
+        imagebutton:
+            idle proof.icon
+            at custom_zoom
+            action Function(proof.showInfo)
+            xpos proof.posX
+            ypos proof.posY
+
+screen proof_info(proof) layer 'front_sprites':
+    zorder 4
+    if proof is not None:
+        frame:
+            xalign 1.0
+            xmargin 10 ymargin 10
+            vbox:
+                text proof.name
+                text proof.description
+                text proof.room.id
+                if store.in_cross_examination:
+                    textbutton "Present":
+                        action Function(lambda: renpy.notify("Preuve présentée !"))
+                        text_color "#d82883"
+                        text_hover_color "#3428d8"
+                        text_size 50
