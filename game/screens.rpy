@@ -95,22 +95,26 @@ style frame:
 ##
 ## https://www.renpy.org/doc/html/screen_special.html#say
 
-screen say(who, what) layer 'overlay':
-    style_prefix "say"
-    zorder 100
+################################################################################
+## In-game screens
+################################################################################
 
-    # fond
+screen dialogue_frame(fullWidth=False):
     frame:
         xalign 0.5
         yalign 0.9
-        xsize 1400
+
+        # Correction : le else est indispensable sinon xsize 1400 s'applique tout le temps
+        if fullWidth:
+            xfill True
+        else:
+            xsize 1400
+
         ysize 240
         background Solid("#33dbe7e1")
         padding (0, 0)
 
-        # 2. LA BOÎTE BLANCHE POUR LE TEXTE (window id "window")
         window:
-            id "window"
             xalign 0.5
             yalign 0.5
             xsize 1300
@@ -118,10 +122,21 @@ screen say(who, what) layer 'overlay':
             background Solid("#fffffff1")
             padding (35, 25, 35, 25)
 
-            text what:
-                id "what"
-                color "#222222" 
-    
+            # Insère le contenu spécifique à l'écran appelant
+            transclude
+
+
+default in_cross_examination = False
+
+screen say(who, what) layer 'overlay':
+    style_prefix "say"
+    zorder 100
+
+    # Étire automatiquement la boîte en mode contre-interrogatoire
+    use dialogue_frame(fullWidth=in_cross_examination):
+        text what:
+            id "what"
+            color "#222222" 
 
         if who is not None:
             window:
@@ -129,13 +144,145 @@ screen say(who, what) layer 'overlay':
                 style "namebox"
                 text who id "who"
 
-    # Texte sombre pour contraster avec le blanc
+        if not renpy.variant("small"):
+            add SideImage() xalign 0.0 yalign 1.0
+
+    # Contrôles de navigation (visibles UNIQUEMENT pendant l'interrogatoire)
+    if in_cross_examination:
+        # Flèche gauche (◀)
+        if cx_index > 0:
+            textbutton "◀":
+                xalign 0.03
+                yalign 0.88
+                text_size 50
+                text_color "#ffffff"
+                text_hover_color "#ffeb3b"
+                action Jump("cx_nav_prev")
+        else:
+            textbutton "◀":
+                xalign 0.03
+                yalign 0.88
+                text_size 50
+                text_color "#55555566"
+                action NullAction()
+
+        # Flèche droite (▶)
+        if cx_index < len(current_cx.statements) - 1:
+            textbutton "▶":
+                xalign 0.97
+                yalign 0.88
+                text_size 50
+                text_color "#ffffff"
+                text_hover_color "#ffeb3b"
+                action Jump("cx_nav_next")
+        else:
+            textbutton "▶":
+                xalign 0.97
+                yalign 0.88
+                text_size 50
+                text_color "#55555566"
+                action NullAction()
+        
+        # Points de progression sous la boîte de dialogue
+        hbox:
+            xalign 0.5
+            yalign 0.99
+            spacing 16
+
+            for i in range(len(current_cx.statements)):
+                if i == cx_index:
+                    text "●":
+                        size 22
+                        color "#ffeb3b"
+                else:
+                    text "●":
+                        size 14
+                        color "#ffffff88"
 
 
-    ## If there's a side image, display it above the text. Do not display on the
-    ## phone variant - there's no room.
-    if not renpy.variant("small"):
-        add SideImage() xalign 0.0 yalign 1.0
+screen room_hud() layer 'overlay':
+    zorder 100
+    
+    use dialogue_frame:
+        # Correction : test booléen propre d'une liste vide
+        if not current_room.convos:
+            text renpy.random.choice(["Nobody here...", "Looks like I'm alone.", "There's no one to talk to in here.", "Alone", "I needed a break from people..."]):
+                color "#888888f5"
+                xalign 0.5
+                yalign 0.5
+        else:
+            hbox:
+                xalign 0.5
+                yalign 0.5
+                spacing 30
+                for c in current_room.convos:  
+                    imagebutton:
+                        idle c.chara
+                        hover Transform(c.chara, matrixcolor=BrightnessMatrix(0.2))
+                        action Jump(c.action)
+
+
+screen cross_examination_screen(statements) layer "overlay":
+    zorder 100
+    modal True
+
+    # Variable locale au screen qui gère la phrase active
+    default idx = 0
+
+    $ curr = statements[idx]
+    $ total = len(statements)
+
+    use dialogue_frame(fullWidth=True):
+        text curr.text:
+            color "#222222"
+            size 28
+
+        if curr.chara_name:
+            window:
+                id "namebox"
+                style "namebox"
+                text curr.chara_name
+
+    # Flèche gauche (◀) : décrémente l'index en boucle sans quitter l'écran
+    textbutton "◀":
+        xalign 0.03
+        yalign 0.88
+        text_size 50
+        text_color "#ffffff"
+        text_hover_color "#ffeb3b"
+        action SetScreenVariable("idx", (idx - 1) % total)
+
+    # Flèche droite (▶) : incrémente l'index en boucle sans quitter l'écran
+    textbutton "▶":
+        xalign 0.97
+        yalign 0.88
+        text_size 50
+        text_color "#ffffff"
+        text_hover_color "#ffeb3b"
+        action SetScreenVariable("idx", (idx + 1) % total)
+
+screen cx_nav_overlay(cx=None) layer "overlay":
+    zorder 150
+
+    # Flèche gauche (◀)
+    textbutton "◀":
+        xalign 0.03
+        yalign 0.88
+        text_size 50
+        text_color "#ffffff"
+        text_hover_color "#ffeb3b"
+        action Function(cx.prev)
+
+    # Flèche droite (▶)
+    textbutton "▶":
+        xalign 0.97
+        yalign 0.88
+        text_size 50
+        text_color "#ffffff"
+        text_hover_color "#ffeb3b"
+        action Function(cx.next)
+
+
 
 screen room_screen():
     zorder 10
@@ -151,8 +298,6 @@ screen room_screen():
         yanchor 1.0
         ypos dialogue_top_y
 
-
-        # 2. L'imagemap à l'intérieur
         imagemap:
             # logique de zoom/animation se jouerait ici pour rester dans le rectangle
             
@@ -160,7 +305,7 @@ screen room_screen():
 
             for h in current_room.hotspots:
                 if h.is_active():
-                    hotspot h.rect action h.action
+                    hotspot h.rect action Jump(h.action)
 
 
 ## Make the namebox available for styling through the Character object.

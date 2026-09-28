@@ -2,11 +2,11 @@ import os
 import re
 
 # Dossier cible à nettoyer (traite également les sous-dossiers s'il y en a)
-TARGET_DIR = "game/images"
+TARGET_DIR = "game/images/sprites"
 
 def sanitize_filename(filename):
     # 1. Supprime le BOM Unicode et les espaces invisibles / à largeur nulle
-    cleaned = filename.replace("\ufeff", "").replace("\u200b", "").replace("\u200c", "").replace("\u200d", "").replace("\xa0", " ")
+    cleaned = filename.replace("\ufeff", "").replace("\u200b", "").replace("\u200c", "").replace("\u200d", "").replace("\xa0", " ").replace("_"," ")
     # 2. Retire les espaces parasites au début et à la fin
     cleaned = cleaned.strip()
     return cleaned
