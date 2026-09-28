@@ -22,7 +22,6 @@ label start:
 
     $ current_room = R_livingRoom
 
-    image Eileen = Solid("#4a6fa5", xsize=400, ysize=900, xalign=0.8, yalign=1.0)
 
     # Affiche le bouton pour toggle la minimap
     show screen minimap_toggle
@@ -31,13 +30,13 @@ label start:
     show screen room_screen
 
     # Dialogue de test par-dessus
-    show Eileen
+    show carmille
     e "Feur 67 ?"
 
-    hide Eileen with dissolve
+    hide carmille with dissolve
     e "tout ca tout ca #tu as la dalle"
 
-    show Eileen
+    show stheno
     e "Très bien, voici ma déposition sur ce qui s'est passé hier soir !"
     window hide None
     # On configure les énoncés
@@ -60,7 +59,7 @@ label start:
 
 label room_not_neighbor:
     image Banane = Solid("#e1ea61", xsize=500, ysize=100, xalign=0.5, yalign=1.0)
-    hide Eileen
+    hide Carmille
     show Banane
     e "OMG.... Cette room n'existe PAAAAAAAAS"
     return
