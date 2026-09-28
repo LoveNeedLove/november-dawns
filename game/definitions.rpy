@@ -1,4 +1,4 @@
-﻿init python:
+init python:
     class Room():
         def __init__(self, id, bg, neighbors=[]):
             self.id = id
@@ -90,101 +90,8 @@
 
     config.window_hide_transition = None
 
-    
-define e = Character("Eileen")
-
-define m = Character("Maj")
-define f = Character("Fransk")
-define l = Character("Lou")
-define s = Character("Stheno")
-define p = Character("Pani")
-define v = Character("Carmille")
-define c = Character("Cassie")
-define k = Character("Kid")
-define a = Character("Agent")
-define d = Character("Cassie's Dad")
-
-# The game starts here.
-label travel_to(destination):
-    scene black with dissolve
-    $ current_room = destination
-
-    if current_room.cutscene is not None:
-        $ cutscene = current_room.cutscene
-        $ current_room.cutscene = None  # Consommée
-        call expression cutscene
-
-    jump room_loop
-
-label room_loop:
-    window hide None
-    scene onlayer front_sprites
-    show screen room_screen
-    call screen room_hud
-    jump room_loop
-
-default cx_index = 0
-
-label cx_display:
-    $ _history = False
-    
-    # 1. Récupère la phrase active selon l'index
-    $ curr = current_cx.statements[cx_index]
-    
-    # 2. Affiche la réplique
-    $ renpy.say(curr.chara, curr.text)
-
-    # 3. Ce bloc n'est atteint QUE si le joueur avance au clic standard
-    if cx_index < len(current_cx.statements) - 1:
-        $ cx_index += 1
-    jump cx_display
-
-# Navigation directe pour les boutons
-label cx_nav_prev:
-    $ cx_index -= 1
-    jump cx_display
-
-label cx_nav_next:
-    $ cx_index += 1
-    jump cx_display
-
-label cx_penalty:
-    "No, this doesn't make sense. I have to think again."
-    jump cx_loop
-
-label start:
-    $ livingRoom = Room("livingRoom", "backgrounds/living_room_1.png")
-    $ current_room = livingRoom
-
-    image Eileen = Solid("#4a6fa5", xsize=400, ysize=900, xalign=0.8, yalign=1.0)
-
-    # Affiche la pièce en fond
-    show screen room_screen
-
-    # Dialogue de test par-dessus
-    show Eileen
-    e "Feur 67 ?"
-
-    hide Eileen with dissolve
-    e "tout ca tout ca #tu as la dalle"
-
-    show Eileen
-    e "Très bien, voici ma déposition sur ce qui s'est passé hier soir !"
-    window hide None
-    # On configure les énoncés
-    $ s1 = Statement(e,"J'étais seule dans le salon toute la soirée jusqu'à minuit.")
-    $ s2 = Statement(e,"À 22h, j'ai entendu quelqu'un courir dans les archives.")
-    
-    # Phrase clé : si on présente "preuve", ça débloque la suite
-    $ s3 = Statement(e,"Je n'ai jamais vu la victime toucher à ce vieux tiroir.", 
-                    correct_evidence_id="preuve", 
-                    contradiction_label="objection_reussie")
-                     
-    $ s4 = Statement(e,"Voilà, c'est tout ce que j'ai vu et entendu.")
-
-    # Initialisation du contre-interrogatoire
-    $ current_cx = CrossExamination([s1, s2, s3, s4])
-
-    $ in_cross_examination = True
-    # Lancement de la phase d'interrogatoire
-    jump cx_display
+    class PersonProfile:
+        def __init__(self, chara, name, icon):
+            self.id = id
+            self.name = name
+            self.icon = icon
