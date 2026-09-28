@@ -3,7 +3,7 @@ init python:
         inventory.append(Proof(name, description, icon, room, posX, posY))
         return
     
-    def toggle_Inventory():
+    def toggle_Inventory(): # Ouvre ou ferme l'inventaire
         if (store.inventory_open):
             store.inventory_open = False
             renpy.hide_screen("inventory")
@@ -11,7 +11,7 @@ init python:
             store.inventory_open = True
             renpy.show_screen("inventory")
 
-    def toggle_Minimap():
+    def toggle_Minimap(): # Ouvre ou ferme la minimap
         if (store.minimap_open):
             store.minimap_open = False
             renpy.hide_screen("minimap")
@@ -19,7 +19,13 @@ init python:
             store.minimap_open = True
             renpy.show_screen("minimap")
 
-screen livre: # Bouton basique pour récupérer un objet dans son inventaire
+    def minimap_Travel(destination): # Pour passer d'une salle à une autre, en utilisant la minimap
+        if destination in current_room.neighbors:
+            renpy.call("travel_to", destination)
+        else:
+            renpy.call("room_not_neighbor")
+
+screen livre(): # Bouton basique pour récupérer un objet dans son inventaire
     imagebutton:
         xpos 90
         ypos 450
@@ -61,12 +67,19 @@ screen minimap_toggle: # Ouvre et ferme la minimap
         at main_buttons_zoom
         action Function(toggle_Minimap)
 
-screen minimap: # Montre la minimap
+screen minimap() layer 'front_sprites': # Montre la minimap
+    zorder 2
     frame:
         xalign 0.5 yalign 0.5
         xmargin 10 ymargin 10
         imagemap:
             ground "minimapTest.png"
-            hotspot (0, 0, 240, 139) action [Function(toggle_Minimap), Jump("map_cuisine")]
-            hotspot (0, 136, 251, 127) action [Function(toggle_Minimap),Jump("map_salon")]
-            hotspot (246, 0, 120, 265) action [Function(toggle_Minimap),Jump("map_couloir")]
+            hotspot (171, 361, 207, 406) action [Function(toggle_Minimap), Function(minimap_Travel, R_entryHallway)]
+            hotspot (378, 363, 506, 315) action [Function(toggle_Minimap), Function(minimap_Travel, R_livingRoom)]
+            hotspot (887, 427, 268, 254) action [Function(toggle_Minimap), Function(minimap_Travel, R_kitchen)]
+            hotspot (1154, 431, 275, 379) action [Function(toggle_Minimap), Function(minimap_Travel, R_garage)]
+            hotspot (888, 135, 542, 293) action [Function(toggle_Minimap), Function(minimap_Travel, R_garden)]
+            hotspot (174, 222, 502, 138) action [Function(toggle_Minimap), Function(minimap_Travel, R_F1hallway)]
+            hotspot (174, 47, 207, 173) action [Function(toggle_Minimap), Function(minimap_Travel, R_F1bathroom)]
+            hotspot (381, 48, 300, 171) action [Function(toggle_Minimap), Function(minimap_Travel, R_F1parentsRoom)]
+            hotspot (683, 96, 204, 266) action [Function(toggle_Minimap), Function(minimap_Travel, R_F1fransksRoom)]
