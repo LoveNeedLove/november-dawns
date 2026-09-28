@@ -1,11 +1,11 @@
 init python:
     class Room():
-        def __init__(self, id, bg, neighbors=[]):
+        def __init__(self, id, bg, neighbors=None):
             self.id = id
             self.bg= bg
             self.hotspots = []
             self.convos = []
-            self.neighbors = neighbors
+            self.neighbors = [] if neighbors is None else neighbors
             self.cutscene = None #on mets un string pour trigger un label à l'entrée de la pièce par exemple
         
         def add_neighbor(self, nextRoom):
