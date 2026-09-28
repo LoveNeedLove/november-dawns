@@ -2,27 +2,7 @@ init python:
 
     @renpy.pure
     class ShowAlternateMenu(Action, DictEquality):
-        """
-         :doc: menu_action
 
-         Show alternate menu screen at the bottom right corner of the cursor.
-         That screen can include textbuttons.
-
-         `button_list`
-             The list of tuple which has two elements. first is a string used
-             as text for textbutton and second is action.
-         `menu_width`
-             If the x-coordinate of the cursor plus this number is greater than
-             :var:`config.scren_witdth`, the menu will be displayed to the left
-             of the cursor. default is 300
-         `menu_height`
-             If the y-coordinate of the cursor plus this number is greater than
-             :var:`config.scren_witdth`, the menu will be displayed to the upper
-             of the cursor. default is 300
-         `style_prefix`
-             If not None, this is used for menu screen as style_prefix.
-
-         """
         def __init__(self, button_list, menu_width=300, menu_height=200, style_prefix=None):
             self.button_list = button_list
             self.style_prefix = style_prefix
