@@ -110,19 +110,21 @@ screen proofs_on_minimap() layer 'front_sprites': # Ajoute toutes les preuves ob
             ypos proof.posY
             mouse "click"
 
-screen proof_info(proof) layer 'front_sprites': # Informations d'une preuve cliquée et possibilité de la présenter
-    zorder 4
-    if proof is not None:
+screen proof_info(proof) layer 'front_sprites':
+    zorder 4[cite: 6]
+    if proof is not None:[cite: 6]
         frame:
-            xalign 1.0
-            xmargin 10 ymargin 10
+            xalign 1.0[cite: 6]
+            xmargin 10 ymargin 10[cite: 6]
             vbox:
-                text proof.name
-                text proof.description
-                text proof.room.id
-                if store.in_cross_examination:
+                text proof.name[cite: 6]
+                text proof.description[cite: 6]
+                text proof.room.id[cite: 6]
+                
+                # Le bouton apparaît en Cross-Exam OU en mode présentation forcée
+                if store.in_cross_examination or store.in_proof_present:
                     textbutton "Present":
-                        action Function(lambda: renpy.notify("Preuve présentée !"))
-                        text_color "#d82883"
-                        text_hover_color "#3428d8"
-                        text_size 50
+                        action Function(proof.present)
+                        text_color "#d82883"[cite: 6]
+                        text_hover_color "#3428d8"[cite: 6]
+                        text_size 50[cite: 6]

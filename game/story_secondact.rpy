@@ -53,7 +53,9 @@ label scene_lou_werewolf_discovery:
     "Each step feels like an eternity, and yet, there’ll never be enough time for me to grasp what just happened."
     "Lou… was…"
     "Lou… is…"
-
+    
+    $ R_livingRoom.cutscene = "scene_living_room_return"
+    $ travel_to("scene_living_room_return")
     return
 
 
@@ -81,6 +83,7 @@ label scene_living_room_return:
     "Spending time with people sure is nice, but I can’t help but shake that image of Lou out of my mind."
     "Those eyes…"
 
+    $ travel_to(R_kitchen, True)
     s "You’re gonna mix my drink forever or what!"
     m "!"
     s "Stop zoning out, man."
@@ -100,6 +103,7 @@ label scene_living_room_return:
     m "Fine by me."
 
     "{i}*shut!*{/i}"
+    $ travel_to(R_F1bathroom, True)
 
     "When life’s too much to bear… pissing is always here to give you a break… break…"
     "…"
@@ -109,14 +113,15 @@ label scene_living_room_return:
 
     "{i}*washhhhhhhhhh* *close!*{/i}"
     "{i}*open*{/i}"
-
+    $ travel_to(R_entryHallway, True)
     m "Ah! Pani!"
     p "Fuckk you’re finally doneee, LET ME IN!"
 
     "{b}*SLAM!*{/b}"
+    
 
     "…I feel bad for taking her turn. Now to the garden…"
-
+    $ travel_to(R_garden, True)
     m "Huh, this looks nice!"
     v "Hey Maj! Over here!"
     m "Hey, is it okay for us to sit here? These couches are covered by tarp…"
@@ -188,7 +193,9 @@ label scene_living_room_return:
     p "Yayyyyyy :)"
     s "So, where do we put this?"
     v "I remember Fransk storing them in the garage, there’s 4 pieces so we should be able to make it in one trip!"
-    m "Sure."
+    m "Sure."  
+
+    $ R_garage.cutscene = "scene_phones_missing_pani_faint"
 
     return
 
@@ -222,6 +229,7 @@ label scene_phones_missing_pani_faint:
     p "Guys…"
     v "Maybe there’s another basket just like it? Then it could be in the kitchen."
     s "Kitchen? Got it."
+    $ travel_to(R_kitchen, True)
     s "{i}*rummage rummage rummage*{/i}"
     v "Any signs?"
     s "Help me look, asshole!"
@@ -290,6 +298,7 @@ label scene_phones_missing_pani_faint:
     v "We have to figure out what happened."
     m "Right."
 
+    #COMEBACK HERE FOR EVENT LOGIC
     # Lancement de l'enquête (appel des labels d'enquête de Pani)
     return
 
@@ -554,6 +563,7 @@ label choice_pani_weight_success:
 
     "… What is going on here? Fucking monsters? How is that making sense?"
 
+    $ R_F1hallway.cutscene = scene_fransk_first_murder
     return
 
 
@@ -625,13 +635,14 @@ label scene_fransk_first_murder:
     m "Allright!"
 
     "Fransk told me he needed to rest, I have no choice but to wake him up now."
+    $ travel_to(R_F1fransksRoom, True)
 
     m "Fransk you have to know abou-!"
 
     "What… Fransk? … … ? … …"
 
     "{b}AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA!{/b}"
-
+    $ travel_to(R_entryHallway, True)
     c "Maj?"
     m "Guys! GUYS!"
     c "Why are you screaming?"
@@ -640,13 +651,13 @@ label scene_fransk_first_murder:
     s "What do you mean?"
     m "Come up!"
     "{i}*rattle* *rattle* *rattle* *rattle*{/i}"
-    m "It’s locked?"
+    m "It’s locked? Wasn't it just open?"
     v "There’s like a pad for a code here."
     l "You guys okay?"
     m "Lou! It’s Fransk, he’s… he’s…"
     "{i}*rattle* *rattle* *rattle*{/i}"
     m "F-FUCK, OPEN UP"
-    v "Try Fransk’s birthday, it’s 08-30-97"
+    v "Try Fransk’s birthday, it’s 08-30-03"
     "{i}*beep beep boop beep* *BEEEEEP*{/i}"
     m "That’s… that’s not it!"
     s "Slow down! What’s happening!"
@@ -681,7 +692,7 @@ label scene_fransk_first_murder:
     "It’s over…"
     l "Maj, Cass, step down please."
     m "!"
-    c "Lou, your voice is clear now!"
+    c "Lou, your voice is clearer!"
     l "I unlocked myself, but there’s also a code on this side, so I have to kick it down."
     c "Kick it down? This door looks fucking heavy dude."
     l "Just, step away. Please."
