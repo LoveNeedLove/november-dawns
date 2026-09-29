@@ -31,7 +31,7 @@ label start:
 
     # Dialogue de test par-dessus
     show carmille
-    e "Feur 67 ?"
+    v "Feur 67 ?"
 
     hide carmille with dissolve
     e "tout ca tout ca #tu as la dalle"
