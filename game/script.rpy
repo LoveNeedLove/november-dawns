@@ -1,11 +1,15 @@
 ﻿label travel_to(destination, in_dialogue=False):
+    # Bloque back au début du déplacement
+    $ renpy.block_rollback()
+
     scene black with dissolve
     $ current_room = destination
     show screen room_screen onlayer backgrounds
+    $ renpy.checkpoint()
 
     if current_room.cutscene is not None:
         $ cutscene_to_play = current_room.cutscene
-        $ current_room.cutscene = None  # Consommée
+        $ current_room.cutscene = None
         call expression cutscene_to_play
 
     if in_dialogue:
@@ -25,7 +29,7 @@ label start:
     call initialisation
 
     $ current_room = R_livingRoom
-    jump prologue_part1_arrival
+    jump scene_lou_werewolf_discovery
     # Dialogue de test par-dessus
     jump room_loop
 
