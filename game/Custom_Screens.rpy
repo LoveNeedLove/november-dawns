@@ -34,7 +34,6 @@ init python:
             print("hiding screen here", None)
             renpy.hide_screen("proof_info")
             
-
     def minimap_Travel(destination): # Pour passer d'une salle à une autre, en utilisant la minimap
         if destination in current_room.neighbors:
             renpy.call("travel_to", destination)
@@ -100,7 +99,7 @@ screen minimap() layer 'front_sprites': # Montre la minimap
             hotspot (381, 48, 300, 171) action [Function(toggle_Minimap), Function(minimap_Travel, R_F1parentsRoom)]
             hotspot (683, 96, 204, 266) action [Function(toggle_Minimap), Function(minimap_Travel, R_F1fransksRoom)]
 
-screen proofs_on_minimap() layer 'front_sprites':
+screen proofs_on_minimap() layer 'front_sprites': # Ajoute toutes les preuves obtenues sur la minimap comme des boutons clickables
     zorder 3
     for proof in store.inventory:
         imagebutton:
@@ -111,7 +110,7 @@ screen proofs_on_minimap() layer 'front_sprites':
             ypos proof.posY
             mouse "click"
 
-screen proof_info(proof) layer 'front_sprites':
+screen proof_info(proof) layer 'front_sprites': # Informations d'une preuve cliquée et possibilité de la présenter
     zorder 4
     if proof is not None:
         frame:

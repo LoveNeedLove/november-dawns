@@ -24,30 +24,38 @@ init python:
         def __init__(self, rect, action):
             self.rect = rect          # Zone de collision du hotspot(x, y, width, height)
             self.action = action      # label vers lequel on doit jump quand on clique sur le hotspot
+        def is_active(self):
+            return True
 
     class QuickEvent:
-        def __init__(self, id, prerequisites, action, triggeredAlready):
+        def __init__(self, id, prerequisites, action):
             self.id = id
-            self.prerequisites = prerequisites
+            self.prerequisites = set(prerequisites)  # S'assure que c'est un set
             self.action = action
             self.triggeredAlready = False
 
         def triggerEvent(self, eventsObserved):
+            # Déclenche l'action si les prérequis sont satisfaits et qu'elle n'a pas encore eu lieu
             if not self.triggeredAlready and self.prerequisites.issubset(eventsObserved):
                 self.triggeredAlready = True
                 renpy.call(self.action)
 
-    class EventManager():
+    class EventManager:
         def __init__(self):
             self.eventsObserved = set()
             self.allEvents = []
 
-            def unlock(self, eventId):
-                if eventId not in self.eventsObserved:
-                    self.eventsObserved.add(eventId)
-                else:
-                    for event in allEvents:
-                        event.triggerEvent(self.eventsObserved)
+        def add_event(self, event):
+            self.allEvents.append(event)
+
+        def unlock(self, eventId):
+            # 1. On n'ajoute que les nouveaux événements pour éviter les doublons
+            if eventId not in self.eventsObserved:
+                self.eventsObserved.add(eventId)
+                
+                # 2. On vérifie immédiatement si cet ajout complète les prérequis d'une scène
+                for event in self.allEvents:
+                    event.triggerEvent(self.eventsObserved)
 
     class Statement:
             def __init__(self, chara, text, correct_evidence_id=None, contradiction_label=None):

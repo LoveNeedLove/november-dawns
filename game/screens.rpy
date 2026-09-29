@@ -128,7 +128,7 @@ screen dialogue_frame(fullWidth=False):
 
 default in_cross_examination = False
 
-screen say(who, what) layer 'overlay':
+screen say(who, what) layer 'dialogue':
     style_prefix "say"
     zorder 100
 
@@ -200,7 +200,7 @@ screen say(who, what) layer 'overlay':
                         color "#ffffff88"
 
 
-screen room_hud() layer 'overlay':
+screen room_hud() layer 'dialogue':
     zorder 100
     
     use dialogue_frame:
@@ -222,7 +222,7 @@ screen room_hud() layer 'overlay':
                         action Jump(c.action)
 
 
-screen cross_examination_screen(statements) layer "overlay":
+screen cross_examination_screen(statements) layer "dialogue":
     zorder 100
     modal True
 
@@ -284,8 +284,7 @@ screen cx_nav_overlay(cx=None) layer "overlay":
 
 
 
-screen room_screen():
-    zorder 10
+screen room_screen() layer 'backgrounds':
     $room_w = 1300
     $room_h = 700
     $dialogue_top_y = 840  # Bord haut du dialogue

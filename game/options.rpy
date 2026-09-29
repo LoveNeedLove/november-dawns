@@ -1,9 +1,11 @@
 ﻿define config.layers = [
     'master',           # Fond noir / Shaders
     'transient',        # Système
-    'screens',          # room_screen
-    'front_sprites',    # Personnages (Eileen)
-    'overlay'           # Dialogues, choix, UI prioritaire
+    'backgrounds', 
+    'front_sprites',   
+    'dialogue',        
+    'screens',     
+    'overlay'           
 ]
 
 define config.mouse = {
