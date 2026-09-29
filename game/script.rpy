@@ -1,17 +1,17 @@
-﻿label travel_to(destination):
+﻿label travel_to(destination, in_dialogue=False):
     scene black with dissolve
     $ current_room = destination
     show screen room_screen onlayer backgrounds
 
     if current_room.cutscene is not None:
-        $ cutscene = current_room.cutscene
-        $ print(f"ça a call {current_room} {cutscene} ")
+        $ cutscene_to_play = current_room.cutscene
         $ current_room.cutscene = None  # Consommée
-        call expression cutscene
-    else:
-        $ print("no cutscene")
+        call expression cutscene_to_play
 
-    jump room_loop
+    if in_dialogue:
+        return
+    else:
+        jump room_loop
 
 label room_loop:
     window hide None
