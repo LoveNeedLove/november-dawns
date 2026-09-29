@@ -92,12 +92,18 @@ label prologue_part1_arrival:
 
     m "Coming !" 
 
+
+    call travel_to(R_entryHallway)
+    
+
     return
 
 
 # --- PARTIE 2 : L'ENTRÉE ET STHENO ---
 
 label prologue_part2_entrance_stheno:
+
+    show screen room_screen onlayer backgrounds
 
     "To my relief the entry hall feels quite more lived in, if you set aside that huge, almost tacky staircase." 
     "Piles of trinkets of varying use lie in glass bowls, and you can immediately tell that the egg-shell colored rug they use as an entry mat clearly saw brighter days." 

@@ -2,8 +2,9 @@
     'master',           # Fond noir / Shaders
     'transient',        # Système
     'backgrounds', 
-    'front_sprites',          
-    'screens',    
+    'front_sprites',   
+    'dialogue',        
+    'screens',     
     'overlay'           
 ]
 

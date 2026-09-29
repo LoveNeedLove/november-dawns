@@ -25,6 +25,7 @@ label initialisation:
     # - EntryHallway
     $ R_entryHallway.add_neighbor(R_livingRoom)
     $ R_entryHallway.add_neighbor(R_F1hallway)
+    $ R_entryHallway.cutscene = "prologue_part2_entrance_stheno"
     # - Kitchen
     $ R_kitchen.add_neighbor(R_livingRoom)
     $ R_kitchen.add_neighbor(R_garden)
