@@ -24,6 +24,8 @@ init python:
         def __init__(self, rect, action):
             self.rect = rect          # Zone de collision du hotspot(x, y, width, height)
             self.action = action      # label vers lequel on doit jump quand on clique sur le hotspot
+        def is_active(self):
+            return True
 
     class QuickEvent:
         def __init__(self, id, prerequisites, action):

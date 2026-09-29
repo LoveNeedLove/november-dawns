@@ -47,11 +47,16 @@ label initialisation:
     $ R_F1fransksRoom.add_neighbor(R_F1hallway)
 
 
-    # Adding proofs to inventory - FOR DEBUG
+    # === FOR DEBUG === 
+    
+    # Adding proofs to inventory
     $ myProof = Proof("ProofTest", "The beautifulest test", "Gray_book.png", R_livingRoom, 300, 300)
     $ secondProof = Proof("TheSecondProof", "Ohmygod... Its the 2nd...", "Gray_book.png", R_livingRoom, 450, 450)
     $ addProofToInventory(myProof)
     $ addProofToInventory(secondProof)
 
+    # Adding hotspot for rooms
+    $ HS_livingRoom = HotspotData((760, 426, 395, 49), "room_not_neighbor")
+    $ R_livingRoom.hotspots.append(HS_livingRoom)
 
-    return 
+    return
