@@ -2,6 +2,8 @@
 default minimap_open = False
 default inventory_open = False
 default proof_open = False
+default current_cx = None
+default cx_index = 0
 
 default inventory = []
 
@@ -25,7 +27,7 @@ label initialisation:
     # - EntryHallway
     $ R_entryHallway.add_neighbor(R_livingRoom)
     $ R_entryHallway.add_neighbor(R_F1hallway)
-    $ R_entryHallway.cutscene = "prologue_part2_entrance_stheno"
+    
     # - Kitchen
     $ R_kitchen.add_neighbor(R_livingRoom)
     $ R_kitchen.add_neighbor(R_garden)
