@@ -6,6 +6,11 @@
     'overlay'           # Dialogues, choix, UI prioritaire
 ]
 
+define config.mouse = {
+    "default": [ ("gui/cursor_base.png", 0, 0) ],
+    "click":   [ ("gui/cursor_click.png", 0, 0) ]
+}
+
 init python:
     # 1. Eileen sur front_sprites
     config.tag_layer["Eileen"] = "front_sprites"

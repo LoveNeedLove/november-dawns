@@ -109,6 +109,7 @@ screen proofs_on_minimap() layer 'front_sprites':
             action Function(proof.showInfo)
             xpos proof.posX
             ypos proof.posY
+            mouse "click"
 
 screen proof_info(proof) layer 'front_sprites':
     zorder 4
