@@ -12,7 +12,7 @@
 label room_loop:
     window hide None
     scene onlayer front_sprites
-    show screen room_screen
+    show screen room_screen onlayer backgrounds
     call screen room_hud
     jump room_loop
 

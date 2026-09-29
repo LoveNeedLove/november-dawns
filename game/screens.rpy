@@ -284,8 +284,7 @@ screen cx_nav_overlay(cx=None) layer "overlay":
 
 
 
-screen room_screen():
-    zorder 10
+screen room_screen() layer 'backgrounds':
     $room_w = 1300
     $room_h = 700
     $dialogue_top_y = 840  # Bord haut du dialogue
