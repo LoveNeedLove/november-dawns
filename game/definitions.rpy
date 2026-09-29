@@ -35,8 +35,10 @@ init python:
             self.triggeredAlready = False
 
         def triggerEvent(self, eventsObserved):
+            print("HERE TRIGGER EVENT")
             # Déclenche l'action si les prérequis sont satisfaits et qu'elle n'a pas encore eu lieu
             if not self.triggeredAlready and self.prerequisites.issubset(eventsObserved):
+                print("HERE INSIDE THE IF OF TRIGEVENT")
                 self.triggeredAlready = True
                 renpy.call(self.action)
 

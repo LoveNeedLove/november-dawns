@@ -3,7 +3,7 @@ default minimap_open = False
 default inventory_open = False
 default proof_open = False
 default current_cx = None
-default cx_index = 0
+default eventMgr = EventManager()
 
 default inventory = []
 

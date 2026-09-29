@@ -93,6 +93,7 @@ label prologue_part1_arrival:
     m "Coming !" 
 
 
+    $ R_entryHallway.cutscene = "prologue_part2_entrance_stheno"
     call travel_to(R_entryHallway)
     
 
@@ -102,8 +103,6 @@ label prologue_part1_arrival:
 # --- PARTIE 2 : L'ENTRÉE ET STHENO ---
 
 label prologue_part2_entrance_stheno:
-
-    show screen room_screen onlayer backgrounds
 
     "To my relief the entry hall feels quite more lived in, if you set aside that huge, almost tacky staircase." 
     "Piles of trinkets of varying use lie in glass bowls, and you can immediately tell that the egg-shell colored rug they use as an entry mat clearly saw brighter days." 
@@ -170,7 +169,7 @@ label prologue_part2_entrance_stheno:
 
     s "Believe me, grants don't last long. And it's not with a shitty diploma like the one they'll give us that you'll find a job anytime soon." 
 
-    m "…" 
+    m "..." 
 
     s "Your sappy attitude warms my heart but you need to get real bro." 
 
@@ -191,6 +190,8 @@ label prologue_part2_entrance_stheno:
     s "Well," 
     s "Welcome to Rose Springs, Wyoming" 
     s "Where dreams come to die !" 
+
+    call prologue_part3_carmille
 
     return
 
@@ -256,6 +257,9 @@ label prologue_part3_carmille:
     "Without saying much, Carmille leads me to the living room. Following him will be a struggle, his stature is smaller than mine but he still makes my knees weak." 
     "I should probably map out the house in my notebook, I tend to get lost easily..." 
 
+    $ R_livingRoom.cutscene = "prologue_part4_living_room"
+    show screen minimap_toggle
+
     return
 
 
@@ -290,7 +294,7 @@ label prologue_part4_living_room:
     m "Actually, I wouldn't mind having some." 
 
     p "See? I knew he was chill." 
-    p "…" 
+    p "..." 
     p "Can I still have your beer tho?" 
 
     "In a swift motion Lou just kind of swipes it away from Pani's hands." 
@@ -353,6 +357,8 @@ label prologue_part4_living_room:
 
     "What a start to this night, it seems like I'm already in trouble." 
 
+    $ R_entryHallway.cutscene = "prologue_part5_trick_or_treater"
+
     return
 
 
@@ -392,17 +398,17 @@ label prologue_part5_trick_or_treater:
 
     m "Oh, hey kid ! I-I mean, mister grim reaper." 
 
-    k "Grrr…" 
+    k "Grrr..." 
 
     "The expression on this child's face is so precious, despite him trying to look intimidating, I can tell that he's having fun." 
 
-    k "Trick… or TREAT!" 
+    k "Trick... or TREAT!" 
 
     m "I'll see what I can get for you." 
 
-    k "You better bring me candy… or the undead's fury will unleash on your domain!" 
+    k "You better bring me candy... or the undead's fury will unleash on your domain!" 
 
-    m "… right." 
+    m "... right." 
 
     m "Hey! Guys! Anyone bring candy for the party?" 
 
@@ -418,13 +424,13 @@ label prologue_part5_trick_or_treater:
 
     p "Beer." 
 
-    "…I'll take that as a no." 
+    "...I'll take that as a no." 
 
-    m "Sorry little guy… No treats, I'm sure I can find you some chips if that's fine by you?" 
+    m "Sorry little guy... No treats, I'm sure I can find you some chips if that's fine by you?" 
 
-    k "So… you choose a trick?" 
+    k "So... you choose a trick?" 
 
-    m "Huh? I mean… if we had any candy I would've given you some." 
+    m "Huh? I mean... if we had any candy I would've given you some." 
 
     k "Have you any idea of what I am? Dear mortal?" 
 
@@ -434,20 +440,20 @@ label prologue_part5_trick_or_treater:
 
     "Something in this kid's voice just hit me in the gut. To the point where I couldn't get any words out of my mouth." 
 
-    k "Defying me… is a poor choice." 
-    k "Facing me… is more terrifying than a horde of zombies." 
-    k "Reaching me… is guaranteed." 
+    k "Defying me... is a poor choice." 
+    k "Facing me... is more terrifying than a horde of zombies." 
+    k "Reaching me... is guaranteed." 
 
-    m "I…" 
+    m "I..." 
 
     "Why can't I say anything! My voice is just stuck!" 
 
-    k "You… will have a taste of death, but none of the sweet release" 
+    k "You... will have a taste of death, but none of the sweet release" 
     k "Kehehehehehehehehehe" 
 
     "His childish effort at a maniacal laugh just brought me back to reality." 
 
-    m "Good luck on your candy hunt kid…" 
+    m "Good luck on your candy hunt kid..." 
 
     k "Muahahahahahahahahahahahaha!" 
 
@@ -459,10 +465,10 @@ label prologue_part5_trick_or_treater:
 
     "Despite my eyes being wide open, I failed to notice Fransk approaching me." 
 
-    f "Dude you okay? You seem kinda pale right now…" 
+    f "Dude you okay? You seem kinda pale right now..." 
 
     m "Oh, sorry." 
-    m "…" 
+    m "..." 
     m "I was just feeling bad about putting a curse on your house on my first day here." 
 
     f "Come on bro, you must be tired as hell. Don't let that shit get to your head." 
@@ -470,9 +476,12 @@ label prologue_part5_trick_or_treater:
 
     "Fransk really has a way with words, just imagining us climbing on his house's roof slightly makes up for my mediocre childhood memories." 
 
-    m "Yeah… I'd like that." 
+    m "Yeah... I'd like that." 
 
     "He didn't answer with words. But his kind smile was enough to show me that I could trust him, I don't know anything about this fraternity, but it's clear that Fransk deeply cares about the people around him. He'd make a hell of a leader." 
+
+    $ R_livingRoom.cutscene = "prologue_part6_cassie_breakdown"
+    call travel_to(R_livingRoom)
 
     return
 
@@ -517,11 +526,11 @@ label prologue_part6_cassie_breakdown:
 
     c "N-No! I need a clean sketch, and I can't get it right, the physics don't make sense!" 
 
-    v "Maj… let's take a break in the garden. Cassie can be… rough to be around to say the least." 
+    v "Maj... let's take a break in the garden. Cassie can be... rough to be around to say the least." 
 
     "Judging from the look on everyone's faces, it is painfully apparent that they wanted to avoid this situation." 
 
-    v "When her stress becomes too much, she kinda just… shuts us out, so I think you better take some space and not let it get to you." 
+    v "When her stress becomes too much, she kinda just... shuts us out, so I think you better take some space and not let it get to you." 
 
     m "What does she do? Is she an artist?" 
 
@@ -529,47 +538,47 @@ label prologue_part6_cassie_breakdown:
 
     m "I see." 
 
-    "This feeling… I need to help… I need to make it stop." 
+    "This feeling... I need to help... I need to make it stop." 
 
     m "Cassie, is that right?" 
 
-    c "…" 
+    c "..." 
 
-    "Her ripped up paper must be around somewhere… Oh! I see it!" 
+    "Her ripped up paper must be around somewhere... Oh! I see it!" 
 
-    m "Here's your… HOLY SHIT!" 
+    m "Here's your... HOLY SHIT!" 
 
     "It seems like my stupefaction broke through her stream of tears." 
 
-    c "What… *whimper* what is wrong!" 
+    c "What... *whimper* what is wrong!" 
 
-    m "Your drawing… It's insanely good!" 
+    m "Your drawing... It's insanely good!" 
 
     c "What?" 
 
     p "Enough to make you scream? Show me that- WOOW." 
 
-    s "Damn Cassie this shit looks great! Can't believe your bitch-ass is complaining when you're probably doing better than 90% of your classmates." 
+    s "Damn Cassie this shit looks great! Can't believe your bitch-ass is complaining when you're probably doing better than 90\% of your classmates." 
 
     c "You guys say that, but it sucks." 
 
-    l "Dude, your design is crazy, I'd probably buy this shit if I were a millionaire or something…" 
+    l "Dude, your design is crazy, I'd probably buy this shit if I were a millionaire or something..." 
 
-    c "The physics don't make sense…" 
+    c "The physics don't make sense..." 
 
-    p "I don't know, it looks like a building to me…" 
+    p "I don't know, it looks like a building to me..." 
 
     c "Even then, I just ripped a hole through it!" 
 
     m "Um. Sorry, but you're talking about the weight distribution right?" 
 
-    c "Huh? Oh… yeah." 
+    c "Huh? Oh... yeah." 
 
     m "The foundation you used couldn't handle the weight of the suspended structure at the top, right?" 
 
-    c "Pretty much…" 
+    c "Pretty much..." 
 
-    m "Doesn't the hole you made… kinda fix the issue? I mean by removing this part you could-" 
+    m "Doesn't the hole you made... kinda fix the issue? I mean by removing this part you could-" 
 
     c "USE THIS SECTION AS SUPPORT!" 
 
@@ -577,7 +586,7 @@ label prologue_part6_cassie_breakdown:
 
     "Before even wiping her tears she tears away the paper from my hand and starts working on her idea." 
 
-    c "I see… I just have to erase this part!" 
+    c "I see... I just have to erase this part!" 
 
     f "Press lightly please!" 
 
@@ -590,13 +599,13 @@ label prologue_part6_cassie_breakdown:
     s "Then how the fuck did you figure that out for her?" 
 
     m "Remember the Harvard thing?" 
-    m "I kinda completed multiple courses…" 
+    m "I kinda completed multiple courses..." 
 
     s "The fuck?" 
 
     l "What? The actual online courses?" 
 
-    m "Yeah… even English literature." 
+    m "Yeah... even English literature." 
 
     l "HAHAHA aren't you full of surprises! I'm sure you missed on \"getting bitches\" course though HAHAHAHA" 
 
@@ -604,7 +613,7 @@ label prologue_part6_cassie_breakdown:
 
     "I kinda hate that he's right, but I'm glad to see that someone here doesn't seem to be weirded out by the fact that I've already completed most of my studies." 
 
-    c "Hey… can I talk to you?" 
+    c "Hey... can I talk to you?" 
 
     m "!" 
 
@@ -620,11 +629,11 @@ label prologue_part6_cassie_breakdown:
 
     m "I understand, I was just genuinely impressed by your work. And I also didn't want the others to worry too much about you." 
 
-    c "…" 
+    c "..." 
 
     m "I know you rely on them, so I just wanted to help them out is all." 
 
-    c "But still…" 
+    c "But still..." 
 
     s "Hey!" 
 
@@ -642,7 +651,7 @@ label prologue_part6_cassie_breakdown:
 
     s "Then why the hell did you start panicking you dumbass idiot? You had this shit handled from the fucking start, can't believe you made me worry." 
 
-    "Did… she really just say that?" 
+    "Did... she really just say that?" 
 
     m "You can't just-" 
 
@@ -650,7 +659,7 @@ label prologue_part6_cassie_breakdown:
 
     s "How so?" 
 
-    c "Now that I have the design, I'm 100% sure that I can handle the rest of the assignment tomorrow! So tonight, I won't even think about my work!" 
+    c "Now that I have the design, I'm 100\% sure that I can handle the rest of the assignment tomorrow! So tonight, I won't even think about my work!" 
 
     s "Mhm, that's the bare minimum bitch." 
 
@@ -660,7 +669,11 @@ label prologue_part6_cassie_breakdown:
 
     c "Wanna help Maj?" 
 
-    m "S-sure!" 
+    m "S-sure!"
+
+    c "Then come to the kitchen!"
+
+    $ R_kitchen.cutscene = "prologue_part7_kitchen_cocktail"
 
     return
 
@@ -669,7 +682,7 @@ label prologue_part6_cassie_breakdown:
 
 label prologue_part7_kitchen_cocktail:
 
-    "I don't know her yet, but I'm all too familiar with that feeling. Helping others… but not being able to help yourself." 
+    "I don't know her yet, but I'm all too familiar with that feeling. Helping others... but not being able to help yourself." 
 
     c "Nearsighted, right?" 
 
@@ -686,14 +699,14 @@ label prologue_part7_kitchen_cocktail:
 
     c "I can figure out the rest. You think that I'm kind and attentive to others, and yet that I'm unable to reframe some expectations when it comes to my own flaws and short-comings." 
 
-    m "…" 
+    m "..." 
     m "Do you read minds or something?" 
 
     c "Nah, everyone just tells me that." 
 
     m "Really?" 
 
-    c "LiSthen, Maj. You're an opportunity for me." 
+    c "Listen, Maj. You're an opportunity for me." 
 
     m "Opportunity?" 
 
@@ -709,7 +722,7 @@ label prologue_part7_kitchen_cocktail:
 
     m "Gotcha." 
 
-    c "Sorry… I hope this isn't too deep for a first conversation." 
+    c "Sorry... I hope this isn't too deep for a first conversation." 
 
     m "Nah no worries, it's good to lay out the bases for a friendship. Now, let's get that cocktail going!" 
 
@@ -723,11 +736,11 @@ label prologue_part7_kitchen_cocktail:
 
     c "What the hell's up with that? Stheno immediately came to complain about it. She thinks you're some kind of CIA agent." 
 
-    m "Well… I know our college sucks but, I really wanted to live the student life you know? Have friends, cram together when finals approach, try stupid shit…" 
+    m "Well... I know our college sucks but, I really wanted to live the student life you know? Have friends, cram together when finals approach, try stupid shit..." 
 
     c "No friends at home?" 
 
-    m "Sure I have some. But I couldn't be myself there…" 
+    m "Sure I have some. But I couldn't be myself there..." 
 
     c "So, the best course of action was to fly a few thousand miles, study everything in advance and leave everything behind?" 
 
@@ -757,11 +770,11 @@ label prologue_part7_kitchen_cocktail:
 
     m "Yeah, I study like my life's on the line." 
 
-    c "No, not that…" 
+    c "No, not that..." 
 
     m "What?" 
 
-    c "You… really got your ass beat for that?" 
+    c "You... really got your ass beat for that?" 
 
     m "Yeah, if I didn't get the perfect grade I'd alway-" 
 
@@ -773,7 +786,7 @@ label prologue_part7_kitchen_cocktail:
 
     c "Perfect? Like an A- wasn't enough?" 
 
-    m "Oh… um, yeah" 
+    m "Oh... um, yeah" 
 
     c "That's fucking horrible Maj, your work should benefit you, and doing things you don't want to because of your pa-" 
 
@@ -783,7 +796,7 @@ label prologue_part7_kitchen_cocktail:
 
     c "What?" 
 
-    "I carefully poured the contents of the shaker onto a sipping glass. Considering the temperature of the mixture and the speed at which the ice melts, it is essential that we bring the beverage to Stheno as soon as possible, each second that passes dilutes the solution we so attentively prepared, and I wouldn't want her to drink a watered down version of what she asked for…" 
+    "I carefully poured the contents of the shaker onto a sipping glass. Considering the temperature of the mixture and the speed at which the ice melts, it is essential that we bring the beverage to Stheno as soon as possible, each second that passes dilutes the solution we so attentively prepared, and I wouldn't want her to drink a watered down version of what she asked for..." 
 
     c "Hey, do you mind if we stay here for a sec ?" 
 
@@ -792,22 +805,24 @@ label prologue_part7_kitchen_cocktail:
     "I want to be liked for who I truly am, for my passion, for my jokes. Not because I need any help. She told me that about herself, can't she understand that I only ask for the same ?" 
 
     m "I-" 
-    m "…" 
-    m "The more we wait the more the ice melts… it waters down the drink." 
+    m "..." 
+    m "The more we wait the more the ice melts... it waters down the drink." 
 
     c "Yeah, you're right. Time is of the essence isn't it ?" 
 
     m "Yeah, it is." 
 
-    "Guess I can't always shake away my old habits, but not having to justify my own exiSthence really feels nice." 
+    "Guess I can't always shake away my old habits, but not having to justify my own existence really feels nice." 
 
     c "Stheno! I have your drink!" 
+
+    call travel_to(R_livingRoom, True)
 
     s "The nerd helped you make it?" 
 
     m "Yup, if I don't earn your respect afterwards I really don't know what will." 
 
-    "She mutters something while putting the glass to her lips, but before long…" 
+    "She mutters something while putting the glass to her lips, but before long..." 
 
     s "Holy fuck that's good Cass! What did you do different?!" 
 
@@ -819,6 +834,8 @@ label prologue_part7_kitchen_cocktail:
     s "{i}*siiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiip*{/i}" 
 
     "I should've expected that." 
+
+    call prologue_part8_truth_or_dare
 
     return
 
@@ -846,7 +863,7 @@ label prologue_part8_truth_or_dare:
 
     l "Dude isn't that your high school picture? Were you even allowed to drive a car then?" 
 
-    p "…" 
+    p "..." 
 
     f "You know I'm fucking with you Pani, right?" 
 
@@ -900,7 +917,7 @@ label prologue_part8_truth_or_dare:
 
     "Franks gives a somewhat strong impulse to the bottom, despite the dangerous precedent of the game my eyes are only drawn to the beauty of this spectacle." 
     "The way the remaining amount of liquid swirls inside of the bottle as it spins, the simple satisfaction that comes from the droplets that drip along the sides, the magnificent refraction of light that creates a mesmerising image at the bottom of the bottle." 
-    "And before realising it, the show was over, and it pointed towards…" 
+    "And before realising it, the show was over, and it pointed towards..." 
 
     p "Pani! Seems like I get to give you a dare!" 
 
@@ -914,14 +931,14 @@ label prologue_part8_truth_or_dare:
 
     p "Yeah I don't wanna do something gross I just wanna drink." 
 
-    l "That… that's a huge design flaw!" 
+    l "That... that's a huge design flaw!" 
     l "It's really obvious that this game lacked any kind of QA testing!" 
 
     c "Pani, let me finish my dare." 
 
     p "Sure bro, but I'm drinking." 
 
-    c "I dare you… to motorboat Lou's pecs…" 
+    c "I dare you... to motorboat Lou's pecs..." 
 
     l "The fuck!" 
 
@@ -965,7 +982,7 @@ label prologue_part8_truth_or_dare:
 
     "Without even consulting with us Pani just slaps the bottle's neck, making it whirl so fast that it is almost impossible to tell where it could land." 
 
-    m "Wow… this might spin for a little while…" 
+    m "Wow... this might spin for a little while..." 
 
     f "Yea it might-" 
 
@@ -979,7 +996,7 @@ label prologue_part8_truth_or_dare:
 
     m "What?!" 
 
-    "I… I can do that!" 
+    "I... I can do that!" 
 
     f "Here Maj, I'll show you. The albums are ordered by band name. They're all on the bottom shelves." 
 
@@ -987,7 +1004,7 @@ label prologue_part8_truth_or_dare:
 
     "I lean towards the bottom shelf of the massive bookcase, propping my hand against a middling shelf." 
 
-    m "Let's see…" 
+    m "Let's see..." 
 
     f "MAJ WAIT-" 
 
@@ -1001,15 +1018,15 @@ label prologue_part8_truth_or_dare:
 
     f "Dude, watch out with this piece of shit. It can fall at any moment, and weighs almost as much as a grand piano." 
 
-    m "Y-Yeah. I'll watch out…" 
+    m "Y-Yeah. I'll watch out..." 
 
     "Instead of resting on my knee I decide to sit on my ass, like those monks tend to do. Judging from its massive size and minute details it is abundantly clear that I do not want to contribute to the destruction of this shelving." 
 
-    m "Let's see…" 
+    m "Let's see..." 
 
     "As I rummage through the copious amount of vinyl discs the chaotic banter of my new friends fades into a low hum, a background noise that my brain can finely tune out as my fingers slowly parse through endless musical icons." 
 
-    m "Rachmaninov… Rage… The Stones… Rush… Sting… Ah this!" 
+    m "Rachmaninov... Rage... The Stones... Rush... Sting... Ah this!" 
 
     "My eyes focus on one specific spine that I take great pleasure in pulling out." 
 
@@ -1017,15 +1034,15 @@ label prologue_part8_truth_or_dare:
 
     m "Yup, hey Stheno. This is my pick!" 
 
-    f "Stevie Wonder? Isn't that a bit… old?" 
+    f "Stevie Wonder? Isn't that a bit... old?" 
 
-    s "Why… Why this one?" 
+    s "Why... Why this one?" 
 
-    m "I don't really know… but you know. We tend to give a lot of value to how things look, but by being blind, he kinda makes me see things in their most true, naked form." 
+    m "I don't really know... but you know. We tend to give a lot of value to how things look, but by being blind, he kinda makes me see things in their most true, naked form." 
 
-    s "…" 
+    s "..." 
 
-    m "It might sound weird… but it makes me hear and “see” emotions in ways no artist ever could… I guess." 
+    m "It might sound weird... but it makes me hear and “see” emotions in ways no artist ever could... I guess." 
 
     s "Sing a song." 
 
@@ -1033,7 +1050,7 @@ label prologue_part8_truth_or_dare:
 
     s "Prove to me that you're not bullshiting?" 
 
-    m "Have you even liSthened to it?" 
+    m "Have you even listened to it?" 
 
     s "I can tell when I see a liar." 
 
@@ -1048,8 +1065,8 @@ label prologue_part8_truth_or_dare:
     m "when autumn comes around." 
     m "I know just what I say, today's not yesterday" 
     m "And all things have an ending." 
-    m "…" 
-    m "…" 
+    m "..." 
+    m "..." 
     m "I could keep going but I'm ending it here." 
 
     "{i}*whistle*{/i}" 
@@ -1076,15 +1093,17 @@ label prologue_part8_truth_or_dare:
 
     m "What?" 
 
-    "Before interjecting Vamp just pats me on the back, which resonates through my body with a clear “She's opening up to you! Don't mess it up!”" 
+    "Before interjecting Vamp just pats me on the back, which resonates through my body with a clear \"She's opening up to you! Don't mess it up!\"" 
 
     m "What's in the flask?" 
 
     s "My favorite." 
 
-    m "Good enough…" 
+    m "Good enough..." 
 
     "We interlock our arms to take the shots, almost like a viking ritual." 
+
+    call prologue_part9_investigation_intro
 
     return
 
@@ -1125,7 +1144,7 @@ label prologue_part9_investigation_intro:
 
     f "Yeah guys, let's look for it. I wouldn't want my parents to find an e-cig when they spring clean." 
 
-    c "I guess…." 
+    c "I guess...." 
 
     # {DÉBUT D'ENQUÊTE}
     f "Have a look around the room, Maj. I'm sure you can help us find it." 
@@ -1134,13 +1153,28 @@ label prologue_part9_investigation_intro:
 
     f "I don't know dude, just point at a spot and start searching, you can also talk to the people around, that'll help for sure." 
 
+    # créer un quickevent et ses prerequis ICI
+    $ QE_part9 = QuickEvent("QE_part9", ("hotspot_couch",
+                                        "talk_stheno_living_room",
+                                        "talk_lou_living_room",
+                                        "hotspot_kitchen", 
+                                        "hotspot_garage_garden",
+                                        "transition_to_bedroom",
+                                        "hotspot_bedroom_bed",
+                                        "hotspot_bedroom_window",
+                                        "talk_fransk_bedroom",
+                                        "talk_stheno_bedroom")
+                                        , Call("prologue_part10_searches_and_trial"))
+    # add à l'eventmanager
+    $ eventMgr.add_event(QE_part9)
+
     return
 
 
 label hotspot_couch:
     m "Hmm, there's pretty much nothing here. Lou? Can I see your jacket?" 
     l "Huh? Yeah. My vape goes in the right pocket." 
-    m "Yeah… if it had fallen somewhere, I'm pretty sure it would've fallen between the cushions. And there's nothing there…" 
+    m "Yeah... if it had fallen somewhere, I'm pretty sure it would've fallen between the cushions. And there's nothing there..." 
     l "So?" 
     m "We have to look someplace else." 
     return
@@ -1167,7 +1201,7 @@ label talk_lou_living_room:
     l "Is it true that I refilled my vape at this very table?" 
     f "Yup, even taxed more than half of the liquid I had left." 
     l "Hey! You promised I could use as much as I want!" 
-    f "Of course, I'm not complaining, you just smoke like a chimney… or rather, a steam engine?" 
+    f "Of course, I'm not complaining, you just smoke like a chimney... or rather, a steam engine?" 
     l "Ha-Ha, but yeah witness gives extra credibility to my claim; Right?!" 
     m "It sure does." 
     # [Vape added to evidence]
@@ -1208,7 +1242,7 @@ label transition_to_bedroom:
 
 
 label hotspot_bedroom_bed:
-    m "No vape here either…" 
+    m "No vape here either..." 
     l "Yeah, if it ain't here then we can safely assume that it was in my pocket." 
     return
 
@@ -1218,9 +1252,9 @@ label hotspot_bedroom_window:
     f "Oh, this window leads to the living room, but it doesn't open much." 
     m "Oh, I remember seeing a window above that huge bookshelf." 
     f "Yeah, there's a handle on both sides but it can realistically only be opened from the inside of my room." 
-    m "Unless you could flied…" 
+    m "Unless you could flied..." 
     f "HAHAHA if you say so bro!" 
-    m "…" 
+    m "..." 
     m "Any idea who opened it?" 
     f "Yeah! It was me! I opened it before the party." 
     m "That settles it!" 
@@ -1231,12 +1265,12 @@ label hotspot_bedroom_window:
 label talk_fransk_bedroom:
     f "I just checked the bathrooms. There wasn't anything there." 
     l "No shit! I haven't gone to the bathroom since I arrived!" 
-    f "Dude… you helped me prepare… it's been like- 12 hours or something." 
+    f "Dude... you helped me prepare... it's been like- 12 hours or something." 
     l "So?" 
     f "You must have drank like 15 beers since this morning." 
     l "So?" 
-    f "…" 
-    m "…" 
+    f "..." 
+    m "..." 
     f "Just go dude!" 
     l "I CAN'T I'M PEE SHY." 
     return
@@ -1244,7 +1278,7 @@ label talk_fransk_bedroom:
 
 label talk_stheno_bedroom:
     s "We checked everywhere downstairs. Either one of us is lying or Lou's a bigger moron than expected." 
-    m "I don't think that he should be called that just for losing something…" 
+    m "I don't think that he should be called that just for losing something..." 
     s "You don't get it, Abby. This guy's always losing shit." 
     m "Really? Are you sure that nobody's fucking with him or something?" 
     s "You have to be a huge moron for people to fuck with you that often." 
@@ -1272,11 +1306,11 @@ label prologue_part10_searches_and_trial:
 
     s "You better not touch me you hairy ape!" 
 
-    l "Oh… got something to hide?" 
+    l "Oh... got something to hide?" 
 
     s "What?" 
 
-    l "Why would you refuse a tiny little search? Seems pretty clear to me…" 
+    l "Why would you refuse a tiny little search? Seems pretty clear to me..." 
 
     s "You callin' me a thief? Come prove it asshole!" 
 
@@ -1286,10 +1320,10 @@ label prologue_part10_searches_and_trial:
 
     s "If you ever doubt me again I'll fucking kill you." 
 
-    l "…" 
+    l "..." 
     l "Your turn Fransk!" 
 
-    f "Sure bro… take your time." 
+    f "Sure bro... take your time." 
 
     l "Don't mind if I do." 
 
@@ -1299,7 +1333,7 @@ label prologue_part10_searches_and_trial:
 
     l "Yeah I can tell that your muscles are sore from all the soccer practice." 
 
-    m "… what are we even doing anymore…" 
+    m "... what are we even doing anymore..." 
 
     f "Mnph~ That's the spot!" 
 
@@ -1307,18 +1341,18 @@ label prologue_part10_searches_and_trial:
 
     c "WHAT IS HAPPENING UP THERE?" 
 
-    m "Lou's doing body searches… at least that's what he's supposed to do!" 
+    m "Lou's doing body searches... at least that's what he's supposed to do!" 
 
     c "REALLY?" 
 
-    f "Phew… that was great!" 
+    f "Phew... that was great!" 
 
     l "Anytime brother!" 
     l "Time to search the others!" 
 
-    f "Let's follow him Maj…" 
+    f "Let's follow him Maj..." 
 
-    m "Yeah… good idea." 
+    m "Yeah... good idea." 
 
     s "I'll stay here to finish the search." 
 
@@ -1326,7 +1360,7 @@ label prologue_part10_searches_and_trial:
 
     f "I can pat them down with you if you want, that'll buy us time." 
 
-    c "Cassie's still in the living room, I'll go get her…" 
+    c "Cassie's still in the living room, I'll go get her..." 
 
     l "Thanks!" 
 
@@ -1338,11 +1372,11 @@ label prologue_part10_searches_and_trial:
 
     l "Is that everyone?" 
 
-    f "I think so…" 
+    f "I think so..." 
 
     # [Body Searches added to evidence]
 
-    l "…" 
+    l "..." 
     l "Still no vape?!" 
 
     s "Face it, Lou! I'm sure you left it at home!" 
@@ -1385,17 +1419,17 @@ label cx1_objection_success:
 
     l "Yeah! I filled my vape up." 
 
-    s "Really… I didn't know…" 
+    s "Really... I didn't know..." 
 
     m "There's no denying it, the vape's here." 
 
-    v "So… Where? We searched everywhere." 
+    v "So... Where? We searched everywhere." 
 
-    "Yeah, the search was thorough, if it simply fell somewhere we would've found it…" 
+    "Yeah, the search was thorough, if it simply fell somewhere we would've found it..." 
 
     # CHOIX 1
     menu:
-        "The vape is…":
+        "The vape is...":
             jump cx_penalty
 
         "Still somewhere around the house":
@@ -1437,7 +1471,7 @@ label choice_on_someone_success:
 
 
 label choice_cassie_success:
-    m "Aside from Fransk, Stheno and I, Cassie was the first one to learn about the searches, she also had a second alone before Carm found her…" 
+    m "Aside from Fransk, Stheno and I, Cassie was the first one to learn about the searches, she also had a second alone before Carm found her..." 
 
     c "Me?!" 
 
@@ -1471,27 +1505,27 @@ label cx2_objection_success:
     c "Just go check the floor of Fransk's room." 
 
     l "On it!" 
-    l "…" 
-    l "…" 
-    l "Nah… Nothing…" 
+    l "..." 
+    l "..." 
+    l "Nah... Nothing..." 
 
     c "See? Your theories lead to nothing." 
 
-    "Do they? The logic seemed pretty sound so far…" 
+    "Do they? The logic seemed pretty sound so far..." 
 
-    m "We're probably missing something…" 
+    m "We're probably missing something..." 
 
     v "Are we? You still seem like a lead suspect to me Cass." 
 
     c "!" 
 
-    v "We just have to think… if she did indeed throw it. How could she have disposed of it again?" 
+    v "We just have to think... if she did indeed throw it. How could she have disposed of it again?" 
 
-    m "Carm… I think I get it." 
+    m "Carm... I think I get it." 
 
     # CHOIX 3 (Preuve / Déduction)
     menu:
-        "The vape was concealed using…":
+        "The vape was concealed using...":
             jump cx_penalty
 
         "Stheno searched upstairs":
@@ -1513,9 +1547,9 @@ label choice_stheno_searched_success:
     m "After the search, Cassie probably sent the vape through the window. And Stheno simply took it with her." 
     m "This simple stratagem completely derailed the search, and it would've been really easy to execute." 
 
-    v "Stheno… do you have Lou's vape?" 
+    v "Stheno... do you have Lou's vape?" 
 
-    s "I- I…" 
+    s "I- I..." 
 
     l "No need for words Stheno." 
     l "I'LL JUST SEARCH YOU AGAIN!!!" 
@@ -1528,7 +1562,7 @@ label choice_stheno_searched_success:
 
     c "You got us!" 
 
-    s "Pranking Lou is kind of a tradition. Didn't expect someone to take the search seriously though…" 
+    s "Pranking Lou is kind of a tradition. Didn't expect someone to take the search seriously though..." 
 
     l "GIVE IT BACK!" 
 
@@ -1562,17 +1596,17 @@ label choice_stheno_searched_success:
 
     f "Lou! Did you see it?" 
 
-    l "Shit… Shit… Shit…" 
+    l "Shit... Shit... Shit..." 
 
-    f "Don't panic! I'll take you to my room…" 
+    f "Don't panic! I'll take you to my room..." 
 
-    l "Fuck….." 
+    l "Fuck....." 
 
     f "GUYS DON'T STAY HERE, GO TO THE LIVING ROOM OR SOMETHING." 
 
     v "S-Sure." 
 
-    l "I shouldn't have come…" 
+    l "I shouldn't have come..." 
 
     "Suddenly, Lou darts beside me, climbing the stairs with blazing speed." 
 
@@ -1582,7 +1616,7 @@ label choice_stheno_searched_success:
 
     m "Lou? Fransk is coming! Do you need anything?" 
 
-    l "Urgh…." 
+    l "Urgh...." 
 
     "{i}*gurgleeee* *CRACK*{/i}" 
 
@@ -1591,9 +1625,9 @@ label choice_stheno_searched_success:
 
     f "MAJ, DON'T." 
 
-    "And see…" 
+    "And see..." 
 
-    f "Don't… look…" 
+    f "Don't... look..." 
 
     "Lou?" 
 
