@@ -111,20 +111,20 @@ screen proofs_on_minimap() layer 'front_sprites': # Ajoute toutes les preuves ob
             mouse "click"
 
 screen proof_info(proof) layer 'front_sprites':
-    zorder 4[cite: 6]
-    if proof is not None:[cite: 6]
+    zorder 4
+    if proof is not None:
         frame:
-            xalign 1.0[cite: 6]
-            xmargin 10 ymargin 10[cite: 6]
+            xalign 1.0
+            xmargin 10 ymargin 10
             vbox:
-                text proof.name[cite: 6]
-                text proof.description[cite: 6]
-                text proof.room.id[cite: 6]
+                text proof.name
+                text proof.description
+                text proof.room.id
                 
                 # Le bouton apparaît en Cross-Exam OU en mode présentation forcée
                 if store.in_cross_examination or store.in_proof_present:
                     textbutton "Present":
                         action Function(proof.present)
-                        text_color "#d82883"[cite: 6]
-                        text_hover_color "#3428d8"[cite: 6]
-                        text_size 50[cite: 6]
+                        text_color "#d82883"
+                        text_hover_color "#3428d8"
+                        text_size 50

@@ -125,9 +125,6 @@ screen dialogue_frame(fullWidth=False):
             # Insère le contenu spécifique à l'écran appelant
             transclude
 
-
-default in_cross_examination = False
-
 screen say(who, what) layer 'dialogue':
     style_prefix "say"
     zorder 100
@@ -452,7 +449,7 @@ screen quick_menu() layer 'overlay':
 init python:
     config.overlay_screens.append("quick_menu")
 
-default quick_menu = True
+    quick_menu = True
 
 style quick_menu is hbox
 style quick_button is default
