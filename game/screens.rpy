@@ -4,6 +4,15 @@
 
 init offset = -1
 
+init python:
+    def room_bg_metrics(bg, width=1440):
+        w, h = renpy.image_size(bg)          # bg = chemin de fichier
+        z = width / float(w)
+        return z, int(round(h * z))          # zoom, hauteur après redimensionnement
+
+define DLG_H = 210                 # hauteur du cadre de dialogue
+define DLG_MARGIN_BOTTOM = 30      # espace sous le cadre
+define DLG_TOP = config.screen_height - DLG_MARGIN_BOTTOM - DLG_H   # 570 en 1440x810
 
 ################################################################################
 ## Styles
@@ -102,24 +111,24 @@ style frame:
 screen dialogue_frame(fullWidth=False):
     frame:
         xalign 0.5
-        yalign 0.9
+        ypos DLG_TOP
+        yanchor 0.0
 
-        # Correction : le else est indispensable sinon xsize 1400 s'applique tout le temps
         if fullWidth:
             xfill True
         else:
             xsize 1440
 
-        ysize 240
-        background Solid("#33dbe7e1")
+        ysize DLG_H
+        background Solid("#33dbe7bb")
         padding (0, 0)
 
         window:
             xalign 0.5
             yalign 0.5
             xsize 1360
-            ysize 200
-            background Solid("#fffffff1")
+            ysize 170
+            background Solid("#ffffffc0")
             padding (35, 25, 35, 25)
 
             # Insère le contenu spécifique à l'écran appelant
@@ -283,26 +292,22 @@ screen cx_nav_overlay(cx=None) layer "overlay":
 
 screen room_screen() layer "backgrounds":
 
-    $ room_w = 1440
-    $ room_h = 810
+    $ crop_y = getattr(current_room, "bg_crop_y", 1.0)
+    $ zoom, img_h = room_bg_metrics(current_room.bg)
+    $ view_h = min(DLG_TOP, img_h)
 
     viewport:
-        xsize room_w
-        ysize room_h
+        xsize 1440
+        ysize view_h
         xalign 0.5
-        yalign 0.5
+        ypos DLG_TOP          # ancré par le bas : le bord inférieur touche le cadre
+        yanchor 1.0
+        yinitial crop_y
         draggable False
         mousewheel False
 
         imagemap:
-            idle Transform(
-                current_room.bg,
-                xsize=room_w,
-                ysize=room_h,
-                fit="contain",
-                xalign=0.5,
-                yalign=0.5
-            )
+            idle Transform(current_room.bg, zoom=zoom)
 
             for h in current_room.hotspots:
                 if h.is_active():

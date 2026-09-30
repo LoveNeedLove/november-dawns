@@ -1,6 +1,7 @@
 init -1:  
     define e = Character("Eileen")
-
+    
+    define narrator = Character(None, what_italic=True, what_color="#242323")
     define m = Character("Maj")
     define f = Character("Fransk",color="#b14b4b", image= "fransk")
     define l = Character("Lou",color="#dba100", image= "lou")

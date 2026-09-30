@@ -20,11 +20,21 @@ init python:
             self.action = action #label vers lequel on doit jump
             self.chara = chara #image du perso associé à la convo
 
+        
+
 
     class HotspotData:
-        def __init__(self, rect, action):
-            self.rect = rect          # Zone de collision du hotspot(x, y, width, height)
-            self.action = action      # label vers lequel on doit jump quand on clique sur le hotspot
+        condition = None    # valeur de repli pour les objets créés avant l'ajout
+
+        def __init__(self, rect, action, condition=None):
+            self.rect = rect            # (x, y, width, height)
+            self.action = action        # label vers lequel on jump au clic
+            self.condition = condition  # None, ou une chaîne, ex. "met_lisa"
+
+        def is_active(self):
+            if self.condition is None:
+                return True
+            return bool(eval(self.condition, renpy.store.__dict__))
 
     class QuickEvent:
         def __init__(self, id, prerequisites, action):
