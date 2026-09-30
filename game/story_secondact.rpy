@@ -2443,9 +2443,9 @@ label hotspot_investigation_body:
     m "It was probably done with some kind of knife..."
     l "Yeah, judging from the depth of it, I can safely assume that the blood came from here."
 
-    # [Information about the body added to evidence] ??
+    # [Information about the body added to evidence] ?
     $ P_body_info = Proof("Information about the body", 
-                            "Infos about the body", 
+                            "Fransk was stabbed in the torso using a knife. The blood from the scene is definitely his.", 
                             "images/props/body.png", 
                             R_F1fransksRoom, 
                             1250, 300, 
