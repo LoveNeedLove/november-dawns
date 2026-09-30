@@ -1205,7 +1205,12 @@ label talk_lou_living_room:
     m "It sure does." 
     
     # [Vape added to evidence]
-    $ vape_liquid = Proof("Liquid Vape", "A blue classic vape, used a lot by a connard poilu", "images/props/vape.png", R_livingRoom, 500, 500, "vape_liquid")
+    $ vape_liquid = Proof("Liquid Vape", 
+                            "Fransk saw Lou fill up his vape earlier today, Lou hasn't left home since.", 
+                            "images/props/vape.png", 
+                            R_livingRoom, 
+                            500, 500, 
+                            "vape_liquid")
     $ addProofToInventory(vape_liquid)
 
     return
@@ -1263,7 +1268,12 @@ label hotspot_bedroom_window:
     m "That settles it!" 
     
     # [Living Room / Fransk Window added to evidence]
-    $ fransk_window = Proof("Living Room Window", "A window of the living room", "images/props/living_room_window.png", R_livingRoom, 650, 500, "fransk_window")
+    $ fransk_window = Proof("Living Room Window", 
+                            "A small window that slightly opens. Leads Fransk's room to the living room.", 
+                            "images/props/living_room_window.png", 
+                            R_livingRoom, 
+                            650, 500, 
+                            "fransk_window")
     $ addProofToInventory(fransk_window)
 
     return
@@ -1382,7 +1392,12 @@ label prologue_part10_searches_and_trial:
     f "I think so..." 
 
     # [Body Searches added to evidence]
-    $ body_searches = Proof("Body Searches", "Notes of your searches...", "images/props/body_searches.png", R_livingRoom, 750, 700, "body_searches")
+    $ body_searches = Proof("Body Searches", 
+                            "Lou got fed up and searched Stheno, Fransk and I upstairs, before searching the others downstairs. Nothing was found.", 
+                            "images/props/body_searches.png", 
+                            R_livingRoom, 
+                            750, 700, 
+                            "body_searches")
     $ addProofToInventory(body_searches)
 
     l "..." 
