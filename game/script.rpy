@@ -29,7 +29,7 @@ label start:
     call initialisation
 
     $ current_room = R_livingRoom
-    jump scene_lou_werewolf_discovery
+    jump prologue_part1_arrival
     # Dialogue de test par-dessus
     jump room_loop
 

@@ -34,6 +34,8 @@ init python:
                 if hasattr(store, "current_cx") and store.current_cx:
                     statement = store.current_cx.statements[store.cx_index]
                     if statement.correct_evidence_id == self.id:
+                        store.in_cross_examination = False
+                        store._history = True
                         renpy.jump(statement.contradiction_label)
                     else:
                         renpy.jump("cx_penalty")

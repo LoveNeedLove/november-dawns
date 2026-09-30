@@ -212,11 +212,11 @@ label prologue_part3_carmille:
 
     "There she goes..." 
 
-    s "Nice to meet you.." 
-    s "{i}*HEM-HEM*{/i}" 
-    s "You must be" 
-    s "{i}*HACK-HACK*{/i}" 
-    s "عبد المجيد" 
+    v "Nice to meet you.." 
+    v "{i}*HEM-HEM*{/i}" 
+    v "You must be" 
+    v "{i}*HACK-HACK*{/i}" 
+    v "عبد المجيد" 
 
     m "H- what ?!" 
 
@@ -1153,7 +1153,7 @@ label prologue_part9_investigation_intro:
 
     f "I don't know dude, just point at a spot and start searching, you can also talk to the people around, that'll help for sure." 
 
-    # créer un quickevent et ses prerequis ICI
+
     $ QE_part9 = QuickEvent("QE_part9", ("hotspot_couch",
                                         "talk_stheno_living_room",
                                         "talk_lou_living_room",
@@ -1164,8 +1164,7 @@ label prologue_part9_investigation_intro:
                                         "hotspot_bedroom_window",
                                         "talk_fransk_bedroom",
                                         "talk_stheno_bedroom")
-                                        , Call("prologue_part10_searches_and_trial"))
-    # add à l'eventmanager
+                                        , "prologue_part10_searches_and_trial")
     $ eventMgr.add_event(QE_part9)
 
     return
@@ -1204,7 +1203,11 @@ label talk_lou_living_room:
     f "Of course, I'm not complaining, you just smoke like a chimney... or rather, a steam engine?" 
     l "Ha-Ha, but yeah witness gives extra credibility to my claim; Right?!" 
     m "It sure does." 
+    
     # [Vape added to evidence]
+    $ vape_liquid = Proof("Liquid Vape", "A blue classic vape, used a lot by a connard poilu", "images/props/vape.png", R_livingRoom, 500, 500, "vape_liquid")
+    $ addProofToInventory(vape_liquid)
+
     return
 
 
@@ -1258,7 +1261,11 @@ label hotspot_bedroom_window:
     m "Any idea who opened it?" 
     f "Yeah! It was me! I opened it before the party." 
     m "That settles it!" 
-    # [Living Room Window added to evidence]
+    
+    # [Living Room / Fransk Window added to evidence]
+    $ fransk_window = Proof("Living Room Window", "A window of the living room", "images/props/living_room_window.png", R_livingRoom, 650, 500, "fransk_window")
+    $ addProofToInventory(fransk_window)
+
     return
 
 
@@ -1375,6 +1382,8 @@ label prologue_part10_searches_and_trial:
     f "I think so..." 
 
     # [Body Searches added to evidence]
+    $ body_searches = Proof("Body Searches", "Notes of your searches...", "images/props/body_searches.png", R_livingRoom, 750, 700, "body_searches")
+    $ addProofToInventory(body_searches)
 
     l "..." 
     l "Still no vape?!" 
@@ -1413,7 +1422,7 @@ label prologue_part10_searches_and_trial:
 label cx1_objection_success:
     m "Impossible." 
 
-    s "Fuck you mean, “impossible?”" 
+    s "Fuck you mean, \"impossible?\"" 
 
     m "Earlier today, while they were setting up the party, Lou asked to borrow Fransk's vape liquid." 
 
@@ -1428,18 +1437,14 @@ label cx1_objection_success:
     "Yeah, the search was thorough, if it simply fell somewhere we would've found it..." 
 
     # CHOIX 1
-    menu:
-        "The vape is...":
-            jump cx_penalty
-
-        "Still somewhere around the house":
-            jump cx_penalty
-
-        "At Lou's":
-            jump cx_penalty
-
-        "On someone":
-            jump choice_on_someone_success
+    call menu_choice_loop("The vape is...",
+        [
+        "Still somewhere around the house",
+        "At Lou's",
+        "On someone"
+        ],
+        3
+    )
 
 
 label choice_on_someone_success:
@@ -1456,18 +1461,13 @@ label choice_on_someone_success:
     m "Could anyone have done it ?" 
 
     # CHOIX 2 (Sélection du suspect)
-    menu:
-        "Who could have hidden it?":
-            jump cx_penalty
-
-        "Cassie":
-            jump choice_cassie_success
-
-        "Pani":
-            jump cx_penalty
-
-        "Fransk":
-            jump cx_penalty
+    call menu_choice_loop("Who could have hidden it?",
+    [    
+        "Cassie",
+        "Pani",
+        "Fransk"],
+        1
+    )
 
 
 label choice_cassie_success:
@@ -1523,16 +1523,14 @@ label cx2_objection_success:
 
     m "Carm... I think I get it." 
 
+
     # CHOIX 3 (Preuve / Déduction)
-    menu:
-        "The vape was concealed using...":
-            jump cx_penalty
-
-        "Stheno searched upstairs":
-            jump choice_stheno_searched_success
-
-        "Fransk hid it again":
-            jump cx_penalty
+    call menu_choice_loop("The vape was concealed using...",
+    [    
+        "Stheno searched upstairs",
+        "Fransk hid it again"],
+        1
+    )
 
 
 label choice_stheno_searched_success:
@@ -1614,6 +1612,8 @@ label choice_stheno_searched_success:
 
     "I instinctively go to follow. A door's slam indicates that he hid in the bathroom." 
 
+    call travel_to(R_F1hallway, True)
+
     m "Lou? Fransk is coming! Do you need anything?" 
 
     l "Urgh...." 
@@ -1632,4 +1632,7 @@ label choice_stheno_searched_success:
     "Lou?" 
 
     # [FIN DU PROLOGUE]
+
+    jump scene_lou_werewolf_discovery
+
     return

@@ -393,11 +393,28 @@ style input:
 ## https://www.renpy.org/doc/html/screen_special.html#choice
 
 screen choice(items):
-    style_prefix "choice"
 
     vbox:
+        style_prefix "choice"
+
         for i in items:
-            textbutton i.caption action i.action
+
+            if i.action:
+                textbutton i.caption action i.action
+
+            else:
+                text i.caption style "choice_question"
+
+style choice_question:
+    color "#FFFFFF"
+    size 54
+    text_align 0.5
+    xalign 0.5
+    yalign 0.5
+    xmaximum 1000
+    yminimum 80
+    top_margin 20
+    bottom_margin 25
 
 
 style choice_vbox is vbox
