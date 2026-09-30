@@ -92,7 +92,6 @@ init python:
         def present(self, evidence_id):
             curr = self.current()
             if curr.correct_evidence_id == evidence_id:
-                global in_cross_examination
                 in_cross_examination = False
                 renpy.jump(curr.contradiction_label)
             else:
