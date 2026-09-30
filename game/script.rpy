@@ -1,16 +1,22 @@
-﻿label travel_to(destination, in_dialogue=False,  trans_duration = 0.4 trans_in=None, anim_out=None, anim_in=None, all_screen=False):
+﻿init python:
+    from renpy.display.transition import Transition
+    
+label travel_to(destination, in_dialogue=False, trans_duration=0.4, trans_in=None, anim_out=None, anim_in=None, all_screen=False):
     $ renpy.block_rollback()
 
     if anim_out is not None:
         if isinstance(anim_out, Transition):
             $ renpy.transition(anim_out)
-            $ renpy.pause(anim_out.time if hasattr(anim_out, 'time') else 0.5)
         else:
             show screen room_screen(at_anim=anim_out, all_screen=all_screen) onlayer backgrounds
-            $ renpy.pause(0.4) # Ajuster la durée si nécessaire pour laisser l'animation se terminer
+            $ renpy.pause(0.4)
 
     scene black
-    with trans_duration                       # trans=None : coupe sèche vers le noir[cite: 1]
+
+    if trans_in is None:
+        with Fade(trans_duration, 0.0, trans_duration)
+    else:
+        with trans_in
 
     # --- CHANGEMENT DE DESTINATION ET ENTRÉE ---
     $ current_room = destination

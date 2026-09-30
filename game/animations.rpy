@@ -92,7 +92,7 @@ transform highlight(dx=30, t=0.25):
 ##     show eileen at cover
 ##     show eileen at cover(dx=40, t=0.3, dark=0.35)
 ##     show eileen at cover(side="left")     # seulement si le perso est pile au centre
-transform cover(dx=30, t=0.25, dark=0.25, side=None):
+transform cover(dx=30, t=0.25, dark=0.18, side=None):
     function _init_brightness
     parallel:
         function ShiftX(dx, t, "edge", side)
@@ -136,3 +136,13 @@ transform trembling(strength=10, timing = 0.3):
     linear timing xoffset strength 
     linear timing xoffset 0   
 
+    # Ombre portée : xoffset, yoffset, flou (blur), couleur
+transform drop_shadow(x=5, y=5, blur=8, color="#000000aa"):
+    matrixcolor DropShadowMatrix(x, y, blur, color)
+
+# Combinaison : ombre portée + léger zoom/éclaircissement pour accentuer le perso actif
+transform speaking_shadow:
+    parallel:
+        matrixcolor DropShadowMatrix(6, 6, 10, "#000000bb")
+    parallel:
+        easein 0.2 matrixcolor BrightnessMatrix(0.05)
