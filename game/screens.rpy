@@ -290,13 +290,14 @@ screen cx_nav_overlay(cx=None) layer "overlay":
 
 
 
-screen room_screen() layer "backgrounds":
+screen room_screen(at_anim=None, all_screen=False) layer "backgrounds":
 
     $ crop_y = getattr(current_room, "bg_crop_y", 1.0)
     $ zoom, img_h = room_bg_metrics(current_room.bg)
     $ view_h = min(DLG_TOP, img_h)
 
-    viewport:
+    # Si all_screen est True, l'animation/transform s'applique sur tout le viewport
+    viewport at (at_anim if (at_anim and all_screen) else []):
         xsize 1440
         ysize view_h
         xalign 0.5
@@ -306,7 +307,8 @@ screen room_screen() layer "backgrounds":
         draggable False
         mousewheel False
 
-        imagemap:
+        # Si all_screen est False, l'animation s'applique uniquement sur l'imagemap
+        imagemap at (at_anim if (at_anim and not all_screen) else []):
             idle Transform(current_room.bg, zoom=zoom)
 
             for h in current_room.hotspots:

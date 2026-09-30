@@ -1,10 +1,31 @@
-﻿label travel_to(destination, in_dialogue=False):
-    # Bloque back au début du déplacement
+﻿label travel_to(destination, in_dialogue=False, trans=dissolve, trans_duration = 0.4 trans_in=None, anim_out=None, anim_in=None, all_screen=False):
     $ renpy.block_rollback()
 
-    scene black with dissolve
+    if anim_out is not None:
+        if isinstance(anim_out, Transition):
+            $ renpy.transition(anim_out)
+            $ renpy.pause(anim_out.time if hasattr(anim_out, 'time') else 0.5)
+        else:
+            show screen room_screen(at_anim=anim_out, all_screen=all_screen) onlayer backgrounds
+            $ renpy.pause(0.4) # Ajuster la durée si nécessaire pour laisser l'animation se terminer
+
+    scene black
+    with trans_duration                       # trans=None : coupe sèche vers le noir[cite: 1]
+
+    # --- CHANGEMENT DE DESTINATION ET ENTRÉE ---
     $ current_room = destination
-    show screen room_screen onlayer backgrounds
+
+    # --- TRANSITION / ANIMATION D'ENTRÉE (anim_in) ---
+    if anim_in is not None and not isinstance(anim_in, Transition):
+        show screen room_screen(at_anim=anim_in, all_screen=all_screen) onlayer backgrounds
+    else:
+        show screen room_screen onlayer backgrounds
+
+    # Application de la transition d'entrée si anim_in ou trans_in est un objet Transition
+    $ entry_trans = anim_in if isinstance(anim_in, Transition) else trans_in
+    if entry_trans is not None:
+        with entry_trans             # None : la nouvelle pièce apparaît d'un coup[cite: 1]
+
     $ renpy.checkpoint()
 
     if current_room.cutscene is not None:
