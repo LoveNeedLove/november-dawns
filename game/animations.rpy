@@ -133,7 +133,7 @@ transform leave_to_left(t=0.4):
     easein_cubic t xoffset -config.screen_width
 
 transform trembling(strength=10, timing = 0.3):
-    linear timing xoffset strength      # monte vite, ralentit au sommet
+    linear timing xoffset strength 
     linear timing xoffset 0   
 
     # Ombre portée : xoffset, yoffset, flou (blur), couleur
@@ -143,6 +143,6 @@ transform drop_shadow(x=5, y=5, blur=8, color="#000000aa"):
 # Combinaison : ombre portée + léger zoom/éclaircissement pour accentuer le perso actif
 transform speaking_shadow:
     parallel:
-        matrixcolor DropShadowMatrix(6, 6, 10, "#f5f2f2bb")
+        matrixcolor DropShadowMatrix(6, 6, 10, "#000000bb")
     parallel:
         easein 0.2 matrixcolor BrightnessMatrix(0.05)

@@ -15,7 +15,8 @@ label scene_lou_werewolf_discovery:
 
     m "Do you need any-"
     l "Get OUT!"
-    f "Maj! Let me handle this."
+    show fransk serious at pop_from_right
+    f serious "Maj! Let me handle this."
     m "!"
 
     "{b}*SLAM!*{/b}"
@@ -24,9 +25,11 @@ label scene_lou_werewolf_discovery:
     f "Lou is gonna be fine."
     f "He just needs some rest."
     m "That's not what I was talking about, he-"
+    show fransk serious with vpunch
     f "He's just Lou, ok?!"
     f "Don't get any id-"
     l "It's alright, Fransk."
+    show fransk serious at hop
     f "!"
     l "Maj... I can't explain what you saw, but I'm trying to do the right thing by locking myself up."
     l "Please, I beg you, don't tell anyone!"
@@ -35,19 +38,23 @@ label scene_lou_werewolf_discovery:
     m "Did you know, Fransk?"
     f "..."
     m "Look, I'm aware that I'm the new guy. But you gotta trust me!"
-    f "Trust you?"
-    f "What the hell, it's not like I can do anything to shut you up."
+    f curious "Trust you?"
+    f -curious "What the hell, it's not like I can do anything to shut you up."
     f "Maj, we're a team now."
+    call anim_room(trans=vpunch)
     m "A team?"
     f "Yup, I'll stay up in my room while you ensure that nobody gets bored."
-    f "Once the party's over or Lou gets better, I'll make sure to tell you everything."
+    f laughing "Once the party's over or Lou gets better, I'll make sure to tell you everything."
     f "Deal?"
     m "Sounds good to me."
-    f "Don't worry about him, I'll watch over him from my room, I really need some rest."
+    f tired "Don't worry about him, I'll watch over him from my room, I really need some rest."
     l "Before that, could you make sure I'm locked up? I can't trust myself to stay here."
     f "Don't worry bro, I have a key to the bathroom, you won't even be able to open the door from the inside when I use this!"
     l "Thanks!"
     m "Welp, I'll go join the others."
+    show fransk tired with dissolve(0.2)
+    $ renpy.pause(0.2)
+    hide fransk
     f "Thanks. I'll close the door right behind you."
 
     "Each step feels like an eternity, and yet, there'll never be enough time for me to grasp what just happened."
@@ -55,7 +62,7 @@ label scene_lou_werewolf_discovery:
     "Lou... is..."
     
     $ R_livingRoom.cutscene = "scene_living_room_return"
-    call travel_to(R_livingRoom)
+    call travel_to(R_livingRoom,trans_in = fade)
     return
 
 
@@ -63,47 +70,74 @@ label scene_lou_werewolf_discovery:
 
 label scene_living_room_return:
 
+    show stheno angry with hpunch
     s "HOW'S LOU, ASSHOLE!"
     m "Ah!"
-    v "Is he okay? Can we come check on him?"
+    hide stheno
+    show carmille worried with vpunch
+    v carmille "Is he okay? Can we come check on him?"
     m "Right now Lou... is resting up. The chase almost made him faint."
-    s "The fuck? He's supposed to be a quarterback!"
+    show carmille at right with move
+    show stheno at left with moveinleft
+    show carmille at cover
+    s angry "The fuck? He's supposed to be a quarterback!"
+    show stheno at cover
+    show carmille at neutral with hop
     c "We shouldn't have fucked with him that much Sthen... he was probably stressed or suffering from nicotine withdrawal..."
-    s "Ugh..."
+    show stheno at neutral
+    show carmille at cover with hop
+    s sighing "Ugh..."
     s "Nicotine withdrawal...?"
     s "We gotta get this bitch to stop!"
-    v "Stheno you have to calm down a bit..."
+    show stheno at cover
+    show carmille at neutral with hop
+    v -worried "Stheno you have to calm down a bit..."
     v "Let's get us some drinks shall we?"
+    hide stheno with dissolve(0.2)
+    hide carmille with dissolve(0.2)
+    show cassie smiling at center with dissolve(0.2)
     c "Yeah! We could even go to the garden if you want!"
+    hide cassie with dissolve(0.2)
+    show pani at center with dissolve(0.2)
     p "And maybe have a smoke of our own..."
+    hide pani with dissolve(0.2)
+    show stheno at center with vpunch
     s "Abby, you better make me another one of those cocktails."
     m "Yeah, sure!"
+    hide stheno with dissolve(0.2)
+    show carmille at center with dissolve(0.2)
+    hide carmille with moveoutright(0.2) 
     c "I'll put on some music!"
-
+#Fade to black?
     "Spending time with people sure is nice, but I can't help but shake that image of Lou out of my mind."
     "Those eyes..."
 
-    call travel_to( R_kitchen,in_dialogue = True)
+    call travel_to( R_kitchen,in_dialogue = True,trans_in=vpunch)
+    show stheno angry
     s "You're gonna mix my drink forever or what!"
     m "!"
     s "Stop zoning out, man."
     m "S-sorry. Your cocktail's ready..."
     s "...Sure bro."
+    hide stheno with moveoutleft
     m "*siiiiiigh*"
+    show pani with dissolve(0.3)
     p "You okay?"
     m "Huh? Yeah. I just have to go to the bathroom; I think?"
     p "Carm's in there I think. And I have to go too..."
     m "Drinks are getting to our bladders, huh?"
     p "Just go before me bro, you're acting weird as hell lmaooo."
     m "... yeah thanks."
-
+    hide pani
+    call travel_to( R_entryHallway,in_dialogue = True)
+    show carmille with dissolve(0.2)
     v "Going in?"
     m "Yeah..."
     v "Let's join up in the garden, fresh air will do us all some good!"
     m "Fine by me."
 
     "{i}*shut!*{/i}"
-    call travel_to( R_F1bathroom,in_dialogue = True)
+    call travel_to( R_F1bathroom,in_dialogue = True, trans_in=fade)
 
     "When life's too much to bear... pissing is always here to give you a break... break..."
     "..."
@@ -114,8 +148,11 @@ label scene_living_room_return:
     "{i}*washhhhhhhhhh* *close!*{/i}"
     "{i}*open*{/i}"
     call travel_to(  R_entryHallway,in_dialogue = True)
+    show pani with vpunch
     m "Ah! Pani!"
+    show pani at hop_bounce
     p "Fuckk you're finally doneee, LET ME IN!"
+    hide pani with moveoutleft(0.1)
 
     "{b}*SLAM!*{/b}"
     

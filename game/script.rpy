@@ -1,4 +1,4 @@
-﻿label travel_to(destination, in_dialogue=False, trans=dissolve, trans_duration = 0.4 trans_in=None, anim_out=None, anim_in=None, all_screen=False):
+﻿label travel_to(destination, in_dialogue=False,  trans_duration = 0.4 trans_in=None, anim_out=None, anim_in=None, all_screen=False):
     $ renpy.block_rollback()
 
     if anim_out is not None:
@@ -37,6 +37,27 @@
         return
     else:
         jump room_loop
+
+label anim_room(anim=None, trans=None, all_screen=False, pause_time=0.4):
+    """
+    Applique une animation (ATL/Transform) ou une transition sur la pièce actuelle.
+    
+    :param anim: Transform ou animation ATL à appliquer (ex: pop_from_right).
+    :param trans: Transition Ren'Py classique (ex: dissolve, fade).
+    :param all_screen: Si True, applique sur tout le viewport ; si False, juste sur l'imagemap.
+    :param pause_time: Temps de pause en secondes pour laisser l'animation ATL se dérouler.
+    """
+    if anim is not None:
+        # Applique le Transform / ATL sur l'écran
+        show screen room_screen(at_anim=anim, all_screen=all_screen) onlayer backgrounds
+        if pause_time > 0:
+            $ renpy.pause(pause_time)
+
+    if trans is not None:
+        # Applique une transition classique Ren'Py
+        with trans
+
+    return
 
 label room_loop:
     window hide None
