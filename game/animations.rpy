@@ -83,6 +83,7 @@ init python:
 ##     show eileen at highlight(dx=60, t=0.4)
 transform highlight(dx=30, t=0.25):
     function _init_brightness
+    zorder = 100
     parallel:
         function ShiftX(dx, t, "center")
     parallel:
@@ -93,6 +94,7 @@ transform highlight(dx=30, t=0.25):
 ##     show eileen at cover(dx=40, t=0.3, dark=0.35)
 ##     show eileen at cover(side="left")     # seulement si le perso est pile au centre
 transform cover(dx=30, t=0.25, dark=0.25, side=None):
+    zorder = 1
     function _init_brightness
     parallel:
         function ShiftX(dx, t, "edge", side)
@@ -101,6 +103,7 @@ transform cover(dx=30, t=0.25, dark=0.25, side=None):
 
 ## Retour à la position et à la luminosité normales
 transform neutral(t=0.25):
+    zorder = 2
     function _init_brightness
     parallel:
         function ShiftX(0, t, "center")
@@ -132,4 +135,6 @@ transform leave_to_right(t=0.4):
 transform leave_to_left(t=0.4):
     easein_cubic t xoffset -config.screen_width
 
-    
+transform trembling(strength=10, timing = 0.3):
+    linear timing xoffset strength      # monte vite, ralentit au sommet
+    linear timing xoffset 0   
