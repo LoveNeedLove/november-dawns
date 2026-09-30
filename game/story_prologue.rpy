@@ -19,7 +19,7 @@ label prologue_part1_arrival:
     "I can't believe I'm finally here, America. I mean, the most unbelievable thing is how much I wanted to come here in the first place, it's almost like I blacked out for most of high school... and also middle school." 
     "These suburbs don't look much different than the fancy parts of where I'm from but still... It's a new beginning!" 
 
-    show fransk
+    show fransk at hop
     f "You talking to yourself ?"
 
     m "Oh ! Fransk ! So glad to see you !" 
@@ -891,7 +891,24 @@ label prologue_part7_kitchen_cocktail:
 
 label prologue_part8_truth_or_dare:
 
-    f "Hey! We're all gathered here!" 
+    show fransk
+    show stheno:
+        xalign 0.1
+        yalign 1.0
+    show lou:
+        xalign 0.25
+        yalign 1.0
+    show pani:
+        xalign 0.75
+        yalign 1.0
+    show cassie:
+        xalign 0.85
+        yalign 1.0
+    show carmille:
+        xalign 1.0
+        yalign 1.0
+
+    f laughing "Hey! We're all gathered here!" 
 
     "It's true. Meeting so many people in one night might've been exhausting, but now that they're all gathered I can really tell that their relationship is really something special." 
 
@@ -903,9 +920,9 @@ label prologue_part8_truth_or_dare:
 
     p "As long as we can get wasteeeeed." 
 
-    f "Pani, you're underage." 
+    f -laughing "Pani, you're underage." 
 
-    p "What?! Wha-wha-what?!" 
+    p ragebaiting "What?! Wha-wha-what?!" 
     p "Mind you, my license says I'm well past 30." 
 
     l "Dude isn't that your high school picture? Were you even allowed to drive a car then?" 
@@ -920,17 +937,17 @@ label prologue_part8_truth_or_dare:
 
     s "Yeah, the new guy just made me a drink, and I'm barely 20." 
 
-    p "So we're drinking?" 
+    p -ragebaiting "So we're drinking?" 
 
     f "Uh-huh." 
 
-    p "Shots." 
+    p "Shots?" 
 
     f "Yup." 
 
     "In a flash, Pani was standing on the table." 
 
-    p "Let's fucking gooooooo!" 
+    p laughing "Let's fucking gooooooo!" 
 
     m "So, what are the rules?" 
 
@@ -940,15 +957,17 @@ label prologue_part8_truth_or_dare:
 
     "Seeing Fransk gleefully running around collecting every single phone almost made up for the unbelievable grief some of us felt by giving away our most precious belongings." 
 
-    f "Be right back!" 
+    f laughing "Be right back!" 
+    hide fransk with dissolve
 
     "Fransk's little run to the garage was honestly stupid, but lighthearted enough to fill the room with warm and bright energy." 
 
+    show fransk with dissolve
     f "Okay! We're playing truth or dare!" 
 
-    l "Hell yeah!" 
+    l laughing "Hell yeah!" 
 
-    f "You know the rules, Maj?" 
+    f -laughing "You know the rules, Maj?" 
 
     m "Yeah, it's like spinning the bottle?" 
 
@@ -958,7 +977,7 @@ label prologue_part8_truth_or_dare:
 
     f "Ready?" 
 
-    l "Wait- guys-" 
+    l -laughing "Wait- guys-" 
 
     f "Go!" 
 
@@ -966,28 +985,28 @@ label prologue_part8_truth_or_dare:
     "The way the remaining amount of liquid swirls inside of the bottle as it spins, the simple satisfaction that comes from the droplets that drip along the sides, the magnificent refraction of light that creates a mesmerising image at the bottom of the bottle." 
     "And before realising it, the show was over, and it pointed towards..." 
 
-    p "Pani! Seems like I get to give you a dare!" 
+    p ragebaiting "Pani! Seems like I get to give you a dare!" 
 
     "Cassie's face failed to hide her naughty intentions." 
 
     c "Pani! You get to-" 
 
-    p "Can I just take a shot?" 
+    p -ragebaiting "Can I just take a shot?" 
 
-    c "What-" 
+    c shocked "What-" 
 
     p "Yeah I don't wanna do something gross I just wanna drink." 
 
     l "That... that's a huge design flaw!" 
     l "It's really obvious that this game lacked any kind of QA testing!" 
 
-    c "Pani, let me finish my dare." 
+    c -shocked "Pani, let me finish my dare." 
 
     p "Sure bro, but I'm drinking." 
 
-    c "I dare you... to motorboat Lou's pecs..." 
+    c smiling "I dare you... to motorboat Lou's pecs..." 
 
-    l "The fuck!" 
+    l panic "The fuck!" 
 
     p "Yea not doing that-" 
 
@@ -1005,7 +1024,7 @@ label prologue_part8_truth_or_dare:
 
     "Pulling her head back at incredible speed Pani takes a quick moment to breathe." 
 
-    p "Goddamn Lou! You've got a great rack!" 
+    p ragebaiting "Goddamn Lou! You've got a great rack!" 
 
     l "Don't ever say that again." 
 
@@ -1025,7 +1044,7 @@ label prologue_part8_truth_or_dare:
 
     l "How did she down them so fucking fast!" 
 
-    p "YEEEEEE-HAW! Who's turn is iiiiiittttttttttt!" 
+    p angry "YEEEEEE-HAW! Who's turn is iiiiiittttttttttt!" 
 
     "Without even consulting with us Pani just slaps the bottle's neck, making it whirl so fast that it is almost impossible to tell where it could land." 
 
@@ -1053,7 +1072,7 @@ label prologue_part8_truth_or_dare:
 
     m "Let's see..." 
 
-    f "MAJ WAIT-" 
+    f serious "MAJ WAIT-" 
 
     "I didn't notice it before but it seems like that gargantuan piece of furniture started wobbling in horrifying fashion." 
 
@@ -1120,19 +1139,19 @@ label prologue_part8_truth_or_dare:
 
     l "Go Maj!" 
 
-    v "That was beautiful!" 
+    v smiling "That was beautiful!" 
 
-    c "Yeah!" 
+    c smiling "Yeah!" 
 
-    l "Whoop whoop!" 
+    l laughing "Whoop whoop!" 
 
     "As they start to applaud, my eyes can't help but remain stuck on Sthen's glasses, until she leans forwards to pull out a liquor flask, briefly allowing me to look at her close eyes." 
 
-    s "I could NEVER do what you just did that was cringe as hell." 
+    s shocked "I could NEVER do what you just did that was cringe as hell." 
 
     "Speaking to me while unbottling her flask made it seem like she was pulled right out of a shitty gangster movie." 
 
-    s "Now take a shot." 
+    s -shocked "Now take a shot." 
 
     m "Huh? But I completed the dare." 
 
@@ -1144,7 +1163,7 @@ label prologue_part8_truth_or_dare:
 
     m "What's in the flask?" 
 
-    s "My favorite." 
+    s snickering "My favorite." 
 
     m "Good enough..." 
 
@@ -1161,7 +1180,7 @@ label prologue_part9_investigation_intro:
 
     "{i}*ruffle* *ruffle* *ruffle* *ruffle*{/i}" 
 
-    l "Uuuuh- hey guys?" 
+    l panic "Uuuuh- hey guys?" 
 
     f "Okay who's going next!" 
 
@@ -1171,35 +1190,41 @@ label prologue_part9_investigation_intro:
 
     l "GUYS!" 
 
-    p "AAACK" 
+    p worried "AAACK" 
 
-    c "Why'd you scream dude?!" 
+    c worried "Why'd you scream dude?!" 
 
     l "Have yall seen my vape? I SWEAR it was in my jacket's pocket?" 
 
-    c "Where'd you leave your jacket?" 
+    c -worried "Where'd you leave your jacket?" 
 
     l "Right here, where I'm sat!" 
 
-    f "Maybe it fell between the cushions? I'll fish it out for you later." 
+    f curious "Maybe it fell between the cushions? I'll fish it out for you later." 
 
     l "Fuck no I need a hit BAD." 
 
-    p "Dude you're acting like some kind of crackhead right now." 
+    p -worried "Dude you're acting like some kind of crackhead right now." 
 
     l "You don't get it." 
 
-    f "Yeah guys, let's look for it. I wouldn't want my parents to find an e-cig when they spring clean." 
+    f -curious "Yeah guys, let's look for it. I wouldn't want my parents to find an e-cig when they spring clean." 
 
     c "I guess...." 
 
     # {DÉBUT D'ENQUÊTE}
+    hide stheno
+    hide lou
+    hide pani
+    hide cassie
+    hide carmille
+
     f "Have a look around the room, Maj. I'm sure you can help us find it." 
 
     m "How so?" 
 
     f "I don't know dude, just point at a spot and start searching, you can also talk to the people around, that'll help for sure." 
-
+    hide fransk
 
     $ QE_part9 = QuickEvent("QE_part9", ("hotspot_couch",
                                         "talk_stheno_living_room",
@@ -1218,39 +1243,46 @@ label prologue_part9_investigation_intro:
 
 
 label hotspot_couch:
+    show lou at left
     m "Hmm, there's pretty much nothing here. Lou? Can I see your jacket?" 
     l "Huh? Yeah. My vape goes in the right pocket." 
     m "Yeah... if it had fallen somewhere, I'm pretty sure it would've fallen between the cushions. And there's nothing there..." 
     l "So?" 
-    m "We have to look someplace else." 
+    m "We have to look someplace else."
+    hide lou
     return
 
-
 label talk_stheno_living_room:
+    show stheno
     m "Did you witness anything suspicious? Like someone roaming around the couch area." 
     s "Why the fuck would I pay attention to this guy's fucking jacket. I'm like 90% sure that he claimed it from the school's lost and found." 
     m "So you didn't see anyone." 
-    s "No! In fact anyone could've carried the crime without anyone noticing. Lou arrived first alongside Cassie at the party, and nobody cares enough to actively monitor a fucking jacket!" 
+    s angry "No! In fact anyone could've carried the crime without anyone noticing. Lou arrived first alongside Cassie at the party, and nobody cares enough to actively monitor a fucking jacket!" 
     "It makes sense, multiple people have even sat by it ever since I arrived." 
     m "Thanks for the intel." 
+    hide stheno
     return
 
 
 label talk_lou_living_room:
+    show lou
     m "Hey, when was the last time you used your vape?" 
     l "Huh? Probably today. Why?" 
     m "Isn't it possible that you lost it before arriving?" 
     l "No, no, no I just filled it up this afternoon using Fransk's vape liquid." 
     m "Oh so you're positive you had it on you?" 
-    l "Doubting me? HEY FRANSK!" 
+    l "Doubting me? HEY FRANSK!"
+    show fransk at right
     f "Yup?" 
     l "Is it true that I refilled my vape at this very table?" 
     f "Yup, even taxed more than half of the liquid I had left." 
     l "Hey! You promised I could use as much as I want!" 
     f "Of course, I'm not complaining, you just smoke like a chimney... or rather, a steam engine?" 
     l "Ha-Ha, but yeah witness gives extra credibility to my claim; Right?!" 
-    m "It sure does." 
-    
+    m "It sure does."
+    hide fransk
+    hide lou
+
     # [Vape added to evidence]
     $ vape_liquid = Proof("Liquid Vape", 
                             "Fransk saw Lou fill up his vape earlier today, Lou hasn't left home since.", 
@@ -1264,6 +1296,7 @@ label talk_lou_living_room:
 
 
 label hotspot_kitchen:
+    show carmille
     m "Hmm I wonder if the vape's around here." 
     v "I can tell you it's not. We looked around with Pani." 
     m "Thanks for clearing that up. Did Lou come over here with his jacket?" 
@@ -1272,11 +1305,13 @@ label hotspot_kitchen:
     v "Franks unloaded the bottles after everyone besides you arrived. I can assure you that we all flocked to this place at the same time to get our drinks." 
     m "So you're saying that everyone was in the kitchen at once?" 
     v "Yup, Franks was obviously here first but I really can't remember how long it took for each of us to come and get our drink." 
-    m "That's interesting to know." 
+    m "That's interesting to know."
+    hide carmille
     return
 
 
 label hotspot_garage_garden:
+    show carmille
     m "Where does this lead?" 
     v "Sorry Maj, Fransk doesn't really want us to get out of the living area." 
     m "What's beyond there?" 
@@ -1284,31 +1319,37 @@ label hotspot_garage_garden:
     "How does that even happen?" 
     v "So yeah, long story short, none of us would dare go there alone, not even Lou." 
     m "I'll trust you on that." 
+    hide carmille
     return
 
 
 label transition_to_bedroom:
+    show lou
     m "Some of the info I got is interesting, but still no sign of the vape's whereabouts." 
-    f "Grrrr, guess I spent a bit of time at Fransk's room, what if we checked that place out?" 
+    l "Grrrr, guess I spent a bit of time at Fransk's room, what if we checked that place out?" 
     m "That's a smart idea" 
-    f "Just follow me back to the entrance hall, it's on the left, then up the stairs!" 
-    m "Will do." 
+    l "Just follow me back to the entrance hall, it's on the left, then up the stairs!" 
+    m "Will do."
+    hide lou
     return
 
 
 label hotspot_bedroom_bed:
+    show lou
     m "No vape here either..." 
     l "Yeah, if it ain't here then we can safely assume that it was in my pocket." 
+    hide lou
     return
 
 
 label hotspot_bedroom_window:
+    show fransk
     m "A window? Here?" 
     f "Oh, this window leads to the living room, but it doesn't open much." 
     m "Oh, I remember seeing a window above that huge bookshelf." 
     f "Yeah, there's a handle on both sides but it can realistically only be opened from the inside of my room." 
     m "Unless you could flied..." 
-    f "HAHAHA if you say so bro!" 
+    f laughing "HAHAHA if you say so bro!" 
     m "..." 
     m "Any idea who opened it?" 
     f "Yeah! It was me! I opened it before the party." 
@@ -1322,11 +1363,14 @@ label hotspot_bedroom_window:
                             650, 500, 
                             "fransk_window")
     $ addProofToInventory(fransk_window)
+    hide fransk
 
     return
 
 
 label talk_fransk_bedroom:
+    show fransk at right
+    show lou at left
     f "I just checked the bathrooms. There wasn't anything there." 
     l "No shit! I haven't gone to the bathroom since I arrived!" 
     f "Dude... you helped me prepare... it's been like- 12 hours or something." 
@@ -1336,25 +1380,37 @@ label talk_fransk_bedroom:
     f "..." 
     m "..." 
     f "Just go dude!" 
-    l "I CAN'T I'M PEE SHY." 
+    l panic "I CAN'T I'M PEE SHY."
+    hide fransk
+    hide lou
     return
 
 
 label talk_stheno_bedroom:
+    show stheno
     s "We checked everywhere downstairs. Either one of us is lying or Lou's a bigger moron than expected." 
     m "I don't think that he should be called that just for losing something..." 
     s "You don't get it, Abby. This guy's always losing shit." 
     m "Really? Are you sure that nobody's fucking with him or something?" 
     s "You have to be a huge moron for people to fuck with you that often." 
-    "So it's entirely possible that this is a recurring prank." 
+    "So it's entirely possible that this is a recurring prank."
+    hide stheno 
     return
 
 
 # --- PARTIE 10 : LE CONTRE-INTERROGATOIRE ET LE DÉNOUEMENT ---
 
 label prologue_part10_searches_and_trial:
+    
+    show lou
+    show stheno:
+        xalign 0.25
+        yalign 1.0
+    show fransk:
+        xalign 0.75
+        yalign 1.0
 
-    l "OKAY THAT'S IT" 
+    l shocked "OKAY THAT'S IT" 
 
     "Lou suddenly starts patting me down rough and firm. Not that I'm complaining." 
 
@@ -1368,21 +1424,21 @@ label prologue_part10_searches_and_trial:
 
     l "The vape is nowhere to be seen, so I'm searching yall directly." 
 
-    s "You better not touch me you hairy ape!" 
+    s angry "You better not touch me you hairy ape!" 
 
-    l "Oh... got something to hide?" 
+    l -shocked "Oh... got something to hide?" 
 
-    s "What?" 
+    s shocked "What?" 
 
     l "Why would you refuse a tiny little search? Seems pretty clear to me..." 
 
-    s "You callin' me a thief? Come prove it asshole!" 
+    s angry "You callin' me a thief? Come prove it asshole!" 
 
     "That's all it took?" 
 
-    l "See? That wasn't so bad." 
+    l "See? That wasn't so bad."
 
-    s "If you ever doubt me again I'll fucking kill you." 
+    s -angry "If you ever doubt me again I'll fucking kill you." 
 
     l "..." 
     l "Your turn Fransk!" 
@@ -1399,17 +1455,17 @@ label prologue_part10_searches_and_trial:
 
     m "... what are we even doing anymore..." 
 
-    f "Mnph~ That's the spot!" 
+    f tired "Mnph~ That's the spot!" 
 
     l "I'll get it all out using my hands!" 
 
-    c "WHAT IS HAPPENING UP THERE?" 
+    c shocked "WHAT IS HAPPENING UP THERE?" 
 
     m "Lou's doing body searches... at least that's what he's supposed to do!" 
 
     c "REALLY?" 
 
-    f "Phew... that was great!" 
+    f -tired "Phew... that was great!" 
 
     l "Anytime brother!" 
     l "Time to search the others!" 
@@ -1420,13 +1476,31 @@ label prologue_part10_searches_and_trial:
 
     s "I'll stay here to finish the search." 
 
+    hide stheno
+    $ travel_to(R_entryHallway, True)
+    show carmille:
+        xalign 0.2
+        yalign 1.0
+    show pani:
+        xalign 0.0
+        yalign 1.0
+
     l "Okay everyone, get ready to be searched." 
 
     f "I can pat them down with you if you want, that'll buy us time." 
 
-    c "Cassie's still in the living room, I'll go get her..." 
+    v "Cassie's still in the living room, I'll go get her..." 
+    hide carmille with dissolve
 
-    l "Thanks!" 
+    l "Thanks!"
+    show carmille:
+        xalign 0.2
+        yalign 1.0
+    show cassie:
+        xalign 0.35
+        yalign 1.0
+
+    l "Alright, let's begin!"
 
     "{i}*squeeze* *squeeze* *squeeze*{/i}" 
     "{i}*pat* *pat* *pat*{/i}" 
@@ -1448,21 +1522,25 @@ label prologue_part10_searches_and_trial:
     $ addProofToInventory(body_searches)
 
     l "..." 
-    l "Still no vape?!" 
+    l shocked "Still no vape?!" 
+
+    show stheno:
+        xalign 0.85
+        yalign 1.0
 
     s "Face it, Lou! I'm sure you left it at home!" 
 
     l "But I-" 
 
-    s "Stop it! We just wanted to party, you're just wasting our time!" 
+    s angry "Stop it! We just wanted to party, you're just wasting our time!" 
 
     m "He couldn't have left it at home." 
 
-    s "What?" 
+    s shocked "What?" 
 
     m "I'm sure of it." 
 
-    s "Yeah? How so." 
+    s -shocked "Yeah? How so." 
 
     m "Let me prove it to you!" 
 
@@ -1488,7 +1566,7 @@ label cx1_objection_success:
 
     m "Earlier today, while they were setting up the party, Lou asked to borrow Fransk's vape liquid." 
 
-    l "Yeah! I filled my vape up." 
+    l - shocked "Yeah! I filled my vape up." 
 
     s "Really... I didn't know..." 
 
@@ -1535,9 +1613,9 @@ label choice_on_someone_success:
 label choice_cassie_success:
     m "Aside from Fransk, Stheno and I, Cassie was the first one to learn about the searches, she also had a second alone before Carm found her..." 
 
-    c "Me?!" 
+    c shocked "Me?!" 
 
-    v "Sorry Maj but I can't back you up on that one." 
+    v worried "Sorry Maj but I can't back you up on that one." 
 
     # [FIGURE IT OUT - CROSS EXAMINATION 2]
     $ current_cx = CrossExamination([
@@ -1560,7 +1638,7 @@ label cx2_objection_success:
     m "The window leading to Fransk's room was open." 
     m "She easily could've thrown the vape from her position." 
 
-    c "Well, that would be easy to prove then." 
+    c -shocked "Well, that would be easy to prove then." 
 
     m "?" 
 
@@ -1577,9 +1655,9 @@ label cx2_objection_success:
 
     m "We're probably missing something..." 
 
-    v "Are we? You still seem like a lead suspect to me Cass." 
+    v -worried "Are we? You still seem like a lead suspect to me Cass." 
 
-    c "!" 
+    c shocked "!" 
 
     v "We just have to think... if she did indeed throw it. How could she have disposed of it again?" 
 
@@ -1602,27 +1680,27 @@ label choice_stheno_searched_success:
 
     m "It wouldn't be too farfetched to claim that Cassie and her worked together to accomplish this prank." 
 
-    f "An accomplice?" 
+    f curious "An accomplice?" 
 
     m "After the search, Cassie probably sent the vape through the window. And Stheno simply took it with her." 
     m "This simple stratagem completely derailed the search, and it would've been really easy to execute." 
 
-    v "Stheno... do you have Lou's vape?" 
+    v side-eye "Stheno... do you have Lou's vape?" 
 
-    s "I- I..." 
+    s dumbfounded "I- I..." 
 
     l "No need for words Stheno." 
-    l "I'LL JUST SEARCH YOU AGAIN!!!" 
+    l laughing "I'LL JUST SEARCH YOU AGAIN!!!" 
 
     s "I admit it! Anything but that!" 
 
-    l "So she did have it!" 
+    l -laughing "So she did have it!" 
 
-    s "You're really annoying, New Guy. It went exactly like you said." 
+    s angry "You're really annoying, New Guy. It went exactly like you said." 
 
-    c "You got us!" 
+    c smiling "You got us!" 
 
-    s "Pranking Lou is kind of a tradition. Didn't expect someone to take the search seriously though..." 
+    s -angry "Pranking Lou is kind of a tradition. Didn't expect someone to take the search seriously though..." 
 
     l "GIVE IT BACK!" 
 
@@ -1630,7 +1708,7 @@ label choice_stheno_searched_success:
 
     l "YES!" 
 
-    s "Come and get it!" 
+    s snickering "Come and get it!" 
 
     "Stheno just hurls the apparatus above Lou's head, making him recoil in surprise." 
 
@@ -1638,15 +1716,15 @@ label choice_stheno_searched_success:
 
     l "I- I'll take it from you!" 
 
-    p "Go for the door Cassie!" 
+    p laughing "Go for the door Cassie!" 
 
-    f "WAIT DON'T!" 
+    f serious "WAIT DON'T!" 
 
     "Cassie swiftly makes her way out the door as Lou clumsily follows. The scene looks like it could've been ripped straight out of a Looney Tunes episode." 
 
     c "Can't catch me!" 
 
-    l "Urgh!" 
+    l shocked "Urgh!" 
 
     "Suddenly, Lou shudders, his knees giving out." 
 
@@ -1656,7 +1734,7 @@ label choice_stheno_searched_success:
 
     f "Lou! Did you see it?" 
 
-    l "Shit... Shit... Shit..." 
+    l panic "Shit... Shit... Shit..." 
 
     f "Don't panic! I'll take you to my room..." 
 
@@ -1664,7 +1742,7 @@ label choice_stheno_searched_success:
 
     f "GUYS DON'T STAY HERE, GO TO THE LIVING ROOM OR SOMETHING." 
 
-    v "S-Sure." 
+    v worried "S-Sure." 
 
     l "I shouldn't have come..." 
 
