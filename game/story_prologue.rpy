@@ -1458,7 +1458,7 @@ label cx1_objection_success:
         "At Lou's",
         "On someone"
         ],
-        3
+        2
     )
 
 
@@ -1481,7 +1481,7 @@ label choice_on_someone_success:
         "Cassie",
         "Pani",
         "Fransk"],
-        1
+        0
     )
 
 
@@ -1544,7 +1544,7 @@ label cx2_objection_success:
     [    
         "Stheno searched upstairs",
         "Fransk hid it again"],
-        1
+        0
     )
 
 
