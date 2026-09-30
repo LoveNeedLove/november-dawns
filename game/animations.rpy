@@ -1,4 +1,3 @@
-init python:
 
     ## Petit saut sur place (ex. : surprise)
     ##
@@ -10,13 +9,13 @@ init python:
     ## Sans changer la position du personnage.
     ## Si tu veux la fixer : show eileen at right, hop
 
-    transform hop(h=40, up=0.12, down=0.18):
+transform hop(h=40, up=0.12, down=0.18):
     yoffset 0
     easeout_quad up yoffset -h      # monte vite, ralentit au sommet
     easein_quad down yoffset 0      # retombe en accélérant, comme la gravité
 
 
-    transform hop_bounce(h=50):
+transform hop_bounce(h=50):
     yoffset 0
     easeout_quad 0.12 yoffset -h
     easein_quad 0.16 yoffset 0
@@ -24,7 +23,7 @@ init python:
     easein_quad 0.07 yoffset 0
 
 
-
+init python:
     def _sprite_x(trans):
         """Position horizontale du sprite en fraction de l'écran (0.0 = gauche, 1.0 = droite)."""
         x = trans.xpos
@@ -132,3 +131,5 @@ transform leave_to_right(t=0.4):
 
 transform leave_to_left(t=0.4):
     easein_cubic t xoffset -config.screen_width
+
+    
