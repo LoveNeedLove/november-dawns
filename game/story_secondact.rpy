@@ -2365,7 +2365,16 @@ label talk_carmille_investigation_pani:
     m "Not really, if injected directly into the bloodstream then it can take you out within seconds, we would've seen someone do it."
     v "...Maj, figure it out for her. Okay?"
     m "I'll do my best."
+
     # [Nyctozepam added to evidence]
+    $ P_nyctozepam = Proof("Nyctozepam", 
+                            "A powerful drug for treating insomnia. The capsules contain a fine powder.", 
+                            "images/props/nyctozepam.png", 
+                            R_kitchen, 
+                            1850, 800, 
+                            "nyctozepam")
+    $ addProofToInventory(P_nyctozepam)
+
     $ eventMgr.unlock("talk_carmille_investigation_pani")
     return
 
@@ -2376,7 +2385,16 @@ label talk_stheno_investigation_pani:
     m "You didn't go?"
     s "I went before Carm, while you were chasing after Lou."
     m "I see."
+
     # [Bathroom Order added to evidence]
+    $ P_bathroom_order = Proof("Bathroom order", 
+                            "Stheno went to the bathroom when I was talking with Lou and Fransk. Later, Carm, Me, Pani and Cassie went in order.", 
+                            "images/props/toilet.png", 
+                            R_F1bathroom, 
+                            450, 900, 
+                            "bathroom_order")
+    $ addProofToInventory(P_bathroom_order)
+
     $ eventMgr.unlock("talk_stheno_investigation_pani")
     return
 
@@ -2424,7 +2442,16 @@ label hotspot_investigation_body:
     l "This wound is just awful to look at, it's like a gaping hole in his torso..."
     m "It was probably done with some kind of knife..."
     l "Yeah, judging from the depth of it, I can safely assume that the blood came from here."
-    # [Information about the body added to evidence]
+
+    # [Information about the body added to evidence] ??
+    $ P_body_info = Proof("Information about the body", 
+                            "Infos about the body", 
+                            "images/props/body.png", 
+                            R_F1fransksRoom, 
+                            1250, 300, 
+                            "body_info")
+    $ addProofToInventory(P_body_info)
+    
     l "...Let's put it back the way we found it..."
     m "Yeah... Wait a sec-"
     l "Notice something?"
@@ -2440,7 +2467,16 @@ label hotspot_investigation_body:
     l "I don't know, this could've been an earlier costume of his."
     m "Either way this piece of clothing was clearly involved in the murder."
     l "Or at the very least in hiding the wound."
+
     # [Black robe added to evidence]
+    $ P_black_robe = Proof("Black Robe", 
+                            "A black robe, probably coming from an old halloween costume. The front is covered in blood, which makes sense when you considered that it was used to cover the body.", 
+                            "images/props/black_robe.png", 
+                            R_F1fransksRoom, 
+                            1300, 400, 
+                            "black_robe")
+    $ addProofToInventory(P_black_robe)   
+
     $ eventMgr.unlock("hotspot_investigation_body")
     return
 
@@ -2452,7 +2488,7 @@ label hotspot_investigation_carpet:
     v "Yeah, that's what I thought."
     l "I checked the room out and I still haven't seen it."
     m "Let's keep an eye out for it, okay? If the killer bothered with hiding it then it must be important."
-    # [Missing Carpet added to evidence]
+    
     $ eventMgr.unlock("hotspot_investigation_carpet")
     return
 
@@ -2472,7 +2508,16 @@ label hotspot_investigation_dreamcatchers:
     m "Maybe they're real after-all?"
     l "I'd like to ask him for his opinion. ..."
     "He's doing his best to stay composed but he must feel terrible..."
+
     # [Dreamcatchers added to evidence]
+    $ P_dreamcatchers = Proof("Dreamcatchers", 
+                            "Fransk allegedly loved these weird trinkets, they apparently helped with his nightmares.", 
+                            "images/props/dreamcatchers.png", 
+                            R_F1fransksRoom, 
+                            1550, 500, 
+                            "dreamcatchers")
+    $ addProofToInventory(P_dreamcatchers)
+
     $ eventMgr.unlock("hotspot_investigation_dreamcatchers")
     return
 
@@ -2490,7 +2535,16 @@ label hotspot_investigation_closet:
     m "Could Fransk have brought it upstairs after that whole ordeal for the vape?"
     l "...Sure but why hide it in his closet?"
     m "I'm drawing blanks here, can't tell you man."
+    
     # [Lou's Jacket added to evidence]
+    $ P_lous_jacket = Proof("Lou's Jacket", 
+                            "Lou's jacket,which we was mysteriously moved to Fransk's room. It's really musky and smells like him.", 
+                            "images/props/lous_jacket.png", 
+                            R_F1fransksRoom, 
+                            1400, 500, 
+                            "lous_jacket")
+    $ addProofToInventory(P_lous_jacket)
+
     $ eventMgr.unlock("hotspot_investigation_closet")
     return
 
@@ -2509,7 +2563,16 @@ label hotspot_investigation_window_living:
     s "Did Fransk open the window to warn us about the murder?"
     m "..."
     "I have a feeling that this window is more important than it may seem."
+
     # [Window added to evidence]
+    $ P_living_window = Proof("Living Room Window", 
+                            "A small window that slightly opens. Leads Fransk's room to the living room.", 
+                            "images/props/living_room_window.png", 
+                            R_livingRoom, 
+                            850, 800, 
+                            "living_room_window")
+    $ addProofToInventory(P_living_window)
+
     $ eventMgr.unlock("hotspot_investigation_window_living")
     return
 
@@ -2533,7 +2596,16 @@ label hotspot_investigation_window_garden:
     m "Yeah makes sense, whoever placed it here probably didn't escape from here then."
     l "So they must've gone through the stairs..."
     m "Exactly my thoughts."
+
     # [Window to the garden added to evidence]
+    $ P_garden_window = Proof("Garden Window", 
+                            "This big window in Fransk's room leads to the garden. Escaping from it seems doable, but it was tied shut with some rope.", 
+                            "images/props/garden_window.png", 
+                            R_F1fransksRoom, 
+                            1700, 500, 
+                            "garden_window")
+    $ addProofToInventory(P_garden_window)
+    
     $ eventMgr.unlock("hotspot_investigation_window_garden")
     return
 
@@ -2562,8 +2634,8 @@ label talk_carmille_investigation_murder:
     v "That's exactly what I was thinking, but I couldn't find anything."
     l "Maybe you were wrong about seeing that?"
     v "...I don't know..."
-    "If he really had some kind of condition then it would be important to note."
-    # [Fransk's condition added to evidence]
+    "If he really had some kind of condition then it would be important to note." 
+    
     $ eventMgr.unlock("talk_carmille_investigation_murder")
     return
 
@@ -2649,7 +2721,16 @@ label talk_lou_investigation_murder:
     l "No problem! I'm here to help!"
     m "I should really keep what you think you smelled in mind, if there's really an unidentified smell then it means that the killer probably isn't one of us!"
     l "Yeah! That's right!"
+
     # [Lou's sense of smell added to evidence]
+    $ P_lous_smell = Proof("Lous' sense of smell", 
+                            "Around the time of Fransk's murder, Lou smelled a strong scent of grass, followed by the smell of Fransk.", 
+                            "images/props/lous_sense_of_smell.png", 
+                            R_F1bathroom, 
+                            400, 350, 
+                            "smell_order")
+    $ addProofToInventory(P_lous_smell) 
+    
     $ eventMgr.unlock("talk_lou_investigation_murder")
     return
 
@@ -2704,7 +2785,16 @@ label hotspot_bookshelf_rope:
     m "Where does this rope even end?"
     c "In the garage. But no one was there. I even checked the car."
     m "Why would someone do this?"
+
     # [Tied Up Bookshelf added to evidence]
+    $ P_tied_bookshelf = Proof("Tied Up Bookshelf", 
+                            "The bookshelf was tied up with rope during our blunt rotation... The point of this evades me.", 
+                            "images/props/tied_up_bookshelf.png", 
+                            R_livingRoom, 
+                            900, 1000, 
+                            "tied_up_shelf")
+    $ addProofToInventory(P_tied_bookshelf) 
+    
     $ eventMgr.unlock("hotspot_bookshelf_rope")
     jump room_loop
 
@@ -2727,7 +2817,16 @@ label hotspot_fatal_closet:
     m "I see... That blue light must've bombarded him with ultraviolet rays..."
     s "... I'll catch the fucker who did this and make him suffer."
     "Don't think I'll stop her."
+
     # [Deadly Closet added to evidence]
+    $ P_deadly_closet = Proof("Deadly Closet", 
+                            "The walk-in closet in the entry hall was weaponized to murder a vampire. The strong smell of garlic makes me want to puke.", 
+                            "images/props/deadly_closet.png", 
+                            R_entryHallway, 
+                            400, 900, 
+                            "deadly_closet")
+    $ addProofToInventory(P_deadly_closet) 
+    
     $ eventMgr.unlock("hotspot_fatal_closet")
     jump room_loop
 
@@ -2743,7 +2842,16 @@ label hotspot_bloody_carpet_found:
     m "I don't think so, these smaller ones heading towards the window are clearly some kind of sneakers, but these other ones are really indistinct."
     l "Those could come from some kind of slippers..."
     m "Maybe, but that doesn't really help us..."
+
     # [Bloody Carpet added to evidence]
+    $ P_bloody_carpet = Proof("Bloody Carpet", 
+                            "Carmille hid this carpet behind the closet.  It features two distinct set of footprints: A small pair of sneaker, heading towards the window, and bigger indistinct one, heading towards the hallway.", 
+                            "images/props/bloody_carpet.png", 
+                            R_entryHallway, 
+                            400, 1000, 
+                            "bloody_carpet")
+    $ addProofToInventory(P_bloody_carpet)
+    
     $ eventMgr.unlock("hotspot_bloody_carpet_found")
     jump room_loop
 
@@ -2757,7 +2865,16 @@ label hotspot_black_cloth_recheck:
     m "There's also something weird with the bottom of this cloak. The edge is all bloody but there are two spots that are especially covered with blood. ..."
     l "So? Any conclusions?"
     m "Not yet, but checking it out again was an excellent idea."
-    # [Black robe added to evidence]
+
+    # [Black robe added to evidence] ?
+    $ P_black_robe = Proof("Black Robe", 
+                            "The right cuff is covered with blood, except for a strange missing pattern. The bottom also features two huge stains, parallel from each other.", 
+                            "images/props/black_robe.png", 
+                            R_F1fransksRoom, 
+                            1300, 400, 
+                            "black_robe_marks_cuff")
+    $ addProofToInventory(P_black_robe)
+    
     $ eventMgr.unlock("hotspot_black_cloth_recheck")
     jump room_loop
 
@@ -2788,7 +2905,16 @@ label hotspot_garage_caulk_gun:
     m "You fucking idiot! This was probably used to seal the locks shut!"
     l "Damn, for real?!"
     m "The bastard who did that is probably still here somewhere!"
-    # [Caulk gun added to evidence]
+
+    # [Caulk gun added to evidence] ?
+    $ P_caulk_gun = Proof("Caulk Gun", 
+                            "A caulk gun found on the garage floor, it was most definitely used to render the main door and garden door unusable.", 
+                            "images/props/caulk_gun.png", 
+                            R_garage, 
+                            2300, 800, 
+                            "caulk_gun")
+    $ addProofToInventory(P_caulk_gun)
+    
     $ eventMgr.unlock("hotspot_garage_caulk_gun")
     jump room_loop
 
@@ -2816,7 +2942,16 @@ label hotspot_fransk_bed_drawer:
     m "No, it usually flows through this back-check valve right here..."
     l "Isn't that hole weird then?"
     m "Definitely."
-    # [Pierced IV pouch added to evidence]
+
+    # [Pierced IV pouch added to evidence] ?
+    $ P_IV_pouch = Proof("Pierced IV pouch", 
+                            "Part of Fransk's treatment, a tiny hole is punctured at the top.", 
+                            "images/props/pierced_iv_pouch.png", 
+                            R_F1fransksRoom, 
+                            1800, 700, 
+                            "blood_pouch")
+    $ addProofToInventory(P_IV_pouch)
+
     m "Wait, what's this? It looks like some sort of remote holder... There's 3 slots..."
     l "His phone charger's wedged into this left one, so we can assume that he kept his phone there at night. There's a remote in this middle one... got it! What the fuck is that for?"
     m "Probably the blood dispenser, the brand's the same as the machine."
@@ -2840,7 +2975,16 @@ label hotspot_fransk_bed_drawer:
     l "The killer didn't notice this tag, right?"
     m "Yes, we can use that information to our advantage."
     l "Alright."
+
     # [Smart house remote added to evidence]
+    $ P_house_remote = Proof("Smart House Remote", 
+                            "A missing remote for controlling smart house features.", 
+                            "images/props/smart_house_remote.png", 
+                            R_F1fransksRoom, 
+                            1900, 750, 
+                            "smart_home_remote")
+    $ addProofToInventory(P_house_remote)
+    
     $ eventMgr.unlock("hotspot_fransk_bed_drawer")
     jump room_loop
 
@@ -2872,7 +3016,16 @@ label hotspot_parent_room_mom_nightstand:
     l "Just give them to me when I do good! And call me a good boy when doing so!"
     m "If that's what you want..."
     "I should stuff him full of candy, he's been nothing but great tonight..."
+
     # [Hard Candy added to evidence]
+    $ P_hard_candy = Proof("Hard Candy", 
+                            "Delicious hard candy found in Fransk's mom's nightstand.", 
+                            "images/props/hard_candy.png", 
+                            R_F1parentsRoom, 
+                            1000, 450, 
+                            "hard_candy")
+    $ addProofToInventory(P_hard_candy)
+    
     $ eventMgr.unlock("hotspot_parent_room_mom_nightstand")
     jump room_loop
 
