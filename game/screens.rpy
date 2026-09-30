@@ -120,7 +120,7 @@ screen dialogue_frame(fullWidth=False):
             xsize 1440
 
         ysize DLG_H
-        background Solid("#33dbe7e1")
+        background Solid("#33dbe7bb")
         padding (0, 0)
 
         window:
@@ -128,7 +128,7 @@ screen dialogue_frame(fullWidth=False):
             yalign 0.5
             xsize 1360
             ysize 170
-            background Solid("#fffffff1")
+            background Solid("#ffffffc0")
             padding (35, 25, 35, 25)
 
             # Insère le contenu spécifique à l'écran appelant
