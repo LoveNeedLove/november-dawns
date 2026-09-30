@@ -107,3 +107,28 @@ transform neutral(t=0.25):
         function ShiftX(0, t, "center")
     parallel:
         linear t matrixcolor BrightnessMatrix(0.0)
+
+        ## Entrée : le perso arrive depuis le bord de l'écran vers sa position droite/gauche
+##     show eileen at pop_from_right
+##     show eileen at pop_from_left(t=0.6)     # plus lent
+transform pop_from_right(t=0.4):
+    xpos 1.0
+    xanchor 1.0
+    xoffset config.screen_width             # départ hors écran, à droite
+    easeout_cubic t xoffset 0               # arrive en ralentissant
+
+transform pop_from_left(t=0.4):
+    xpos 0.0
+    xanchor 0.0
+    xoffset -config.screen_width            # départ hors écran, à gauche
+    easeout_cubic t xoffset 0
+
+## Sortie : le perso quitte l'écran par le bord droit/gauche
+##     show eileen at leave_to_right
+##     $ renpy.pause(0.4)                   # laisse l'animation se terminer
+##     hide eileen                          # puis on retire le perso
+transform leave_to_right(t=0.4):
+    easein_cubic t xoffset config.screen_width
+
+transform leave_to_left(t=0.4):
+    easein_cubic t xoffset -config.screen_width
