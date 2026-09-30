@@ -108,7 +108,7 @@ screen dialogue_frame(fullWidth=False):
         if fullWidth:
             xfill True
         else:
-            xsize 1400
+            xsize 1440
 
         ysize 240
         background Solid("#33dbe7e1")
@@ -117,7 +117,7 @@ screen dialogue_frame(fullWidth=False):
         window:
             xalign 0.5
             yalign 0.5
-            xsize 1300
+            xsize 1360
             ysize 200
             background Solid("#fffffff1")
             padding (35, 25, 35, 25)
@@ -281,28 +281,32 @@ screen cx_nav_overlay(cx=None) layer "overlay":
 
 
 
-screen room_screen() layer 'backgrounds':
-    $room_w = 1300
-    $room_h = 700
-    $dialogue_top_y = 840  # Bord haut du dialogue
+screen room_screen() layer "backgrounds":
 
-    # 1. Le viewport impose les dimensions et le masque (découpage)
+    $ room_w = 1440
+    $ room_h = 810
+
     viewport:
         xsize room_w
         ysize room_h
         xalign 0.5
-        yanchor 1.0
-        ypos dialogue_top_y
+        yalign 0.5
+        draggable False
+        mousewheel False
 
         imagemap:
-            # logique de zoom/animation se jouerait ici pour rester dans le rectangle
-            
-            idle current_room.bg
+            idle Transform(
+                current_room.bg,
+                xsize=room_w,
+                ysize=room_h,
+                fit="contain",
+                xalign=0.5,
+                yalign=0.5
+            )
 
             for h in current_room.hotspots:
                 if h.is_active():
                     hotspot h.rect action Jump(h.action)
-
 
 ## Make the namebox available for styling through the Character object.
 init python:
@@ -393,28 +397,11 @@ style input:
 ## https://www.renpy.org/doc/html/screen_special.html#choice
 
 screen choice(items):
+    style_prefix "choice"
 
     vbox:
-        style_prefix "choice"
-
         for i in items:
-
-            if i.action:
-                textbutton i.caption action i.action
-
-            else:
-                text i.caption style "choice_question"
-
-style choice_question:
-    color "#FFFFFF"
-    size 54
-    text_align 0.5
-    xalign 0.5
-    yalign 0.5
-    xmaximum 1000
-    yminimum 80
-    top_margin 20
-    bottom_margin 25
+            textbutton i.caption action i.action
 
 
 style choice_vbox is vbox
