@@ -2,8 +2,10 @@
     from renpy.display.transition import Transition
     
 label travel_to(destination, in_dialogue=False, trans_duration=0.4, trans_in=None, anim_out=None, anim_in=None, all_screen=False):
+
     $ renpy.block_rollback()
 
+    # --- ANIMATION DE SORTIE ÉVENTUELLE ---
     if anim_out is not None:
         if isinstance(anim_out, Transition):
             $ renpy.transition(anim_out)
@@ -11,26 +13,22 @@ label travel_to(destination, in_dialogue=False, trans_duration=0.4, trans_in=Non
             show screen room_screen(at_anim=anim_out, all_screen=all_screen) onlayer backgrounds
             $ renpy.pause(0.4)
 
-    scene black
-
-    if trans_in is None:
-        with Fade(trans_duration, 0.0, trans_duration)
-    else:
-        with trans_in
-
-    # --- CHANGEMENT DE DESTINATION ET ENTRÉE ---
+    # --- CHANGEMENT DE DESTINATION ---
     $ current_room = destination
 
-    # --- TRANSITION / ANIMATION D'ENTRÉE (anim_in) ---
+    # --- PRÉPARATION DE LA NOUVELLE PIÈCE ---
     if anim_in is not None and not isinstance(anim_in, Transition):
         show screen room_screen(at_anim=anim_in, all_screen=all_screen) onlayer backgrounds
     else:
         show screen room_screen onlayer backgrounds
 
-    # Application de la transition d'entrée si anim_in ou trans_in est un objet Transition
-    $ entry_trans = anim_in if isinstance(anim_in, Transition) else trans_in
-    if entry_trans is not None:
-        with entry_trans             # None : la nouvelle pièce apparaît d'un coup[cite: 1]
+    # --- TRANSITION ENTRE ANCIENNE ET NOUVELLE PIÈCE ---
+    if isinstance(anim_in, Transition):
+        with anim_in
+    elif trans_in is not None:
+        with trans_in
+    else:
+        with Fade(trans_duration, 0.0, trans_duration)
 
     $ renpy.checkpoint()
 
@@ -82,8 +80,5 @@ label start:
     jump room_loop
 
 label room_not_neighbor:
-    image Banane = Solid("#e1ea61", xsize=500, ysize=100, xalign=0.5, yalign=1.0)
-    hide Carmille
-    show Banane
-    e "OMG.... Cette room n'existe PAAAAAAAAS"
+    m "Mmmmh... I can't reach this room from here..."
     return
