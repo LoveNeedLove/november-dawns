@@ -2759,7 +2759,7 @@ label hotspot_bookshelf_rope:
     m "Why would someone do this?"
     # [Tied Up Bookshelf added to evidence]
     $ eventMgr.unlock("hotspot_bookshelf_rope")
-    return
+    jump room_loop
 
 label hotspot_fatal_closet:
     s "…Tsk!"
@@ -2782,7 +2782,7 @@ label hotspot_fatal_closet:
     "Don’t think I’ll stop her."
     # [Deadly Closet added to evidence]
     $ eventMgr.unlock("hotspot_fatal_closet")
-    return
+    jump room_loop
 
 label hotspot_bloody_carpet_found:
     m "There should be a carpet behind this closet."
@@ -2798,7 +2798,7 @@ label hotspot_bloody_carpet_found:
     m "Maybe, but that doesn’t really help us…"
     # [Bloody Carpet added to evidence]
     $ eventMgr.unlock("hotspot_bloody_carpet_found")
-    return
+    jump room_loop
 
 label hotspot_black_cloth_recheck:
     m "Carm confirmed that he’s the one that placed this onto the body."
@@ -2812,20 +2812,20 @@ label hotspot_black_cloth_recheck:
     m "Not yet, but checking it out again was an excellent idea."
     # [Black robe added to evidence]
     $ eventMgr.unlock("hotspot_black_cloth_recheck")
-    return
+    jump room_loop
 
 label hotspot_garage_car:
     m "No one’s here…"
-    m "The car's locked anyways, I doubt that Fransk’s mom would trust him with it after THAT incident…"
+    l "The car's locked anyways, I doubt that Fransk’s mom would trust him with it after THAT incident…"
     m "What incident?"
-    m "Dude, you don’t wanna know about it."
+    l "Dude, you don’t wanna know about it."
     m "… Isn’t there some sort of switch to open the garage door?"
-    m "Nah there ain’t. There’s a remote linked to the car keys though."
+    l "Nah there ain’t. There’s a remote linked to the car keys though."
     m "It must be hidden in the parent’s room…"
-    m "Yeah, Fransk’s mom probably wouldn’t trust me there after the incident."
+    l "Yeah, Fransk’s mom probably wouldn’t trust me there after the incident."
     m "I’ll just take your word for it…"
     $ eventMgr.unlock("hotspot_garage_car")
-    return
+    jump room_loop
 
 label hotspot_garage_caulk_gun:
     m "Is that some sort of tube?"
@@ -2843,7 +2843,7 @@ label hotspot_garage_caulk_gun:
     m "The bastard who did that is probably still here somewhere!"
     # [Caulk gun added to evidence]
     $ eventMgr.unlock("hotspot_garage_caulk_gun")
-    return
+    jump room_loop
 
 
 # --- ENQUÊTE 5 : CHAMBRE DES PARENTS & MEURTRE DE FRANSK AU MANCHE ÉLECTRIQUE ---
@@ -2895,7 +2895,7 @@ label hotspot_fransk_bed_drawer:
     l "Alright."
     # [Smart house remote added to evidence]
     $ eventMgr.unlock("hotspot_fransk_bed_drawer")
-    return
+    jump room_loop
 
 label hotspot_electric_door_handle:
     m "This handle…"
@@ -2912,7 +2912,7 @@ label hotspot_electric_door_handle:
     l "Fransk’s room was always left open before the stabbing… so we couldn’t have noticed."
     m "Yeah…"
     $ eventMgr.unlock("hotspot_electric_door_handle")
-    return
+    jump room_loop
 
 label hotspot_parent_room_mom_nightstand:
     m "*rummage rummage* Aside from Fransk’s baby photos I don’t see anything of value…"
@@ -2927,25 +2927,25 @@ label hotspot_parent_room_mom_nightstand:
     "I should stuff him full of candy, he’s been nothing but great tonight…"
     # [Hard Candy added to evidence]
     $ eventMgr.unlock("hotspot_parent_room_mom_nightstand")
-    return
+    jump room_loop
 
 label hotspot_parent_room_dad_nightstand:
     m "Holy shit! This drawer’s full of junk!"
     l "Yikes, this’ll take a while to sort through…"
     m "Maybe it won’t. There’s a manual for a smart house remote. We have to check it out!"
     l "This is huge!"
-    m "“Thank you for choosing SureThings’ home automation and security services!”"
+    m '“Thank you for choosing SureThings’ home automation and security services!”'
     l "Skip to the good part!"
-    m "\“The remote features 3 preset buttons. By linking the remote to the SureThings app using your remote’s unique ID, you can easily modify those presets to fit your needs!\”"
+    m '“The remote features 3 preset buttons. By linking the remote to the SureThings app using your remote’s unique ID, you can easily modify those presets to fit your needs!"'
     l "Sh-Shit! What kind of features are there?"
-    m "“Shutting down every curtain for the night? Turn your living room into an impromptu nightclub? Arm your security systems before travelling? Maybe all of these at the same time? The custom presets will do it all at the press of a button!” …"
+    m '“Shutting down every curtain for the night? Turn your living room into an impromptu nightclub? Arm your security systems before travelling? Maybe all of these at the same time? The custom presets will do it all at the press of a button!” …'
     "I start shuffling through the book, my eyes darting on particular phrases."
-    m "“Prevent robberies by delivering nasty electric shocks using our patented SureThings smart handles…”"
-    m "“No need to strain your voice! Use the automated announcement system to call those silly kids to dinner!...”"
+    m '“Prevent robberies by delivering nasty electric shocks using our patented SureThings smart handles…”'
+    m '“No need to strain your voice! Use the automated announcement system to call those silly kids to dinner!...”'
     m "There’s no doubt in my mind, they used the remote."
     l "Using a smart house to murder someone… *GULP*"
     m "What is it?"
     l "Could it be… that AI is taking over? And that the house itself decided to murder Fransk?"
     m "… Shut up…"
     $ eventMgr.unlock("hotspot_parent_room_dad_nightstand")
-    return
+    jump room_loop
