@@ -19,9 +19,11 @@ label prologue_part1_arrival:
     "I can't believe I'm finally here, America. I mean, the most unbelievable thing is how much I wanted to come here in the first place, it's almost like I blacked out for most of high school... and also middle school." 
     "These suburbs don't look much different than the fancy parts of where I'm from but still... It's a new beginning!" 
 
-    f "You talking to yourself ?" 
+    show fransk
+    f "You talking to yourself ?"
 
     m "Oh ! Fransk ! So glad to see you !" 
+    show fransk at right with move
 
     "Without thinking I just hold out my hand to greet him, failing to realise that said hand is carrying a suitcase that's approximately the weight of 7 bowling balls." 
 
@@ -29,7 +31,7 @@ label prologue_part1_arrival:
 
     m "Oh my god dude, are you okay?!" 
 
-    f "Yeooowch!, this shit is heavy as fuck!" 
+    f laughing "Yeooowch!, this shit is heavy as fuck!" 
 
     "The way he smiles is simply contagious, but this is not the time to laugh !" 
     "He must be in pain." 
@@ -39,7 +41,7 @@ label prologue_part1_arrival:
     m "Huh ? What ? I mean... yeah kinda ?" 
     m "Aren't you in, like ? Massive- pain ?" 
 
-    f "Huh ? Oh yeah I guess. It's really no biggie." 
+    f -laughing "Huh ? Oh yeah I guess. It's really no biggie." 
 
     "Without showing the slightest sign of pain or struggle Franks just hoists my 100-pound luggage over his shoulder like it's some kind of trendy handbag." 
 
@@ -54,7 +56,7 @@ label prologue_part1_arrival:
 
     m "Maj?" 
 
-    f "Hope you don't mind me calling you that, your name's like impossible to say." 
+    f curious "Hope you don't mind me calling you that, your name's like impossible to say." 
 
     m "Wow, it only took an hour..." 
 
@@ -62,12 +64,12 @@ label prologue_part1_arrival:
 
     m "To get my first racist remark." 
 
-    f "Huh? What? I- I SWEAR I DIDN'T MEAN IT LIKE-" 
+    f serious "Huh? What? I- I SWEAR I DIDN'T MEAN IT LIKE-" 
 
     m "Just kidding~ Everyone calls me that, bro" 
 
-    f "Huh ?!" 
-    f "AHAHAHAHAHAHA" 
+    f curious "Huh ?!" 
+    f laughing "AHAHAHAHAHAHA" 
 
     "Didn't expect that joke to land..." 
 
@@ -88,7 +90,7 @@ label prologue_part1_arrival:
     "As Fransk fishes for the keys in his pocket, I take a second to admire his abode. Despite being surrounded by hundreds of similar houses I still can't shake off just how surreal it seems." 
     "The massive wooden double doors look like they've been recently varnished -polished even. So polished, in fact, that the distorted reflection of my face that's outlined into them almost resembles one of those street caricatures, the ones that accentuate everything you hate about yourself." 
 
-    f "Yo Maj, get in." 
+    f -laughing "Yo Maj, get in." 
 
     m "Coming !" 
 
@@ -118,6 +120,7 @@ label prologue_part2_entrance_stheno:
     f "Hey, my parents just want what's best for the golden boy." 
     f "Anyhow, bathroom's right here, just find a spot for your stuff somewhere around, I'll go and tell the others you're there." 
 
+    hide fransk with dissolve
     "As Fransk skips happily towards the living room I can't help but smile at the big \"GOLDEN-BOY\" that's imprinted on the back of his varsity jacket." 
     "Smiling to myself I start looking for a corner that wouldn't mind hosting my bag for a little bit." 
 
@@ -127,6 +130,7 @@ label prologue_part2_entrance_stheno:
 
     m "Shit, it's locked" 
 
+    show stheno
     s "You always this nosy, new guy ?" 
 
     m "AAAACK" 
@@ -179,7 +183,7 @@ label prologue_part2_entrance_stheno:
 
     m "I did the whole course." 
 
-    s "HUH?!" 
+    s shocked "HUH?!" 
 
     m "Yeah, I really wanted to get into some schools so... I guess I got a little carried away." 
 
@@ -187,7 +191,7 @@ label prologue_part2_entrance_stheno:
 
     m "Well, just goes to show how much I wanted to come here. It's been my dream." 
 
-    s "Well," 
+    s -shocked "Well," 
     s "Welcome to Rose Springs, Wyoming" 
     s "Where dreams come to die !" 
 
@@ -200,17 +204,22 @@ label prologue_part2_entrance_stheno:
 
 label prologue_part3_carmille:
 
+    show stheno at left with move
+    show carmille at right
     v "Sthenn... lay off him please..." 
 
-    s "Oh, Carm!" 
+    s shocked "Oh, Carm!" 
 
     "Finally! A sincere expression on her face." 
 
     v "Just get with the others please, the guy must be tired." 
 
-    s "Oh, ok sure." 
+    s -shocked "Oh, ok sure." 
+    hide stheno with dissolve
 
     "There she goes..." 
+
+    show carmille at center with move
 
     v "Nice to meet you.." 
     v "{i}*HEM-HEM*{/i}" 
@@ -220,33 +229,33 @@ label prologue_part3_carmille:
 
     m "H- what ?!" 
 
-    v "Oh sorry ! Was my pronunciation wrong?" 
+    v worried "Oh sorry ! Was my pronunciation wrong?" 
 
     m "No it was actually... perfect." 
 
-    v "Phew thank god ! I practiced that days in advance !" 
+    v smiling "Phew thank god ! I practiced that days in advance !" 
 
     m "Really ? You really didn't have to." 
 
-    v "Oh no don't say that! Being so far away from your home must be so difficult." 
+    v -smiling "Oh no don't say that! Being so far away from your home must be so difficult." 
 
     "And who's THAT princely guy?!" 
 
     m "Don't worry ! I actually prefer being far. But... It did feel nice hearing some Arabic..." 
 
-    v "Time well spent then !" 
+    v smiling "Time well spent then !" 
 
     m "From now on just call me Maj, for simplicity's sake. Oh! I almost forgot. What's your name?" 
 
-    v "I'm Carmille, the name's French so I'm used to people struggling with its pronunciation." 
+    v -smiling "I'm Carmille, the name's French so I'm used to people struggling with its pronunciation." 
 
     m "I relate quite well... Carmille ?" 
 
-    v "Oh ! The way you rolled that \"r\" was just delightful Maj!" 
+    v smiling "Oh ! The way you rolled that \"r\" was just delightful Maj!" 
 
     "I- I think I'm charmed." 
 
-    v "Now please, come and meet the others !" 
+    v -smiling "Now please, come and meet the others !" 
 
     m "They really wouldn't mind me." 
 
@@ -256,6 +265,8 @@ label prologue_part3_carmille:
 
     "Without saying much, Carmille leads me to the living room. Following him will be a struggle, his stature is smaller than mine but he still makes my knees weak." 
     "I should probably map out the house in my notebook, I tend to get lost easily..." 
+
+    hide carmille with dissolve
 
     $ R_livingRoom.cutscene = "prologue_part4_living_room"
     show screen minimap_toggle
@@ -267,6 +278,7 @@ label prologue_part3_carmille:
 
 label prologue_part4_living_room:
 
+    show lou
     l "Yo! You the new guy?" 
 
     "Didn't expect to be approached this fast." 
@@ -277,13 +289,15 @@ label prologue_part4_living_room:
 
     m "I don't really watch... sports." 
 
+    show lou at left with move
+    show pani at right
     p "Hey." 
 
     "Who's this now?" 
 
     p "Want a beer?" 
 
-    l "Pani! Dude, he's arab!" 
+    l panic "Pani! Dude, he's arab!" 
 
     p "So?" 
 
@@ -299,15 +313,15 @@ label prologue_part4_living_room:
 
     "In a swift motion Lou just kind of swipes it away from Pani's hands." 
 
-    l "Here you go bro. Sorry for that." 
+    l -panic "Here you go bro. Sorry for that." 
 
     m "Yea no worri-" 
 
-    l "SO you don't fuck with no sports? That's lame as hell HAHAHA." 
+    l laughing "SO you don't fuck with no sports? That's lame as hell HAHAHA." 
 
     m "I've always been the kind of guy that reads his books in a corner during sporting events." 
 
-    l "No shit? What kinda books?" 
+    l -laughing "No shit? What kinda books?" 
 
     m "Mostly mangas but I also like fantasy stuff." 
 
@@ -319,7 +333,7 @@ label prologue_part4_living_room:
 
     m "?" 
 
-    l "HAHAHAHA, you call these \"books\", really ?" 
+    l laughing "HAHAHAHA, you call these \"books\", really ?" 
 
     m "Well, that's what they are..." 
 
@@ -327,7 +341,7 @@ label prologue_part4_living_room:
 
     m "Excuse-me?" 
 
-    l "\"If you only read the books that everyone else is reading, you can only think what everyone else is thinking\", that's my philosophy!" 
+    l flexing ego "\"If you only read the books that everyone else is reading, you can only think what everyone else is thinking\", that's my philosophy!" 
 
     m "I've read some underground stu-" 
 
@@ -337,11 +351,11 @@ label prologue_part4_living_room:
 
     p "Please don't fan the flames." 
 
-    l "A rebuttal? Did I hear you right?" 
+    l -flexing "A rebuttal? Did I hear you right?" 
 
     m "I-I guess?" 
 
-    l "Oh-ho! Really well! You shall face the might of the future English Litt valedictorian, from the undefeated champion, the Rose springs debate master, the astounding..." 
+    l flexing ego "Oh-ho! Really well! You shall face the might of the future English Litt valedictorian, from the undefeated champion, the Rose springs debate master, the astounding..." 
 
     "{i}*ding dong*{/i}" 
 
@@ -353,7 +367,7 @@ label prologue_part4_living_room:
 
     "She's probably giving me an out. Judging by the reactions of everyone around I better get to the door." 
 
-    l "Where are you going! Chickening out? I have no tolerance for..." 
+    l -flexing "Where are you going! Chickening out? I have no tolerance for..." 
 
     "What a start to this night, it seems like I'm already in trouble." 
 
@@ -365,6 +379,9 @@ label prologue_part4_living_room:
 # --- PARTIE 5 : L'INTERRUPTION DU TRICK-OR-TREATER ---
 
 label prologue_part5_trick_or_treater:
+
+    hide lou
+    hide pani
 
     "{i}*ring* *ring*{/i}" 
 
@@ -382,6 +399,7 @@ label prologue_part5_trick_or_treater:
 
     "There... There's no one here." 
 
+    show kid with dissolve
     k "Ermmm... sir?" 
 
     "But, I'm sure the bell rang, how is that possible" 
@@ -398,15 +416,15 @@ label prologue_part5_trick_or_treater:
 
     m "Oh, hey kid ! I-I mean, mister grim reaper." 
 
-    k "Grrr..." 
+    k menacing "Grrr..." 
 
     "The expression on this child's face is so precious, despite him trying to look intimidating, I can tell that he's having fun." 
 
-    k "Trick... or TREAT!" 
+    k -menacing "Trick... or TREAT!" 
 
     m "I'll see what I can get for you." 
 
-    k "You better bring me candy... or the undead's fury will unleash on your domain!" 
+    k menacing "You better bring me candy... or the undead's fury will unleash on your domain!" 
 
     m "... right." 
 
@@ -449,13 +467,15 @@ label prologue_part5_trick_or_treater:
     "Why can't I say anything! My voice is just stuck!" 
 
     k "You... will have a taste of death, but none of the sweet release" 
-    k "Kehehehehehehehehehe" 
+    k laughing "Kehehehehehehehehehe" 
 
     "His childish effort at a maniacal laugh just brought me back to reality." 
 
     m "Good luck on your candy hunt kid..." 
 
     k "Muahahahahahahahahahahahaha!" 
+
+    hide kid with dissolve
 
     "Closing the door is easy, but shaking that gross feeling in my stomach away feels much harder." 
 
@@ -464,21 +484,23 @@ label prologue_part5_trick_or_treater:
     m "What-" 
 
     "Despite my eyes being wide open, I failed to notice Fransk approaching me." 
+    show fransk
 
-    f "Dude you okay? You seem kinda pale right now..." 
+    f curious "Dude you okay? You seem kinda pale right now..." 
 
     m "Oh, sorry." 
     m "..." 
     m "I was just feeling bad about putting a curse on your house on my first day here." 
 
-    f "Come on bro, you must be tired as hell. Don't let that shit get to your head." 
-    f "Even then, what's a better way to get to know each other than to spend a little time cleaning TP and eggshells off my roof!" 
+    f -curious "Come on bro, you must be tired as hell. Don't let that shit get to your head." 
+    f laughing "Even then, what's a better way to get to know each other than to spend a little time cleaning TP and eggshells off my roof!" 
 
     "Fransk really has a way with words, just imagining us climbing on his house's roof slightly makes up for my mediocre childhood memories." 
 
     m "Yeah... I'd like that." 
 
     "He didn't answer with words. But his kind smile was enough to show me that I could trust him, I don't know anything about this fraternity, but it's clear that Fransk deeply cares about the people around him. He'd make a hell of a leader." 
+    hide fransk
 
     $ R_livingRoom.cutscene = "prologue_part6_cassie_breakdown"
     call travel_to(R_livingRoom)
@@ -490,7 +512,7 @@ label prologue_part5_trick_or_treater:
 
 label prologue_part6_cassie_breakdown:
 
-    c "RRRR AAAAAAAAH!" 
+    c worried "RRRR AAAAAAAAH!" 
 
     m "!" 
 
@@ -505,10 +527,12 @@ label prologue_part6_cassie_breakdown:
     "{i}*scribble* *scribble* *scribble* *scribble* *scribble* *scribble*{/i}" 
 
     "In the living room sat a woman, sketching away at a sketchpad half her size." 
+    show carmille
 
+    show fransk at right
     f "Cassie. You're going kinda hard with your eraser, light strokes is what you want." 
 
-    c "THIS NEEDS TO GOOOO." 
+    c worried "THIS NEEDS TO GOOOO." 
 
     f "Cassie, I said softer, not hard-" 
 
@@ -518,6 +542,8 @@ label prologue_part6_cassie_breakdown:
 
     "I could tell through the way she gripped her head that the frustration was getting to her." 
 
+    hide fransk
+    show lou at right
     l "Hey Cass, why don't you take a rest and chill out with us." 
 
     c "I can't! I told you that I had an assignment for Monday." 
@@ -525,12 +551,14 @@ label prologue_part6_cassie_breakdown:
     l "Then work on it tomorrow, I've seen you cram! I'm sure you'll get it done in time." 
 
     c "N-No! I need a clean sketch, and I can't get it right, the physics don't make sense!" 
+    show cassie at left
+    show carmille
 
-    v "Maj... let's take a break in the garden. Cassie can be... rough to be around to say the least." 
+    v side-eye "Maj... let's take a break in the garden. Cassie can be... rough to be around to say the least." 
 
     "Judging from the look on everyone's faces, it is painfully apparent that they wanted to avoid this situation." 
 
-    v "When her stress becomes too much, she kinda just... shuts us out, so I think you better take some space and not let it get to you." 
+    v -side-eye "When her stress becomes too much, she kinda just... shuts us out, so I think you better take some space and not let it get to you." 
 
     m "What does she do? Is she an artist?" 
 
@@ -539,6 +567,7 @@ label prologue_part6_cassie_breakdown:
     m "I see." 
 
     "This feeling... I need to help... I need to make it stop." 
+    hide carmille
 
     m "Cassie, is that right?" 
 
@@ -554,25 +583,33 @@ label prologue_part6_cassie_breakdown:
 
     m "Your drawing... It's insanely good!" 
 
-    c "What?" 
+    c shocked "What?" 
 
+    show pani at right
     p "Enough to make you scream? Show me that- WOOW." 
 
+    hide pani
+    show stheno at right
     s "Damn Cassie this shit looks great! Can't believe your bitch-ass is complaining when you're probably doing better than 90\% of your classmates." 
 
     c "You guys say that, but it sucks." 
 
+    hide stheno
+    show lou at right
     l "Dude, your design is crazy, I'd probably buy this shit if I were a millionaire or something..." 
 
-    c "The physics don't make sense..." 
+    c -shocked "The physics don't make sense..." 
 
+    hide lou
+    show pani
     p "I don't know, it looks like a building to me..." 
 
     c "Even then, I just ripped a hole through it!" 
+    hide pani
 
     m "Um. Sorry, but you're talking about the weight distribution right?" 
 
-    c "Huh? Oh... yeah." 
+    c curious "Huh? Oh... yeah." 
 
     m "The foundation you used couldn't handle the weight of the suspended structure at the top, right?" 
 
@@ -580,7 +617,7 @@ label prologue_part6_cassie_breakdown:
 
     m "Doesn't the hole you made... kinda fix the issue? I mean by removing this part you could-" 
 
-    c "USE THIS SECTION AS SUPPORT!" 
+    c smiling "USE THIS SECTION AS SUPPORT!" 
 
     m "Yea-" 
 
@@ -591,29 +628,35 @@ label prologue_part6_cassie_breakdown:
     f "Press lightly please!" 
 
     "Looks like I managed to squash this panic attack." 
+    hide cassie
+    show lou at left
 
     l "Well done Maj! Are you studying architecture?" 
 
     m "Me? No not really, I'm going for sociology." 
 
+    show stheno at right
     s "Then how the fuck did you figure that out for her?" 
 
     m "Remember the Harvard thing?" 
     m "I kinda completed multiple courses..." 
 
-    s "The fuck?" 
+    s shocked "The fuck?" 
 
-    l "What? The actual online courses?" 
+    l shocked "What? The actual online courses?" 
 
     m "Yeah... even English literature." 
 
-    l "HAHAHA aren't you full of surprises! I'm sure you missed on \"getting bitches\" course though HAHAHAHA" 
+    l laughing "HAHAHA aren't you full of surprises! I'm sure you missed on \"getting bitches\" course though HAHAHAHA" 
 
-    s "*snicker*" 
+    s snickering "*snicker*" 
 
     "I kinda hate that he's right, but I'm glad to see that someone here doesn't seem to be weirded out by the fact that I've already completed most of my studies." 
+    hide stheno
+    hide lou
 
-    c "Hey... can I talk to you?" 
+    show cassie
+    c -smiling "Hey... can I talk to you?" 
 
     m "!" 
 
@@ -635,31 +678,33 @@ label prologue_part6_cassie_breakdown:
 
     c "But still..." 
 
+    show stheno at right
     s "Hey!" 
 
-    c "!" 
+    c shocked "!" 
 
     m "!" 
 
+    show cassie at left with move
     s "You're gonna be okay with your deadline? Redoing the sketch won't fuck you up?" 
 
-    c "No! I'm gonna keep it ripped!" 
+    c -shocked "No! I'm gonna keep it ripped!" 
 
     s "For real?" 
 
     c "Yeah! It's the best way to convey my design, I can even use the hole to overlay new ideas under the drawing." 
 
-    s "Then why the hell did you start panicking you dumbass idiot? You had this shit handled from the fucking start, can't believe you made me worry." 
+    s angry "Then why the hell did you start panicking you dumbass idiot? You had this shit handled from the fucking start, can't believe you made me worry." 
 
     "Did... she really just say that?" 
 
     m "You can't just-" 
 
-    c "Sorry Sthen! I'll make it up to you!" 
+    c worried "Sorry Sthen! I'll make it up to you!" 
 
-    s "How so?" 
+    s -angry "How so?" 
 
-    c "Now that I have the design, I'm 100\% sure that I can handle the rest of the assignment tomorrow! So tonight, I won't even think about my work!" 
+    c -worried "Now that I have the design, I'm 100\% sure that I can handle the rest of the assignment tomorrow! So tonight, I won't even think about my work!" 
 
     s "Mhm, that's the bare minimum bitch." 
 
@@ -671,7 +716,7 @@ label prologue_part6_cassie_breakdown:
 
     m "S-sure!"
 
-    c "Then come to the kitchen!"
+    c smiling "Then come to the kitchen!"
 
     $ R_kitchen.cutscene = "prologue_part7_kitchen_cocktail"
 
@@ -722,15 +767,15 @@ label prologue_part7_kitchen_cocktail:
 
     m "Gotcha." 
 
-    c "Sorry... I hope this isn't too deep for a first conversation." 
+    c worried "Sorry... I hope this isn't too deep for a first conversation." 
 
     m "Nah no worries, it's good to lay out the bases for a friendship. Now, let's get that cocktail going!" 
 
-    c "Sure, pass the OJ, Peach Schnapps and Vodka from the fridge please!" 
+    c smiling "Sure, pass the OJ, Peach Schnapps and Vodka from the fridge please!" 
 
     m "No cranberry juice in your version?" 
 
-    c "Know your way around lady drinks huh?!" 
+    c -smiling "Know your way around lady drinks huh?!" 
 
     m "Uhh I guess? Mixology was included in the Harvard culinary course." 
 
@@ -766,15 +811,15 @@ label prologue_part7_kitchen_cocktail:
 
     m "I'm not talented for shit, I just got a solid work ethic. People think being the perfect student comes easy for me but I'd just get my ass beat if I wasn't." 
 
-    c "Wait, what?" 
+    c shocked "Wait, what?" 
 
     m "Yeah, I study like my life's on the line." 
 
-    c "No, not that..." 
+    c -shocked "No, not that..." 
 
     m "What?" 
 
-    c "You... really got your ass beat for that?" 
+    c worried "You... really got your ass beat for that?" 
 
     m "Yeah, if I didn't get the perfect grade I'd alway-" 
 
@@ -794,11 +839,11 @@ label prologue_part7_kitchen_cocktail:
 
     m "The drink's ready, let's get it to Stheno." 
 
-    c "What?" 
+    c shocked "What?" 
 
     "I carefully poured the contents of the shaker onto a sipping glass. Considering the temperature of the mixture and the speed at which the ice melts, it is essential that we bring the beverage to Stheno as soon as possible, each second that passes dilutes the solution we so attentively prepared, and I wouldn't want her to drink a watered down version of what she asked for..." 
 
-    c "Hey, do you mind if we stay here for a sec ?" 
+    c -shocked "Hey, do you mind if we stay here for a sec ?" 
 
     m "I-" 
 
@@ -818,6 +863,8 @@ label prologue_part7_kitchen_cocktail:
 
     call travel_to(R_livingRoom, True)
 
+    show carmille at right with move
+    show stheno at left
     s "The nerd helped you make it?" 
 
     m "Yup, if I don't earn your respect afterwards I really don't know what will." 
