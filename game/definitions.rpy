@@ -1,8 +1,9 @@
 init python:
     class Room():
-        def __init__(self, id, bg, neighbors=None):
+        def __init__(self, id, bg, bg_crop_y = 1.0, neighbors=None):
             self.id = id
             self.bg= bg
+            self.bg_crop_y = bg_crop_y
             self.hotspots = []
             self.convos = []
             self.neighbors = [] if neighbors is None else neighbors
@@ -24,8 +25,6 @@ init python:
         def __init__(self, rect, action):
             self.rect = rect          # Zone de collision du hotspot(x, y, width, height)
             self.action = action      # label vers lequel on doit jump quand on clique sur le hotspot
-        def is_active(self):
-            return True
 
     class QuickEvent:
         def __init__(self, id, prerequisites, action):
@@ -35,10 +34,8 @@ init python:
             self.triggeredAlready = False
 
         def triggerEvent(self, eventsObserved):
-            print("HERE TRIGGER EVENT")
             # Déclenche l'action si les prérequis sont satisfaits et qu'elle n'a pas encore eu lieu
             if not self.triggeredAlready and self.prerequisites.issubset(eventsObserved):
-                print("HERE INSIDE THE IF OF TRIGEVENT")
                 self.triggeredAlready = True
                 renpy.call(self.action)
 
@@ -51,11 +48,8 @@ init python:
             self.allEvents.append(event)
 
         def unlock(self, eventId):
-            # 1. On n'ajoute que les nouveaux événements pour éviter les doublons
             if eventId not in self.eventsObserved:
                 self.eventsObserved.add(eventId)
-                
-                # 2. On vérifie immédiatement si cet ajout complète les prérequis d'une scène
                 for event in self.allEvents:
                     event.triggerEvent(self.eventsObserved)
 
@@ -90,8 +84,9 @@ init python:
                 self.index -= 1
 
         def present(self, evidence_id):
-            curr = self.current()
+            curr = self.statements[store.cx_index]
             if curr.correct_evidence_id == evidence_id:
+                global in_cross_examination
                 in_cross_examination = False
                 renpy.jump(curr.contradiction_label)
             else:
