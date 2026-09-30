@@ -55,7 +55,7 @@ label scene_lou_werewolf_discovery:
     "Lou… is…"
     
     $ R_livingRoom.cutscene = "scene_living_room_return"
-    $ travel_to("scene_living_room_return")
+    call travel_to(R_livingRoom)
     return
 
 
@@ -83,7 +83,7 @@ label scene_living_room_return:
     "Spending time with people sure is nice, but I can’t help but shake that image of Lou out of my mind."
     "Those eyes…"
 
-    $ travel_to(R_kitchen, True)
+    call travel_to( R_kitchen,in_dialogue = True)
     s "You’re gonna mix my drink forever or what!"
     m "!"
     s "Stop zoning out, man."
@@ -103,7 +103,7 @@ label scene_living_room_return:
     m "Fine by me."
 
     "{i}*shut!*{/i}"
-    $ travel_to(R_F1bathroom, True)
+    call travel_to( R_F1bathroom,in_dialogue = True)
 
     "When life’s too much to bear… pissing is always here to give you a break… break…"
     "…"
@@ -113,7 +113,7 @@ label scene_living_room_return:
 
     "{i}*washhhhhhhhhh* *close!*{/i}"
     "{i}*open*{/i}"
-    $ travel_to(R_entryHallway, True)
+    call travel_to(  R_entryHallway,in_dialogue = True)
     m "Ah! Pani!"
     p "Fuckk you’re finally doneee, LET ME IN!"
 
@@ -121,7 +121,7 @@ label scene_living_room_return:
     
 
     "…I feel bad for taking her turn. Now to the garden…"
-    $ travel_to(R_garden, True)
+    call travel_to( R_garden,in_dialogue = True)
     m "Huh, this looks nice!"
     v "Hey Maj! Over here!"
     m "Hey, is it okay for us to sit here? These couches are covered by tarp…"
@@ -229,7 +229,7 @@ label scene_phones_missing_pani_faint:
     p "Guys…"
     v "Maybe there’s another basket just like it? Then it could be in the kitchen."
     s "Kitchen? Got it."
-    $ travel_to(R_kitchen, True)
+    call travel_to( R_kitchen,in_dialogue = True)
     s "{i}*rummage rummage rummage*{/i}"
     v "Any signs?"
     s "Help me look, asshole!"
@@ -297,13 +297,13 @@ label scene_phones_missing_pani_faint:
     m "… She’s definitely sleeping."
     v "We have to figure out what happened."
     m "Right."
+    $ eventMgr.add_event(QuickEvent("pani_faint",{"talk_carmille_investigation_pani","talk_stheno_investigation_pani", "talk_cassie_investigation_pani"},"cx_pani_poisoning"))
 
-    #COMEBACK HERE FOR EVENT LOGIC
-    # Lancement de l'enquête (appel des labels d'enquête de Pani)
     return
 
 
 # --- CONTRE-INTERROGATOIRE : QUI A DROGUÉ PANI ? ---
+
 
 label cx_pani_poisoning:
 
@@ -348,11 +348,7 @@ label cx_pani_objection_success:
     m "Then… could anyone have done it?"
 
     "Let’s think… Who would’ve had the opportunity?"
-
     menu:
-        "Who would have had the opportunity?":
-            jump cx_penalty
-
         "Stheno":
             jump cx_penalty
 
@@ -400,11 +396,9 @@ label choice_none_of_them_success:
     v "Then what are we missing? I’m sure we covered everything…"
     c "Maybe we made some false assumptions?"
     "Carm is right, things aren’t always as obvious as they may seem…"
+    "I think we need to take a deeper look at…"
 
     menu:
-        "I think we need to take a deeper look at…":
-            jump cx_penalty
-
         "The drug’s delivery":
             jump cx_penalty
 
@@ -563,7 +557,7 @@ label choice_pani_weight_success:
 
     "… What is going on here? Fucking monsters? How is that making sense?"
 
-    $ R_F1hallway.cutscene = scene_fransk_first_murder
+    $ R_F1hallway.cutscene = "scene_fransk_first_murder"
     return
 
 
@@ -635,14 +629,14 @@ label scene_fransk_first_murder:
     m "Allright!"
 
     "Fransk told me he needed to rest, I have no choice but to wake him up now."
-    $ travel_to(R_F1fransksRoom, True)
+    call travel_to( R_F1fransksRoom, in_dialogue = True)
 
     m "Fransk you have to know abou-!"
 
     "What… Fransk? … … ? … …"
 
     "{b}AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA!{/b}"
-    $ travel_to(R_entryHallway, True)
+    call travel_to( R_entryHallway,in_dialogue = True)
     c "Maj?"
     m "Guys! GUYS!"
     c "Why are you screaming?"
@@ -711,6 +705,7 @@ label scene_fransk_first_murder:
     s "…okay?"
     l "Now let’s check on Fransk!"
     v "He’s right… there’s no time to lose."
+    call travel_to( R_F1hallway, in_dialogue = True)
 
     "You’re not strong enough. You can’t open this door. What waits beyond. Is stronger than us."
     "Shut-up… Stop following me…"
@@ -721,6 +716,7 @@ label scene_fransk_first_murder:
     m "SHUT UP!"
 
     "In one fell swing. I open the door."
+    call travel_to(R_F1fransksRoom,in_dialogue = True)
 
     v "!"
     l "No! No! NOOOOOO!"
@@ -741,23 +737,27 @@ label scene_fransk_first_murder:
     c "…Yeah, that’s fair enough."
     m "Let’s investigate…"
 
+    $ eventMgr.add_event(QuickEvent("first_fransk_investigation",{"hotspot_investigation_body","hotspot_investigation_carpet", "hotspot_investigation_dreamcatchers","hotspot_investigation_closet","hotspot_investigation_window_living","hotspot_investigation_window_garden","talk_carmille_investigation_murder","talk_lou_investigation_murder","talk_stheno_investigation_murder"},"scene_confronting_cassie_ghost"))
+
     return
 
 
 # --- CONFRONTATION CASSIE ET LE SECRET DU FANTÔME ---
 
+
 label scene_confronting_cassie_ghost:
 
     m "Let’s step out for a bit, I’ve looked at everything I can…"
     l "Yeah, good idea."
+    call travel_to( R_F1hallway,in_dialogue = True)
     l "Any more places you wanna check?"
     m "Not really…"
     l "Alright bro… … Huh?"
     m "What is it?"
     l "HEY CASS!"
     c "Don’t fucking scream like that!"
-    l "Sorry… Aren’t you gonna look? You’re more clever than any of us, I’m sure you’d notice something we miss."
-    c "Sorry… I can’t?"
+    l "Sorry… Aren’t you gonna look? You’re more clever than any of us, I’m sure you’d notice something we missed."
+    c "Sorry… I can’t..."
     m "Is the blood too much to bear?"
     c "Y-Yea, that’s right…"
     l "What!? You used to love those true crime videos, they were borderline gore, bro!"
@@ -774,7 +774,7 @@ label scene_confronting_cassie_ghost:
     l "What, no! Never!"
     c "Why are you answering that question for me!"
     l "Sorry! I just know what he liked, and you’re not even close to his standards…"
-    c "You womanizing…"
+    c "You womanizing-"
     m "Then you’re a prime suspect."
     c "!"
     l "What! Her? No way! She never enters his room anyway!"
@@ -789,15 +789,13 @@ label scene_confronting_cassie_ghost:
     c "I just…"
 
     "She’s definitely hiding something…"
+    "The reason she's staying here is..."
 
     menu:
-        "The reason she can't enter is...":
-            jump cx_penalty
-
         "She couldn’t have entered the room":
             jump choice_cassie_cant_enter_success
 
-        "She couldn’t have stabbed him":
+        "She stabbed him":
             jump cx_penalty
 
         "She’s hemophobic":
@@ -819,13 +817,8 @@ label choice_cassie_cant_enter_success:
     c "…"
     m "The reason you can’t enter is because of…"
 
-    menu:
-        "Because of...":
-            jump cx_penalty
-
-        "Dreamcatchers":
-            jump choice_dreamcatchers_success
-
+    call force_present_proof("dreamcatchers")
+    jump choice_dreamcatchers_success
 
 label choice_dreamcatchers_success:
 
@@ -899,6 +892,9 @@ label choice_dreamcatchers_success:
     m "If they didn’t exit through the hall, or leave through the window…"
     l "Then they probably used a supernatural way to escape!"
     m "That’s right. And I must figure that out. For now, let’s gather up everyone in the living room."
+    
+    $ R_livingRoom.cutscene = "cx_murder_scent_investigation"
+    call travel_to( R_F1hallway)
 
     return
 
@@ -940,11 +936,9 @@ label cx_smell_order_success:
     c "Yeah, so?"
     m "I believe that Lou didn’t smell Fransk’s odor going to his room, but rather down the stairs."
     c "What, then that would mean… the person who came down the stairs was…"
+    "The person who came down was..."
 
     menu:
-        "The person who came down was...":
-            jump cx_penalty
-
         "Fransk himself":
             jump cx_penalty
 
@@ -970,12 +964,8 @@ label choice_the_murderer_stairs_success:
 
     "I must have some proof laying around. Let’s think about it."
 
-    menu:
-        "Present Evidence":
-            jump cx_penalty
-
-        "Garden facing Window":
-            jump choice_garden_window_success
+    call force_present_proof("garden_window")
+    jump choice_garden_window_success
 
 
 label choice_garden_window_success:
@@ -999,11 +989,9 @@ label choice_garden_window_success:
     m "This would require one of them to access the garden in the first place… which would’ve been difficult when considering the fact that we were all in its general idea."
     m "I could easily imagine someone escaping from the window while we were putting the tarp in the garage, but that whole stratagem seems highly unlikely."
     c "Then how did they get there?"
+    "How did they get there?"
 
     menu:
-        "How did they get there?":
-            jump cx_penalty
-
         "The stairs":
             jump choice_stairs_again_success
 
@@ -1025,12 +1013,8 @@ label choice_stairs_again_success:
 
     "Is there a way to hide your smell from Lou’s snout?"
 
-    menu:
-        "Hide smell with:":
-            jump cx_penalty
-
-        "Lou’s Jacket":
-            jump choice_lous_jacket_success
+    call force_present_proof("lous_jacket")
+    jump choice_lous_jacket_success
 
 
 label choice_lous_jacket_success:
@@ -1090,14 +1074,20 @@ label choice_lous_jacket_success:
     l "I only destroyed it to get to Cassie and Maj!"
     v "So this confirms the timeframe for the shuffling of the room?"
     m "Yes, and now it’s only a matter of alibis. When considering the state of the room… as well as the search for the passcode."
-    m "The culprit can only be:"
+    m "The culprit can only be..."
 
     menu:
-        "The culprit is...":
+        "Stheno":
             jump cx_penalty
 
         "Carmille":
             jump choice_carmille_culprit_success
+            
+        "Lou":
+            jump cx_penalty
+
+        "Cassie":
+            jump cx_penalty
 
 
 label choice_carmille_culprit_success:
@@ -1107,12 +1097,8 @@ label choice_carmille_culprit_success:
     s "You’re forgetting something! Carmille was in the living room! With no access whatsoever to Fransk’s room!"
     m "I’d beg to differ, this qualifies as a passageway!"
 
-    menu:
-        "Present passageway:":
-            jump cx_penalty
-
-        "Window to living room":
-            jump choice_window_living_room_carmille_success
+    call force_present_proof("living_room_window")
+    jump choice_window_living_room_carmille_success
 
 
 label choice_window_living_room_carmille_success:
@@ -1165,12 +1151,9 @@ label choice_window_living_room_carmille_success:
     m "You can fly, can’t you?"
     v "Yes, but in the form of a bat. As far as I’m aware bats do not possess hands, so tilting the window is impossible for me."
     m "Yeah, sure it isn’t. I’ll put an end to this masquerade."
-    m "You could’ve opened it easily using:"
+    m "You could’ve opened it easily using..."
 
     menu:
-        "Using:":
-            jump cx_penalty
-
         "Your mouth":
             jump choice_bat_mouth_success
 
@@ -1199,12 +1182,8 @@ label choice_bat_mouth_success:
     v "… Maj…"
     m "On it. The proof that implicates Carmille is:"
 
-    menu:
-        "Present Proof:":
-            jump cx_penalty
-
-        "Window to the living room":
-            jump choice_window_proof_carmille_success
+    call force_present_proof("living_room_window")
+    jump choice_window_proof_carmille_success
 
 
 label choice_window_proof_carmille_success:
@@ -1213,12 +1192,9 @@ label choice_window_proof_carmille_success:
     s "What of it? Who’s to say they weren’t there before?"
     m "There’s still more."
     s "!"
-    m "Something about this window confirms my theory:"
+    m "Something about this window confirms my theory..."
 
     menu:
-        "Confirming factor:":
-            jump cx_penalty
-
         "Bite marks":
             jump cx_penalty
 
@@ -1277,6 +1253,7 @@ label choice_window_stayed_open_success:
     v "Guys… I don’t know what to say…"
     m "From now on, you have to be truthful, let’s get to the bottom of th-"
 
+    jump scene_carmille_death
     return
 
 
@@ -1295,6 +1272,7 @@ label scene_carmille_death:
     l "Sh-Shit! Get him some shade!"
     s "DON’T GET UNDER THE COUCH DUMBASS, LIGHT CAN GET DOWN THERE!"
     c "Carm! Try to go out!"
+    call travel_to( R_entryHallway,in_dialogue = True)
     "{i}*rattle rattle rattle*{/i}"
     s "Who locked the front fucking door?!"
     v "Th-The closet! I have my special hoodie in there!"
@@ -1309,7 +1287,7 @@ label scene_carmille_death:
     "{b}*THUNK*{/b}"
     v "AAAAAAAAAAAAAAH"
     c "What the fuck!"
-    l "His skin’s sizzling like crazy!"
+    l "His skin’s it's... sizzling!"
     s "G-Garlic! It’s garlic!"
     v "RAAAAAAAARGH!"
     s "I’ll get it off! AAAACK IT BURNS! FUCK IT! GRAAAAAAAARGH"
@@ -1376,6 +1354,7 @@ label scene_carmille_death:
     p "Come on kiddies, toodle-oo. Follow me to the garden!"
     m "Sure… I could use the fresh air…"
 
+    $ R_garden.cutscene = "scene_garden_smoke_break"
     return
 
 
@@ -1529,17 +1508,24 @@ label scene_garden_smoke_break:
     "Is that kid involved in Fransk’s murder?"
     m "We have to investigate again, Carm mentioned that he hid something behind the closet. I also want to figure out why the front doors wouldn’t open."
 
+    $ eventMgr.add_event(QuickEvent("second_murder",{"hotspot_bookshelf_rope","hotspot_fatal_closet","hotspot_bloody_carpet_found","hotspot_black_cloth_recheck"}),"stheno_scream")
     return
 
 
 # --- SCÈNE 7 : LE PIÈGE DE LA CUISINE ET LA RENCONTRE DANS LE FREEZER ---
+#EVENT HERE
 
-label scene_kitchen_door_locked_chase:
 
+
+label stheno_scream:
     s "WHAT THE FUCK?!"
     l "What’s going on?"
     m "Was that Stheno? We should get to the kitchen as soon as possible."
+    $ R_kitchen.cutscene = "scene_kitchen_door_locked_chase"
+    $ eventMgr.add_event(QuickEvent("kid_found",{"hotspot_garage_car","hotspot_garage_caulk_gun)"},"fin_garage_investigation"))
+    return
 
+label scene_kitchen_door_locked_chase:
     s "Fuck! Shit!"
     l "Is everything alright?"
     s "The fucking door to the garden’s shut. We’re stuck!"
@@ -1553,13 +1539,16 @@ label scene_kitchen_door_locked_chase:
     m "And this is the only way to get to the garden?"
     l "Yeah."
     m "! If this lock can only be accessed from the inside, then it means that whoever just did this-"
-    l "Should’ve also locked himself!"
+    l "Should’ve also locked themselves!"
     m "Shit, they can exit through Fransk’s window!"
     l "We were just there! They’re probably close!"
-    m "Let’s check out the garage!"
+    m "Let’s check out the house!"
     s "I’ll stay here, if the motherfucker tries to get upstairs then I’ll catch their ass."
+    return
 
-    l "That asshole must be in the garage, then?"
+#EVENT HERE
+label fin_garage_investigation:
+    l "That asshole's really in the garage?'"
     m "Yeah, he probably locked the kitchen door while everyone was busy investigating the trap and shit."
     l "The garage's pretty small… we should be able to catch him quick- … *sniff sniff sniff sniff sniff sniff* No way!"
     m "Did you find something?"
@@ -1599,19 +1588,16 @@ label scene_kitchen_door_locked_chase:
     k "But I won’t tell youuuu, *blblblblblblblbl*!"
     m "Guess I’ll just show you then. The nature of your trick!"
 
-    return
+    jump cx_kid_interrogation
+
 
 
 # --- CONTRE-INTERROGATOIRE : LE TOUR DU GAMIN ET LE TÉMOIGNAGE ---
 
 label cx_kid_interrogation:
 
-    menu:
-        "The nature of your trick:":
-            jump cx_penalty
-
-        "Shelf":
-            jump choice_kid_shelf_trick_success
+    call force_present_proof("tied_up_shelf")
+    jump choice_kid_shelf_trick_success
 
 
 label choice_kid_shelf_trick_success:
@@ -1627,12 +1613,8 @@ label choice_kid_shelf_trick_success:
     l "Using rope to mislead us? That’s-"
     m "A lie. The rope was always part of your plan."
 
-    menu:
-        "Present Evidence:":
-            jump cx_penalty
-
-        "Shed’s Message":
-            jump choice_shed_message_success
+    call force_present_proof("shed_message")
+    jump choice_shed_message_success
 
 
 label choice_shed_message_success:
@@ -1647,12 +1629,8 @@ label choice_shed_message_success:
     k "! *whistleeee*"
     m "No need to tell me. I know."
 
-    menu:
-        "Entered through:":
-            jump cx_penalty
-
-        "Hole in the garden":
-            jump choice_hole_in_garden_success
+    call force_present_proof("garden_hole")
+    jump choice_hole_in_garden_success
 
 
 label choice_hole_in_garden_success:
@@ -1687,6 +1665,7 @@ label choice_hole_in_garden_success:
 
     s "GET BACK HERE LITTLE FUCKER!"
     l "He’s already in the hall! Stheno and Cassie must’ve failed to catch him…"
+    call travel_to( R_entryHallway,in_dialogue = True)
     s "I’M GONNA GET YOUR LITTLE-"
     l "Hey Sthen, is everything okay?"
     s "! … H-How?!"
@@ -1765,6 +1744,7 @@ label choice_hole_in_garden_success:
     m "! This sound!"
     "MAY THE SPARK OF SIN PUT AN END TO YOURS"
     m "Fransk! Wait"
+    call travel_to( R_F1hallway,in_dialogue = True)
 
     # [Entry hall cinématique]
     m "DON’T OPEN THE DOOR"
@@ -1820,18 +1800,20 @@ label choice_hole_in_garden_success:
     m "…"
 
     "Just like that, gone again. Lou’s right, I have to put an end to this myself."
-
+    $ eventMgr.add_event(QuickEvent("kid_reveal",{"hotspot_fransk_bed_drawer","hotspot_electric_door_handle", "hotspot_parent_room_mom_nightstand", "hotspot_parent_room_dad_nightstand"},"final_investigation_end"))
+    
     return
 
 
 # --- CONTRE-INTERROGATOIRE : LE GAMIN ET LE TÉLÉPHONE RETROUVÉ ---
 
-label cx_kid_final_testimony:
-
+label final_investigation_end:
     s "I FINALLY GOT YOU, FUCKING BRAT!"
     l "Stheno’s voice always had some crazy reach…"
     m "She must’ve caught the kid, let’s go ask some questions… That shout came from the garage."
+    $ R_garage.cutscene = "cx_kid_final_testimony"
 
+label cx_kid_final_testimony:
     s "You fucking brat… I fucking hate running… I’ll make you regret that…"
     k "BLBLBLBL I HATE YOU UGLY LADY!"
     s "Who are you calling ugly?!"
@@ -1912,12 +1894,9 @@ label cx_kid_candy_success:
     k "I didn’t!"
     m "I see, you’re lying. We only have to check this piece of evidence to make it obvious."
 
-    menu:
-        "Check evidence:":
-            jump cx_penalty
-
-        "Bloody Carpet":
-            jump choice_kid_bloody_carpet_success
+    
+    call force_present_proof("bloody_carpet")
+    jump choice_kid_bloody_carpet_success
 
 
 label choice_kid_bloody_carpet_success:
@@ -2017,8 +1996,9 @@ label cx_kid_caulk_gun_success:
     l "?"
     m "Cassie lied."
     l "What do you mean?"
-    m "… Kid, stay in the garage okay? We’re going to warn your sister. … Why would she lie? Why lie about THAT?"
-
+    m "… Kid, stay in the garage okay? We’re going to warn your sister." 
+    "… Why would she lie? Why lie about THAT?"
+    $ R_livingRoom.cutscene = "scene_final_confrontation_cassie"
     return
 
 
@@ -2045,11 +2025,8 @@ label scene_final_confrontation_cassie:
     s "Bullshit!"
     c "Why would I lie about that?!"
     m "Depends on how long you’ve kept that lie going, but for tonight there’s enough of a reason."
-
-    menu:
-        "Her reason was...":
-            jump cx_penalty
-
+    "Her reason was..."
+    menu:  
         "To join the monster gang":
             jump cx_penalty
 
@@ -2070,12 +2047,8 @@ label choice_cassie_alibi_motive_success:
 
     "No reason in keeping this going, let’s just spell it out for them."
 
-    menu:
-        "Present Proof:":
-            jump cx_penalty
-
-        "Dreamcatchers":
-            jump choice_final_dreamcatchers_success
+    call force_present_proof("dreamcatchers")
+    jump choice_final_dreamcatchers_success
 
 
 label choice_final_dreamcatchers_success:
@@ -2097,12 +2070,8 @@ label choice_final_dreamcatchers_success:
     m "Sure, but he could’ve been attacked without even knowing."
     l "How?"
 
-    menu:
-        "Attacked through:":
-            jump cx_penalty
-
-        "Blood pouch":
-            jump choice_blood_pouch_attack_success
+    call force_present_proof("blood_pouch")
+    jump choice_blood_pouch_attack_success
 
 
 label choice_blood_pouch_attack_success:
@@ -2111,12 +2080,8 @@ label choice_blood_pouch_attack_success:
     c "And how exactly would that have led to his stabbing?"
     m "It all makes sense when you consider what was injected into the pouch…"
 
-    menu:
-        "Injected Substance:":
-            jump cx_penalty
-
-        "Nyctozepam":
-            jump choice_nyctozepam_pouch_success
+    call force_present_proof("nyctozepam")
+    jump choice_nyctozepam_pouch_success
 
 
 label choice_nyctozepam_pouch_success:
@@ -2137,12 +2102,8 @@ label choice_nyctozepam_pouch_success:
     c "Right, ‘cause I totally could’ve done it with my single set of clothes, and the footprints at the scene clearly resembled mine…"
     m "Sarcasm, at this time? You better not underestimate us."
 
-    menu:
-        "Present Proof:":
-            jump cx_penalty
-
-        "Black Robe":
-            jump choice_black_robe_proof_success
+    call force_present_proof("black_robe")
+    jump choice_black_robe_proof_success
 
 
 label choice_black_robe_proof_success:
@@ -2172,12 +2133,8 @@ label choice_black_robe_proof_success:
     m "I know how they were done."
     c "Really? Please tell us."
 
-    menu:
-        "Execution method:":
-            jump cx_penalty
-
-        "Remote tag":
-            jump choice_remote_tag_reveal_success
+    call force_present_proof("smart_home_remote")
+    jump choice_remote_tag_reveal_success
 
 
 label choice_remote_tag_reveal_success:
@@ -2203,15 +2160,12 @@ label choice_remote_tag_reveal_success:
     c "*huff* *huff*"
     s "Cassie, you better explain yourself, now!"
     s "I don’t have any remote, Maj is a fucking liar! Think about it! Why would I have set up two different plans to murder Fransk!"
-
+    "Cassie needed two plans because:"
     menu:
-        "Why two plans?":
-            jump cx_penalty
-
         "Something went wrong":
             jump choice_something_went_wrong_success
 
-        "You needed a backup":
+        "She needed a backup":
             jump cx_penalty
 
         "The remote was glitching":
@@ -2228,11 +2182,9 @@ label choice_something_went_wrong_success:
     m "Cassie couldn’t foresee your sudden transformation. She couldn’t find an opportunity to trigger the trap because Fransk went up to “rest” too early. And your presence also complicated things for her."
     l "I see…"
     m "There’s also another proof that cements this claim…"
+    "What proves that she had to improvise is..."
 
     menu:
-        "Confirming Proof:":
-            jump cx_penalty
-
         "The bed":
             jump cx_penalty
 
@@ -2262,11 +2214,9 @@ label choice_the_announcements_success:
     m "Then, you could add another hole to the bag to make it seem like the plan was set-up way earlier."
     c "Your theories are laughable. If I truly had done that, Fransk would’ve noticed."
     m "Oh trust me, he did. And the absolute proof of that is…"
+    "The ultimate proof of her guilt is..."
 
     menu:
-        "Absolute Proof:":
-            jump cx_penalty
-
         "The proof of struggle":
             jump cx_penalty
 
@@ -2449,97 +2399,6 @@ label choice_fransk_last_words_success:
     return
 
 
-# --- ÉPILOGUE : L'HÔPITAL, LE GOUVERNEMENT ET LA FIN ---
-
-label scene_epilogue_hospital:
-
-    a "Abdul?"
-    m "…Huh?"
-    a "Hey… you’re waking up!"
-    m "Wh-who are you?"
-    a "I’m Agent Slate, secret services. I’ve been meaning to talk to you…"
-    a "But first, your leg will be alright, you might be bed-ridden for a few days but we’ll get you hooked up with the finest wheelchair."
-    m "What do you want from me?"
-    a "A few hours ago, the police started investigating a case which involves… a couple monster-related homicides."
-    m "…"
-    a "You were there, right?"
-    m "I’m a human, sir."
-    a "That we know. But is there any more information we should know about?"
-    m "You said a couple, but there was another one, a vampire, named Carmille."
-    a "I see, where would his body be?"
-    m "There’s no body to be found, he was killed using garlic."
-    a "I see… Anything else?"
-    m "The killer used a remote to cont-"
-    a "By killer, you mean Cassandra Anderson?"
-    m "Y-Yes."
-    a "We’ll be alright, Abdul. Just rest up. We’re aware of the smart house features, let the police figure it out…"
-    a "I’ve come here to offer you a position. In exchange for your silence, we can offer to cover your medical expenses, and the bureau could always use a promising student with hands-on knowledge about monsters."
-    m "And if I refuse."
-    a "Well, you’re free to warn everyone about monsters when you’re gonna be living on the streets."
-    "Figured…"
-    m "Thank you, agent. I’m just worried that Cassie will come for me, the way she talked…"
-    a "Well, dealing with monsters of the sort is my job, dear friend."
-    m "!"
-    a "I’ll ensure that an officer stays on guard until she’s caught, you don’t have to wo-"
-    "!"
-    "…"
-    "The… His… Blood…"
-
-    c "Maj."
-    m "! Cassie…"
-    c "I managed to catch up."
-    m "… What are you going to do to me?"
-    c "I promised I’d kill you."
-    m "!"
-    c "Look at you, tied to an IV."
-    m "…"
-    c "I should’ve gone another way about killing Fransk… Just a bubble of air in your system and you’ll peacefully go in 3 minutes or so…"
-    m "Air embolism? Not only does that hurt you’re also leaving a bunch of evidence in my body and on the medical equipment…"
-    c "Evidence? They already know my name, I just needed to fulfill my promise."
-    m "I can’t believe you… Are you really the same Cassie that worried about me when she heard that poor old Maj used to get beat by his dad?"
-    c "…Your dad?"
-    m "Yeah, he beat my ass when I didn’t get perfect grades, and always got fucking drunk!"
-    c "…"
-    m "Earlier tonight you were begging me to know the fucking story! All of that to fucking kill me?"
-    c "He drank?"
-    m "? Yeah, especially when his favourite team lost."
-    c "Let me guess, soccer?"
-    m "It’s not that big in the US but yeah, it’s big enough of a deal back home to warrant beating on your kids."
-    c "… When mom left, dad started drinking too. “Fuck, you look just like your bitch of a mom!” He said…"
-    m "Each time he beat on you?"
-    c "Amongst other things."
-
-    "I’m starting to understand what Pani told me before leaving…"
-
-    m "Well, fuck them. Both my dad and yours. Fuck, them."
-    c "…"
-    m "God, I know why I came here… I always said I did it for me, but I just want to get my little sisters out of that shit hole!"
-    c "I get you…"
-    m "Fuck, I was out there enjoying myself while the both of them were stuck with that piece of human filth."
-    c "… A monster…"
-    m "And now they’re going to be alone!"
-    c "I’m sorry! It must feel awful, leaving your sisters like that."
-
-    "This… this tone. That’s… how she sounded at the start…"
-
-    c "I got accepted to some great universities, you know? But I stayed here for the same reason why you came!"
-    m "… W-What?"
-    c "I can’t just leave Kid alone!"
-    m "… What? Does she even? Realise?"
-    c "Not with monsters going around, that is!"
-    m "Cass… Kid’s-"
-    c "I’m really sorry Maj, I have to protect him."
-    m "Wait-"
-
-    "{b}*SLAM*{/b}"
-    d "I FOUND THE FUCKING MONSTER"
-    "{b}*GUN GUN GUN*{/b}"
-    m "Cassie-"
-    "{b}*THUD*{/b}"
-
-    scene black with fade
-    return
-
 
 # ==============================================================================
 # ACTE 2 & CONCLUSION DU PROLOGUE - LABELS D'INTERACTION & SCÈNES
@@ -2560,6 +2419,7 @@ label talk_carmille_investigation_pani:
     v "…Maj, figure it out for her. Okay?"
     m "I’ll do my best."
     # [Nyctozepam added to evidence]
+    $ eventMgr.unlock("talk_carmille_investigation_pani")
     return
 
 label talk_stheno_investigation_pani:
@@ -2570,6 +2430,7 @@ label talk_stheno_investigation_pani:
     s "I went before Carm, while you were chasing after Lou."
     m "I see."
     # [Bathroom Order added to evidence]
+    $ eventMgr.unlock("talk_stheno_investigation_pani")
     return
 
 label talk_cassie_investigation_pani:
@@ -2586,10 +2447,13 @@ label talk_cassie_investigation_pani:
     m "The night was going along so well…"
     c "I’m glad we talked earlier, at least we got acquainted."
     m "Yeah, I’m happy too."
+    $ eventMgr.unlock("talk_cassie_investigation_pani")
     return
 
 
+
 # --- ENQUÊTE 3 : MEURTRE DE FRANSK (CHAMBRE DE FRANSK) ---
+
 
 label hotspot_investigation_body:
     l "…"
@@ -2630,6 +2494,7 @@ label hotspot_investigation_body:
     m "Either way this piece of clothing was clearly involved in the murder."
     l "Or at the very least in hiding the wound."
     # [Black robe added to evidence]
+    $ eventMgr.unlock("hotspot_investigation_body")
     return
 
 label hotspot_investigation_carpet:
@@ -2641,6 +2506,7 @@ label hotspot_investigation_carpet:
     l "I checked the room out and I still haven’t seen it."
     m "Let’s keep an eye out for it, okay? If the killer bothered with hiding it then it must be important."
     # [Missing Carpet added to evidence]
+    $ eventMgr.unlock("hotspot_investigation_carpet")
     return
 
 label hotspot_investigation_dreamcatchers:
@@ -2660,6 +2526,7 @@ label hotspot_investigation_dreamcatchers:
     l "I’d like to ask him for his opinion. …"
     "He’s doing his best to stay composed but he must feel terrible…"
     # [Dreamcatchers added to evidence]
+    $ eventMgr.unlock("hotspot_investigation_dreamcatchers")
     return
 
 label hotspot_investigation_closet:
@@ -2677,6 +2544,7 @@ label hotspot_investigation_closet:
     l "…Sure but why hide it in his closet?"
     m "I’m drawing blanks here, can't tell you man."
     # [Lou’s Jacket added to evidence]
+    $ eventMgr.unlock("hotspot_investigation_closet")
     return
 
 label hotspot_investigation_window_living:
@@ -2695,6 +2563,7 @@ label hotspot_investigation_window_living:
     m "…"
     "I have a feeling that this window is more important than it may seem."
     # [Window added to evidence]
+    $ eventMgr.unlock("hotspot_investigation_window_living")
     return
 
 label hotspot_investigation_window_garden:
@@ -2718,6 +2587,7 @@ label hotspot_investigation_window_garden:
     l "So they must’ve gone through the stairs…"
     m "Exactly my thoughts."
     # [Window to the garden added to evidence]
+    $ eventMgr.unlock("hotspot_investigation_window_garden")
     return
 
 label talk_carmille_investigation_murder:
@@ -2747,6 +2617,7 @@ label talk_carmille_investigation_murder:
     v "…I don’t know…"
     "If he really had some kind of condition then it would be important to note."
     # [Fransk’s condition added to evidence]
+    $ eventMgr.unlock("talk_carmille_investigation_murder")
     return
 
 label talk_lou_investigation_murder:
@@ -2832,6 +2703,7 @@ label talk_lou_investigation_murder:
     m "I should really keep what you think you smelled in mind, if there’s really an unidentified smell then it means that the killer probably isn’t one of us!"
     l "Yeah! That’s right!"
     # [Lou’s sense of smell added to evidence]
+    $ eventMgr.unlock("talk_lou_investigation_murder")
     return
 
 label talk_stheno_investigation_murder:
@@ -2871,10 +2743,12 @@ label talk_stheno_investigation_murder:
     m "We should look at each other’s alib-"
     s "None of us."
     "…She might be hard to approach but she cares deeply about her friends…"
+    $ eventMgr.unlock("talk_stheno_investigation_murder")
     return
 
 
 # --- ENQUÊTE 4 : APRÈS LE MEURTRE DE CARMILLE (JARDIN, ENTRÉE & GARAGE) ---
+
 
 label hotspot_bookshelf_rope:
     l "What the hell is this?"
@@ -2884,6 +2758,7 @@ label hotspot_bookshelf_rope:
     c "In the garage. But no one was there. I even checked the car."
     m "Why would someone do this?"
     # [Tied Up Bookshelf added to evidence]
+    $ eventMgr.unlock("hotspot_bookshelf_rope")
     return
 
 label hotspot_fatal_closet:
@@ -2906,6 +2781,7 @@ label hotspot_fatal_closet:
     s "… I’ll catch the fucker who did this and make him suffer."
     "Don’t think I’ll stop her."
     # [Deadly Closet added to evidence]
+    $ eventMgr.unlock("hotspot_fatal_closet")
     return
 
 label hotspot_bloody_carpet_found:
@@ -2921,6 +2797,7 @@ label hotspot_bloody_carpet_found:
     l "Those could come from some kind of slippers…"
     m "Maybe, but that doesn’t really help us…"
     # [Bloody Carpet added to evidence]
+    $ eventMgr.unlock("hotspot_bloody_carpet_found")
     return
 
 label hotspot_black_cloth_recheck:
@@ -2934,6 +2811,7 @@ label hotspot_black_cloth_recheck:
     l "So? Any conclusions?"
     m "Not yet, but checking it out again was an excellent idea."
     # [Black robe added to evidence]
+    $ eventMgr.unlock("hotspot_black_cloth_recheck")
     return
 
 label hotspot_garage_car:
@@ -2946,6 +2824,7 @@ label hotspot_garage_car:
     m "It must be hidden in the parent’s room…"
     m "Yeah, Fransk’s mom probably wouldn’t trust me there after the incident."
     m "I’ll just take your word for it…"
+    $ eventMgr.unlock("hotspot_garage_car")
     return
 
 label hotspot_garage_caulk_gun:
@@ -2963,10 +2842,13 @@ label hotspot_garage_caulk_gun:
     l "Damn, for real?!"
     m "The bastard who did that is probably still here somewhere!"
     # [Caulk gun added to evidence]
+    $ eventMgr.unlock("hotspot_garage_caulk_gun")
     return
 
 
 # --- ENQUÊTE 5 : CHAMBRE DES PARENTS & MEURTRE DE FRANSK AU MANCHE ÉLECTRIQUE ---
+
+
 
 label hotspot_fransk_bed_drawer:
     m "There’s supposed to be a drawer hidden here… Ah! There’s a slit by his bedside! !"
@@ -3012,6 +2894,7 @@ label hotspot_fransk_bed_drawer:
     m "Yes, we can use that information to our advantage."
     l "Alright."
     # [Smart house remote added to evidence]
+    $ eventMgr.unlock("hotspot_fransk_bed_drawer")
     return
 
 label hotspot_electric_door_handle:
@@ -3028,6 +2911,7 @@ label hotspot_electric_door_handle:
     m "Any idea when that could’ve happened?"
     l "Fransk’s room was always left open before the stabbing… so we couldn’t have noticed."
     m "Yeah…"
+    $ eventMgr.unlock("hotspot_electric_door_handle")
     return
 
 label hotspot_parent_room_mom_nightstand:
@@ -3042,16 +2926,17 @@ label hotspot_parent_room_mom_nightstand:
     m "If that’s what you want…"
     "I should stuff him full of candy, he’s been nothing but great tonight…"
     # [Hard Candy added to evidence]
+    $ eventMgr.unlock("hotspot_parent_room_mom_nightstand")
     return
 
 label hotspot_parent_room_dad_nightstand:
     m "Holy shit! This drawer’s full of junk!"
     l "Yikes, this’ll take a while to sort through…"
-    m "! Maybe it won’t. There’s a manual for a smart house remote. We have to check it out!"
+    m "Maybe it won’t. There’s a manual for a smart house remote. We have to check it out!"
     l "This is huge!"
     m "“Thank you for choosing SureThings’ home automation and security services!”"
     l "Skip to the good part!"
-    m "“The remote features 3 preset buttons. By linking the remote to the SureThings app using your remote’s unique ID, you can easily modify those presets to fit your needs!”"
+    m "\“The remote features 3 preset buttons. By linking the remote to the SureThings app using your remote’s unique ID, you can easily modify those presets to fit your needs!\”"
     l "Sh-Shit! What kind of features are there?"
     m "“Shutting down every curtain for the night? Turn your living room into an impromptu nightclub? Arm your security systems before travelling? Maybe all of these at the same time? The custom presets will do it all at the press of a button!” …"
     "I start shuffling through the book, my eyes darting on particular phrases."
@@ -3062,4 +2947,5 @@ label hotspot_parent_room_dad_nightstand:
     m "What is it?"
     l "Could it be… that AI is taking over? And that the house itself decided to murder Fransk?"
     m "… Shut up…"
+    $ eventMgr.unlock("hotspot_parent_room_dad_nightstand")
     return

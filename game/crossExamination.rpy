@@ -25,4 +25,26 @@ label cx_nav_next:
 
 label cx_penalty:
     "No, this doesn't make sense. I have to think again."
-    jump cx_loop
+    jump cx_display
+
+label force_present_proof(target_proof_id):
+    $ store.expected_proof_id = target_proof_id
+    $ store.in_proof_present = True
+
+    # Ouvre automatiquement la minimap et les preuves si elles ne sont pas déjà ouvertes
+    if not store.minimap_open:
+        $ toggle_Minimap()
+
+    # Pause interactive : attend que le joueur clique sur une preuve puis sur "Present"
+    $ renpy.pause(hard=True)
+
+label after_proof_presented:
+    if store.proof_presentation_result:
+        # Succès : on nettoie et on continue le dialogue
+        $ store.expected_proof_id = None
+        $ store.proof_presentation_result = None
+        return
+    else:
+        # Échec : réplique d'erreur puis on redemande
+        "No, that doesn't prove anything right now."
+        call force_present_proof(store.expected_proof_id)
