@@ -82,8 +82,5 @@ label start:
     jump room_loop
 
 label room_not_neighbor:
-    image Banane = Solid("#e1ea61", xsize=500, ysize=100, xalign=0.5, yalign=1.0)
-    hide Carmille
-    show Banane
-    e "OMG.... Cette room n'existe PAAAAAAAAS"
+    m "Mmmmh... I can't reach this room from here..."
     return
