@@ -19,11 +19,10 @@ label prologue_part1_arrival:
     "I can't believe I'm finally here, America. I mean, the most unbelievable thing is how much I wanted to come here in the first place, it's almost like I blacked out for most of high school... and also middle school." 
     "These suburbs don't look much different than the fancy parts of where I'm from but still... It's a new beginning!" 
 
-    show fransk at hop
+    show fransk at hop, center
     f "You talking to yourself ?"
 
-    m "Oh ! Fransk ! So glad to see you !" 
-    show fransk at right with move
+    m "Oh ! Fransk ! So glad to see you !"
 
     "Without thinking I just hold out my hand to greet him, failing to realise that said hand is carrying a suitcase that's approximately the weight of 7 bowling balls." 
 
@@ -120,7 +119,8 @@ label prologue_part2_entrance_stheno:
     f "Hey, my parents just want what's best for the golden boy." 
     f "Anyhow, bathroom's right here, just find a spot for your stuff somewhere around, I'll go and tell the others you're there." 
 
-    hide fransk with dissolve
+    hide fransk with moveoutright
+    
     "As Fransk skips happily towards the living room I can't help but smile at the big \"GOLDEN-BOY\" that's imprinted on the back of his varsity jacket." 
     "Smiling to myself I start looking for a corner that wouldn't mind hosting my bag for a little bit." 
 
@@ -215,7 +215,7 @@ label prologue_part3_carmille:
     v "Just get with the others please, the guy must be tired." 
 
     s -shocked "Oh, ok sure." 
-    hide stheno with dissolve
+    hide stheno with moveoutright
 
     "There she goes..." 
 
