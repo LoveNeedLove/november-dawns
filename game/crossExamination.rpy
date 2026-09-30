@@ -48,3 +48,12 @@ label after_proof_presented:
         # Échec : réplique d'erreur puis on redemande
         "No, that doesn't prove anything right now."
         call force_present_proof(store.expected_proof_id)
+
+# Pour avoir des choix de type "menu" qui bouclent. Attention, bonne_reponse est un index qui commence à 0
+label menu_choice_loop(question, choice, good_answer, fail_text="No, this doesn't make sense. I have to think again."):
+    while True:
+        $ items = [(question, None)] + [(text, index) for index, text in enumerate(choice)]
+        $ chosen_answer = renpy.display_menu(items, screen="choice")
+        if chosen_answer == good_answer:
+            return
+        "[fail_text]"
