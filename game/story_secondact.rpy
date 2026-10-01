@@ -99,7 +99,7 @@ screen purple_light():
 label scene_lou_werewolf_discovery:
 
     $ drHouse.clearHouse()
-    show screen illu("images/illus/lou first transfo.png")
+    show screen illus("images/illu/lou first transfo.png")
 
     "..."
 
@@ -160,7 +160,7 @@ label scene_lou_werewolf_discovery:
     "Lou... is..."
     
     $ R_livingRoom.cutscene = "scene_living_room_return"
-    $ R_livingRoom.image = "living_room_2.png"
+    $ R_livingRoom.bg = "backgrounds/living_room_2.png"
     call travel_to(R_livingRoom) from _call_travel_to_5
     return
 
@@ -842,8 +842,8 @@ label scene_fransk_first_murder:
     hide lou with dissolve
 
     "Fransk told me he needed to rest, I have no choice but to wake him up now."
-    $ R_F1fransksRoom.image = "backgrounds/fransks_room_murder_1.png"
-    call travel_to( R_F1fransksRoom, in_dialogue = True) from _call_travel_to_12
+    $ R_F1fransksRoom.bg = "backgrounds/fransks_room_murder_1.png"
+    call travel_to( R_F1fransksRoom, in_dialogue = True) 
 
     m "Fransk you have to know abou-!"
 
@@ -893,9 +893,8 @@ label scene_fransk_first_murder:
     l "When did he get that bouquet?"
     "How... how... how... did I end up here again..."
 
-    $ R_livingRoom.image = "living_room_1.png"
-    $ R_F1fransksRoom.image = "backgrounds/fransks_room_murder_2.png"
-    call travel_to( R_F1fransksRoom, in_dialogue = True) from _call_travel_to_12
+    $ R_livingRoom.bg = "backgrounds/living_room_1.png"
+    $ R_F1fransksRoom.bg = "backgrounds/fransks_room_murder_2.png"
 
     show carmille at enter_from_left(0.35)
     v "Maj! It took a while but I have some birthday dates!"
@@ -1586,7 +1585,7 @@ label scene_carmille_death:
 
     show carmille at dust_away
     hide screen purple_light
-    show screen illu("images/illus/carmille_death.png")
+    show screen illus("images/illu/carmille_death.png")
     with dissolve
     "Dust. It's like there's already nothing left of him. Just, dust."
     hide screen illus with dissolve
@@ -1798,7 +1797,7 @@ label scene_garden_smoke_break:
     c "Right here, on the wall."
     m "What the-"
 
-    show screen illu("images/illus/shed_message.png")
+    show screen illus("images/illu/shed_message.png")
     with vpunch
     "{b}THE WEIGHT OF YOUR SINS WILL RAIN UPON YOUR HEADS.{/b}"
 
@@ -1835,13 +1834,13 @@ label scene_garden_smoke_break:
     "Is that kid involved in Fransk's murder?"
     m "We have to investigate again, Carm mentioned that he hid something behind the closet. I also want to figure out why the front doors wouldn't open."
 
-    $ R_livingRoom.image = "living_room_1.png"
+    $ R_livingRoom.bg = "backgrounds/living_room_1.png"
 
     $ eventMgr.add_event(QuickEvent("second_murder",{"hotspot_bookshelf_rope","hotspot_fatal_closet","hotspot_bloody_carpet_found","hotspot_black_cloth_recheck"},"stheno_scream"))
     
     #After carmille's death
-    $ R_livingRoom.convos.append(HotspotData("hotspot_bookshelf_rope",(1311, 247, 618, 397)))
-    $ R_entryHallway.convos.append(HotspotData("hotspot_fatal_closet",(280, 231, 391, 789)))
+    $ R_livingRoom.hotspots.append(HotspotData("hotspot_bookshelf_rope",(1311, 247, 618, 397)))
+    $ R_entryHallway.hotspots.append(HotspotData("hotspot_fatal_closet",(280, 231, 391, 789)))
     $ R_F1fransksRoom.hotspots.append(HotspotData("hotspot_bloody_carpet_found",(1188, 273, 376, 491)))
     $ R_F1fransksRoom.hotspots.append(HotspotData("hotspot_black_cloth_recheck",(286, 489, 433, 194)))
 
@@ -1994,8 +1993,8 @@ label choice_shed_message_success:
 
 
 label choice_hole_in_garden_success:
-    $ R_F1fransksRoom.image = "backgrounds/fransks_room_murder_3.png"
-    call travel_to( R_F1fransksRoom, in_dialogue = True) from _call_travel_to_12
+    $ R_F1fransksRoom.bg = "backgrounds/fransks_room_murder_3.png"
+    call travel_to( R_F1fransksRoom, in_dialogue = True)
     m "You found the hole in the fence, right?"
     show kid at hop
     k "! Sherlock Holmes?!"
@@ -2166,7 +2165,7 @@ label choice_hole_in_garden_success:
     p "They're broken Maj..."
     m "1... 2..."
 
-    show screen illu("images/illus/fransk_real_death.png") with dissolve
+    show screen illus("images/illu/fransk_real_death.png") with dissolve
     "She was right... performing CPR on a disembodied torso isn't going to save anyo- Isn't going to save- Isn't..."
     with vpunch
     "{b}*THUD*{/b}"
@@ -2742,7 +2741,7 @@ label choice_fransk_last_words_success:
     "{i}*tuggggg*{/i}"
     "I can't comprehend the situation."
     show lou at faint_fall
-    show screen illu("images/illus/lou_bookshelf.png")
+    show screen illus("images/illu/lou_bookshelf.png")
     with vpunch
     "{b}*CRASHHH*{/b}"
     "All I can see now is Cassie's free and..."
@@ -2766,7 +2765,7 @@ label choice_fransk_last_words_success:
     m "KID, QUICK!"
     "I pull with all of my might but..."
 
-    show screen illu("images/illus/kid_under_shelf_dead.png")
+    show screen illus("images/illu/kid_under_shelf_dead.png")
     with vpunch
     "{b}*SLAAAAAAAAAAAAAAAAAAAAAAAAAAM*{/b}"
     m "GRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH"

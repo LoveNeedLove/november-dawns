@@ -1881,7 +1881,7 @@ label choice_stheno_searched_success:
     f "MAJ, DON'T." 
 
     "And see..." 
-    show screen illus("images/illus/lou first transfo.png") with dissolve
+    show screen illus("images/illu/lou first transfo.png") with dissolve
 
     f "Don't... look..." 
 
