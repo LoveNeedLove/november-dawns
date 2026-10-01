@@ -330,6 +330,11 @@ label scene_phones_missing_pani_faint:
     m "Right."
     $ eventMgr.add_event(QuickEvent("pani_faint",{"talk_carmille_investigation_pani","talk_stheno_investigation_pani", "talk_cassie_investigation_pani"},"cx_pani_poisoning"))
 
+    #Pani Faint
+    $ R_kitchen.convos.append(Convo("carmille","talk_carmille_investigation_pani"))
+    $ R_kitchen.convos.append(("stheno","talk_stheno_investigation_pani"))
+    $ R_kitchen.convos.append(Convo("cassie","talk_cassie_investigation_pani"))
+
     return
 
 
@@ -761,6 +766,17 @@ label scene_fransk_first_murder:
     m "Let's investigate..."
 
     $ eventMgr.add_event(QuickEvent("first_fransk_investigation",{"hotspot_investigation_body","hotspot_investigation_carpet", "hotspot_investigation_dreamcatchers","hotspot_investigation_closet","hotspot_investigation_window_living","hotspot_investigation_window_garden","talk_carmille_investigation_murder","talk_lou_investigation_murder","talk_stheno_investigation_murder"},"scene_confronting_cassie_ghost"))
+
+    #Fransk Murder 1
+    $ R_F1fransksRoom.convos.append(Convo("carmille","talk_carmille_investigation_murder"))
+    $ R_F1fransksRoom.convos.append(Convo("lou","talk_lou_investigation_murder"))
+    $ R_F1fransksRoom.convos.append(Convo("stheno","talk_stheno_investigation_murder"))
+    $ R_F1fransksRoom.hotspots.append(HotspotData("hotspot_investigation_body",(286, 489, 433, 194)))
+    $ R_F1fransksRoom.hotspots.append(HotspotData("hotspot_investigation_carpet",(148, 762, 729, 250)))
+    $ R_F1fransksRoom.hotspots.append(HotspotData("hotspot_investigation_dreamcatchers",(677, 416, 88, 116)))
+    $ R_F1fransksRoom.hotspots.append(HotspotData("hotspot_investigation_closet",(1188, 273, 376, 491)))
+    $ R_F1fransksRoom.hotspots.append(HotspotData("hotspot_investigation_window_living", (1603, 556, 332, 362)))
+    $ R_F1fransksRoom.hotspots.append(HotspotData("hotspot_investigation_window_garden",(820, 393, 150, 190)))
 
     return
 
@@ -1504,6 +1520,13 @@ label scene_garden_smoke_break:
     m "We have to investigate again, Carm mentioned that he hid something behind the closet. I also want to figure out why the front doors wouldn't open."
 
     $ eventMgr.add_event(QuickEvent("second_murder",{"hotspot_bookshelf_rope","hotspot_fatal_closet","hotspot_bloody_carpet_found","hotspot_black_cloth_recheck"}),"stheno_scream")
+    
+    #After carmille's death
+    $ R_livingRoom.convos.append(HotspotData("hotspot_bookshelf_rope",(1311, 247, 618, 397)))
+    $ R_entryHall.convos.append(HotspotData("hotspot_fatal_closet",(280, 231, 391, 789)))
+    $ R_F1fransksRoom.hotspots.append(HotspotData("hotspot_bloody_carpet_found",(1188, 273, 376, 491)))
+    $ R_F1fransksRoom.hotspots.append(HotspotData("hotspot_black_cloth_recheck",(286, 489, 433, 194)))
+
     return
 
 
@@ -1518,6 +1541,11 @@ label stheno_scream:
     m "Was that Stheno? We should get to the kitchen as soon as possible."
     $ R_kitchen.cutscene = "scene_kitchen_door_locked_chase"
     $ eventMgr.add_event(QuickEvent("kid_found",{"hotspot_garage_car","hotspot_garage_caulk_gun)"},"fin_garage_investigation"))
+
+    #Stheno scream
+    $ R_garage.hotspots.append(HotspotData("hotspot_garage_car",(391, 308, 610, 488)))
+    $ R_garage.hotspots.append(HotspotData("hotspot_garage_caulk_gun", (242, 810, 231, 155)))
+
     return
 
 label scene_kitchen_door_locked_chase:
@@ -1797,6 +1825,13 @@ label choice_hole_in_garden_success:
     "Just like that, gone again. Lou's right, I have to put an end to this myself."
     $ eventMgr.add_event(QuickEvent("kid_reveal",{"hotspot_fransk_bed_drawer","hotspot_electric_door_handle", "hotspot_parent_room_mom_nightstand", "hotspot_parent_room_dad_nightstand"},"final_investigation_end"))
     
+    #Kid reveal
+
+    $ R_F1fransksRoom.hotspots.append(HotspotData("hotspot_fransk_bed_drawer",(89, 612, 216, 174)))
+    $ R_F1hallway.hotspots.append(HotspotData("hotspot_electric_door_handle",(921, 459, 232, 290)))
+    $ R_F1parentsRoom.hotspots.append(HotspotData("hotspot_parent_room_mom_nightstand",(1586, 260, 383, 539)))
+    $ R_F1parentsRoom.hotspots.append(HotspotData("hotspot_parent_room_dad_nightstand", (1109, 341, 270, 398)))
+
     return
 
 
