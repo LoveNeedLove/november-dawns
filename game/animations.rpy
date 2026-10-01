@@ -132,9 +132,15 @@ transform leave_to_right(t=0.4):
 transform leave_to_left(t=0.4):
     easein_cubic t xoffset -config.screen_width
 
-transform trembling(strength=10, timing = 0.3):
+transform trembling(strength=15, timing = 0.05):
     linear timing xoffset strength 
-    linear timing xoffset 0   
+    linear timing xoffset 0
+    repeat
+
+transform jumping(strength=15, timing = 0.07):
+    linear timing yoffset strength 
+    linear timing yoffset 0
+    repeat
 
     # Ombre portée : xoffset, yoffset, flou (blur), couleur
 transform drop_shadow(x=5, y=5, blur=8, color="#000000aa"):
