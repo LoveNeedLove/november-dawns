@@ -99,6 +99,7 @@ screen purple_light():
 label scene_lou_werewolf_discovery:
 
     $ drHouse.clearHouse()
+    show screen illus("images/illus/lou first transfo.png")
 
     "..."
 
@@ -110,6 +111,7 @@ label scene_lou_werewolf_discovery:
     m "Do you need any-"
     with hpunch
     l "Get OUT!"
+    hide screen illus with dissolve
     show fransk serious at pop_from_right
     f "Maj! Let me handle this."
     m "!"
@@ -499,6 +501,7 @@ label cx_pani_poisoning:
     m "Excuse me?"
     s "You're the only one that could've done it!"
 
+    call figure_it_out_anim
     $ current_cx = CrossExamination([
         Statement(s, "Pani's our best friend, you're the only one that could've done it."),
         Statement(s, "You probably drugged her before she went to the bathroom.",
@@ -1168,6 +1171,7 @@ label cx_murder_scent_investigation:
     m "I want to hear your theories, if we can reach a consensus then we might find the murderer."
     "I have to keep their potential abilities in mind. Stheno and Carmille are still human, but considering the fact that 3 of them have lied already then I can't be too sure."
 
+    call figure_it_out_anim
     $ current_cx = CrossExamination([
         Statement(v, "Fransk was probably murdered during one of his naps."),
         Statement(l, "The murderer is potentially an outsider."),
@@ -1575,7 +1579,11 @@ label scene_carmille_death:
     v "Coward."
 
     show carmille at dust_away
+    hide screen purple_light
+    show screen illus("images/illus/carmille_death.png")
+    with dissolve
     "Dust. It's like there's already nothing left of him. Just, dust."
+    hide screen illus with dissolve
     hide carmille
     hide screen purple_light with dissolve
 
@@ -1784,10 +1792,12 @@ label scene_garden_smoke_break:
     c "Right here, on the wall."
     m "What the-"
 
+    show screen illus("images/illus/shed_message.png")
     with vpunch
     "{b}THE WEIGHT OF YOUR SINS WILL RAIN UPON YOUR HEADS.{/b}"
 
     m "Who the fuck wrote that?!"
+    hide screen illus with dissolve
     show pani:
         xalign 0.62 yalign 1.0
     show lou:
@@ -2147,6 +2157,7 @@ label choice_hole_in_garden_success:
     p "They're broken Maj..."
     m "1... 2..."
 
+    show screen illus("images/illus/fransk_real_death.png") with dissolve
     "She was right... performing CPR on a disembodied torso isn't going to save anyo- Isn't going to save- Isn't..."
     with vpunch
     "{b}*THUD*{/b}"
@@ -2160,6 +2171,7 @@ label choice_hole_in_garden_success:
     l "I got this from his room."
     m "A blanket?"
     l "I'll cover his body to make sure he rests, you figure this out for him."
+    hide screen illus with dissolve
     m "I- I can't-"
     l "Starting with-"
     m "I'M TELLING YOU I CAN'T-"
@@ -2211,6 +2223,7 @@ label cx_kid_final_testimony:
     m "?"
     s "Just try."
 
+    call figure_it_out_anim
     $ current_cx = CrossExamination([
         Statement(k, "BLBLBLBLBLBLBLBL"),
         Statement(k, "I won't talk to you meanies!"),
@@ -2335,6 +2348,7 @@ label choice_kid_bloody_carpet_success:
     k "What?!"
     m "Please, tell us what you know."
 
+    call figure_it_out_anim
     $ current_cx = CrossExamination([
         Statement(k, "I waited for everyone to get out of the kitchen and into the garden."),
         Statement(k, "When the last girl went to the bathroom, I bolted and reached the stairs."),
@@ -2719,6 +2733,7 @@ label choice_fransk_last_words_success:
     "{i}*tuggggg*{/i}"
     "I can't comprehend the situation."
     show lou at faint_fall
+    show screen illus("images/illus/lou_bookshelf.png")
     with vpunch
     "{b}*CRASHHH*{/b}"
     "All I can see now is Cassie's free and..."
@@ -2742,6 +2757,7 @@ label choice_fransk_last_words_success:
     m "KID, QUICK!"
     "I pull with all of my might but..."
 
+    show screen illus("images/illus/kid_under_shelf_dead.png")
     with vpunch
     "{b}*SLAAAAAAAAAAAAAAAAAAAAAAAAAAM*{/b}"
     m "GRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH"
@@ -2758,6 +2774,7 @@ label choice_fransk_last_words_success:
     m "?"
     c "The young are meant to serve their elders. I don't care for his death."
     m "How... you??"
+    hide screen illus with dissolve
     "How could she say something so... awful? All of that while digging through her bag..."
     show cassie at hop
     c "If you liked Fransk so much, then you'll kill you with the same knife."
