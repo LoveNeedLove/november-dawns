@@ -88,16 +88,17 @@ screen minimap() layer 'screens': # Montre la minimap
         xalign 0.5 yalign 0.5
         xmargin 10 ymargin 10
         imagemap:
-            ground "minimapTest.png"
-            hotspot (171, 361, 207, 406) action [Function(toggle_Minimap), Function(minimap_Travel, R_entryHallway)]
-            hotspot (378, 363, 506, 315) action [Function(toggle_Minimap), Function(minimap_Travel, R_livingRoom)]
-            hotspot (887, 427, 268, 254) action [Function(toggle_Minimap), Function(minimap_Travel, R_kitchen)]
-            hotspot (1154, 431, 275, 379) action [Function(toggle_Minimap), Function(minimap_Travel, R_garage)]
-            hotspot (888, 135, 542, 293) action [Function(toggle_Minimap), Function(minimap_Travel, R_garden)]
-            hotspot (174, 222, 502, 138) action [Function(toggle_Minimap), Function(minimap_Travel, R_F1hallway)]
-            hotspot (174, 47, 207, 173) action [Function(toggle_Minimap), Function(minimap_Travel, R_F1bathroom)]
-            hotspot (381, 48, 300, 171) action [Function(toggle_Minimap), Function(minimap_Travel, R_F1parentsRoom)]
-            hotspot (683, 96, 204, 266) action [Function(toggle_Minimap), Function(minimap_Travel, R_F1fransksRoom)]
+            at Transform(zoom=0.8)
+            ground "minimap.png"
+            hotspot (270, 469, 240, 463) action [Function(toggle_Minimap), Function(minimap_Travel, R_entryHallway)]
+            hotspot (516, 465, 618, 371) action [Function(toggle_Minimap), Function(minimap_Travel, R_livingRoom)]
+            hotspot (1129, 536, 342, 289) action [Function(toggle_Minimap), Function(minimap_Travel, R_kitchen)]
+            hotspot (1473, 543, 323, 444) action [Function(toggle_Minimap), Function(minimap_Travel, R_garage)]
+            hotspot (1136, 177, 673, 354) action [Function(toggle_Minimap), Function(minimap_Travel, R_garden)]
+            hotspot (260, 274, 612, 176) action [Function(toggle_Minimap), Function(minimap_Travel, R_F1hallway)]
+            hotspot (247, 60, 265, 218) action [Function(toggle_Minimap), Function(minimap_Travel, R_F1bathroom)]
+            hotspot (503, 67, 363, 211) action [Function(toggle_Minimap), Function(minimap_Travel, R_F1parentsRoom)]
+            hotspot (873, 115, 236, 347) action [Function(toggle_Minimap), Function(minimap_Travel, R_F1fransksRoom)]
 
 screen proofs_on_minimap() layer 'screens': # Ajoute toutes les preuves obtenues sur la minimap comme des boutons clickables
     zorder 13
