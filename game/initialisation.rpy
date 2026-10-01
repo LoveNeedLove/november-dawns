@@ -16,7 +16,9 @@ default R_garden = Room("garden", "backgrounds/garden.png")
 default R_F1hallway = Room("floor1Hallway", "backgrounds/floor_1_hallway.png")
 default R_F1bathroom = Room("upstairsBathroom", "backgrounds/upstairs_bathroom.png")
 default R_F1parentsRoom = Room("parentsRoom", "backgrounds/parents_room.png")
-default R_F1fransksRoom = Room("fransksRoom", "backgrounds/fransks_room.png")    
+default R_F1fransksRoom = Room("fransksRoom", "backgrounds/fransks_room.png")   
+
+default drHouse = House([R_livingRoom,R_entryHallway,R_kitchen,R_garage,R_F1hallway,R_F1bathroom,R_F1parentsRoom,R_F1fransksRoom])
 
 label initialisation:
 # Ajout de tous les liens entre toutes les Rooms (neighbors)

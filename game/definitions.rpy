@@ -16,7 +16,7 @@ init python:
             self.neighbors.remove(roomToRemove)
 
     class Convos():
-        def __init__(self, action, chara):
+        def __init__(self, chara,action):
             self.action = action #label vers lequel on doit jump
             self.chara = chara #image du perso associé à la convo
 
@@ -26,7 +26,7 @@ init python:
     class HotspotData:
         condition = None    # valeur de repli pour les objets créés avant l'ajout
 
-        def __init__(self, rect, action, condition=None):
+        def __init__(self,action, rect, condition=None):
             self.rect = rect            # (x, y, width, height)
             self.action = action        # label vers lequel on jump au clic
             self.condition = condition  # None, ou une chaîne, ex. "met_lisa"
@@ -109,3 +109,12 @@ init python:
             self.id = id
             self.name = name
             self.icon = icon
+
+    class House():
+        def __init__(self, rooms):
+            self.rooms = rooms
+        
+        def clearHouse(self):
+            for r in self.rooms:
+                r.convos = []
+                r.hotspots = []
