@@ -99,7 +99,7 @@ screen purple_light():
 label scene_lou_werewolf_discovery:
 
     $ drHouse.clearHouse()
-    show screen illus("images/illus/lou first transfo.png")
+    show screen illu("images/illus/lou first transfo.png")
 
     "..."
 
@@ -1580,7 +1580,7 @@ label scene_carmille_death:
 
     show carmille at dust_away
     hide screen purple_light
-    show screen illus("images/illus/carmille_death.png")
+    show screen illu("images/illus/carmille_death.png")
     with dissolve
     "Dust. It's like there's already nothing left of him. Just, dust."
     hide screen illus with dissolve
@@ -1792,7 +1792,7 @@ label scene_garden_smoke_break:
     c "Right here, on the wall."
     m "What the-"
 
-    show screen illus("images/illus/shed_message.png")
+    show screen illu("images/illus/shed_message.png")
     with vpunch
     "{b}THE WEIGHT OF YOUR SINS WILL RAIN UPON YOUR HEADS.{/b}"
 
@@ -2157,7 +2157,7 @@ label choice_hole_in_garden_success:
     p "They're broken Maj..."
     m "1... 2..."
 
-    show screen illus("images/illus/fransk_real_death.png") with dissolve
+    show screen illu("images/illus/fransk_real_death.png") with dissolve
     "She was right... performing CPR on a disembodied torso isn't going to save anyo- Isn't going to save- Isn't..."
     with vpunch
     "{b}*THUD*{/b}"
@@ -2733,7 +2733,7 @@ label choice_fransk_last_words_success:
     "{i}*tuggggg*{/i}"
     "I can't comprehend the situation."
     show lou at faint_fall
-    show screen illus("images/illus/lou_bookshelf.png")
+    show screen illu("images/illus/lou_bookshelf.png")
     with vpunch
     "{b}*CRASHHH*{/b}"
     "All I can see now is Cassie's free and..."
@@ -2757,7 +2757,7 @@ label choice_fransk_last_words_success:
     m "KID, QUICK!"
     "I pull with all of my might but..."
 
-    show screen illus("images/illus/kid_under_shelf_dead.png")
+    show screen illu("images/illus/kid_under_shelf_dead.png")
     with vpunch
     "{b}*SLAAAAAAAAAAAAAAAAAAAAAAAAAAM*{/b}"
     m "GRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH"
