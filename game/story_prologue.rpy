@@ -1280,13 +1280,16 @@ label prologue_part9_investigation_intro:
                                         "talk_lou_living_room",
                                         "hotspot_kitchen", 
                                         "hotspot_garage_garden",
-                                        "transition_to_bedroom",
-                                        "hotspot_bedroom_bed",
-                                        "hotspot_bedroom_window",
-                                        "talk_fransk_bedroom",
-                                        "talk_stheno_bedroom")
-                                        , "prologue_part10_searches_and_trial")
+                                        )
+                                        , "transition_to_bedroom")
     $ eventMgr.add_event(QE_part9)
+
+    # Adding Convos and Hotspot for the investigation
+    $ R_livingRoom.convos.append(Convo("lou","talk_lou_living_room"))
+    $ R_livingRoom.convos.append(Convo("stheno","talk_stheno_living_room"))
+    $ R_livingRoom.hotspots.append(HotspotData("hotspot_couch",(6, 544, 620, 412)))
+    $ R_kitchen.hotspots.append(HotspotData("hotspot_kitchen", (697, 381, 649, 516)))
+    $ R_kitchen.hotspots.append(HotspotData("hotspot_garage_garden", (1326, 394, 344, 394)))
 
     return
 
@@ -1311,7 +1314,6 @@ label talk_stheno_living_room:
     m "Thanks for the intel." 
     hide stheno
     return
-
 
 label talk_lou_living_room:
     show lou
@@ -1343,7 +1345,6 @@ label talk_lou_living_room:
 
     return
 
-
 label hotspot_kitchen:
     show carmille
     m "Hmm I wonder if the vape's around here." 
@@ -1358,7 +1359,6 @@ label hotspot_kitchen:
     hide carmille
     return
 
-
 label hotspot_garage_garden:
     show carmille
     m "Where does this lead?" 
@@ -1371,7 +1371,6 @@ label hotspot_garage_garden:
     hide carmille
     return
 
-
 label transition_to_bedroom:
     show lou
     m "Some of the info I got is interesting, but still no sign of the vape's whereabouts." 
@@ -1380,6 +1379,22 @@ label transition_to_bedroom:
     l "Just follow me back to the entrance hall, it's on the left, then up the stairs!" 
     m "Will do."
     hide lou
+
+    # Going upstairs, so adding a new Quick Event for floor 1 events
+    $ QE_part9_2 = QuickEvent("QE_part9_2", (
+                                        "hotspot_bedroom_bed",
+                                        "hotspot_bedroom_window",
+                                        "talk_fransk_bedroom",
+                                        "talk_stheno_bedroom")
+                                        , "prologue_part10_searches_and_trial")
+    $ eventMgr.add_event(QE_part9_2)
+
+    # Adding Convos and Hotspot for the upstairs investigation
+    $ R_F1fransksRoom.convos.append(Convo("stheno", "talk_stheno_bedroom"))
+    $ R_F1fransksRoom.convos.append(Convo("fransk","talk_fransk_bedroom"))
+    $ R_F1fransksRoom.hotspots.append(HotspotData("hotspot_bedroom_bed", (237, 517, 542, 277)))
+    $ R_F1fransksRoom.hotspots.append(HotspotData("hotspot_bedroom_window",(1603, 556, 332, 362)))
+
     return
 
 
@@ -1450,7 +1465,7 @@ label talk_stheno_bedroom:
 # --- PARTIE 10 : LE CONTRE-INTERROGATOIRE ET LE DÉNOUEMENT ---
 
 label prologue_part10_searches_and_trial:
-    
+
     show lou
     show stheno:
         xalign 0.25
