@@ -298,7 +298,7 @@ label scene_phones_missing_pani_faint:
     v "We have to figure out what happened."
     m "Right."
     $ eventMgr.add_event(QuickEvent("pani_faint",{"talk_carmille_investigation_pani","talk_stheno_investigation_pani", "talk_cassie_investigation_pani"},"cx_pani_poisoning"))
-    $ R_kitchen.convos.append(Convo("carmille","talk_carmille_investigation_pani")
+    $ R_kitchen.convos.append(Convo("carmille","talk_carmille_investigation_pani"))
 
     $ R_kitchen.convos.append(("stheno","talk_stheno_investigation_pani"))
 
@@ -759,7 +759,7 @@ label scene_fransk_first_murder:
 
     $ R_F1fransksRoom.hotspots.append(HotspotData("hotspot_investigation_closet",(1188, 273, 376, 491)))
 
-    $ R_F1fransksRoom.hotspots.append(HotspotData("hotspot_investigation_window_living", (1603, 556, 332, 362))))
+    $ R_F1fransksRoom.hotspots.append(HotspotData("hotspot_investigation_window_living", (1603, 556, 332, 362)))
 
     $ R_F1fransksRoom.hotspots.append(HotspotData("hotspot_investigation_window_garden",(820, 393, 150, 190)))
 
@@ -1535,11 +1535,11 @@ label scene_garden_smoke_break:
 
     $ eventMgr.add_event(QuickEvent("second_murder",{"hotspot_bookshelf_rope","hotspot_fatal_closet","hotspot_bloody_carpet_found","hotspot_black_cloth_recheck"}),"stheno_scream")
 
-    $ R_livingRoom.convos.append((HotspotData("hotspot_bookshelf_rope",(1311, 247, 618, 397)))
+    $ R_livingRoom.convos.append(HotspotData("hotspot_bookshelf_rope",(1311, 247, 618, 397)))
 
-    $ R_entryHall.convos.append((HotspotData(HotspotData("hotspot_fatal_closet",(280, 231, 391, 789)))
+    $ R_entryHall.convos.append(HotspotData("hotspot_fatal_closet",(280, 231, 391, 789)))
 
-    $ R_F1fransksRoom.hotspots.append(HotspotData("hotspot_bloody_carpet_found",(1188, 273, 376, 491))
+    $ R_F1fransksRoom.hotspots.append(HotspotData("hotspot_bloody_carpet_found",(1188, 273, 376, 491)))
 
     $ R_F1fransksRoom.hotspots.append(HotspotData("hotspot_black_cloth_recheck",(286, 489, 433, 194)))
     return
