@@ -9,12 +9,24 @@ label prologue_part1_arrival:
     $ drHouse.clearHouse()
 
     "I made it."
+    show screen illus("images/illu/intro 1.png") with dissolve
+    $ renpy.pause(1.3)
     "After many years, I finally made it." 
+    show screen illus("images/illu/intro 2.png") with dissolve
+    $ renpy.pause(1.3)
     "Made it out of there." 
+    show screen illus("images/illu/intro 3.png") with dissolve
+    $ renpy.pause(1.3)
     "There... Where is that?" 
+    show screen illus("images/illu/intro4.png") with dissolve
+    $ renpy.pause(1.3)
     "Where... am... I?" 
 
+    hide screen illus with dissolve
+    $ renpy.pause(1.2, hard=True)
+
     # [NOVEMBER DAWNS]
+    call show_game_title
 
     m "Hey, Fransk! Sorry for the voice message, I don't really like them myself but... I'm close by and carrying luggage so if you could pick me up that'd be really appreciated!" 
 
@@ -1637,6 +1649,7 @@ label prologue_part10_searches_and_trial:
     m "Let me prove it to you!" 
 
     # [FIGURE IT OUT - CROSS EXAMINATION 1]
+    call figure_it_out_anim
     $ current_cx = CrossExamination([
         Statement(s, "Lou's vape wasn't found in his jacket."),
         Statement(s, "It wasn't found in this whole ass house."),
@@ -1710,6 +1723,7 @@ label choice_cassie_success:
     v worried "Sorry Maj but I can't back you up on that one." 
 
     # [FIGURE IT OUT - CROSS EXAMINATION 2]
+    call figure_it_out_anim
     $ current_cx = CrossExamination([
         Statement(v, "Cassie was standing in the middle of the room."),
         Statement(v, "If she hid it around the bookshelf or couch area I definitely would've seen her."),
@@ -1858,6 +1872,7 @@ label choice_stheno_searched_success:
     f "MAJ, DON'T." 
 
     "And see..." 
+    show screen illus("images/illus/lou first transfo.png") with dissolve
 
     f "Don't... look..." 
 
