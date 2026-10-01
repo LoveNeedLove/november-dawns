@@ -527,9 +527,9 @@ label prologue_part6_cassie_breakdown:
     "{i}*scribble* *scribble* *scribble* *scribble* *scribble* *scribble*{/i}" 
 
     "In the living room sat a woman, sketching away at a sketchpad half her size." 
-    show carmille
+    show carmille worried
 
-    show fransk at right
+    show fransk serious at right
     f "Cassie. You're going kinda hard with your eraser, light strokes is what you want." 
 
     c worried "THIS NEEDS TO GOOOO." 
@@ -544,15 +544,15 @@ label prologue_part6_cassie_breakdown:
 
     hide fransk
     show lou at right
-    l "Hey Cass, why don't you take a rest and chill out with us." 
+    l panic "Hey Cass, why don't you take a rest and chill out with us." 
 
     c "I can't! I told you that I had an assignment for Monday." 
 
     l "Then work on it tomorrow, I've seen you cram! I'm sure you'll get it done in time." 
 
     c "N-No! I need a clean sketch, and I can't get it right, the physics don't make sense!" 
-    show cassie at left
-    show carmille
+    #show cassie at left
+    hide lou
 
     v side-eye "Maj... let's take a break in the garden. Cassie can be... rough to be around to say the least." 
 
@@ -570,6 +570,7 @@ label prologue_part6_cassie_breakdown:
     hide carmille
 
     m "Cassie, is that right?" 
+    show cassie
 
     c "..." 
 
@@ -579,11 +580,11 @@ label prologue_part6_cassie_breakdown:
 
     "It seems like my stupefaction broke through her stream of tears." 
 
-    c "What... *whimper* what is wrong!" 
+    c shocked "What... *whimper* what is wrong!?" 
 
     m "Your drawing... It's insanely good!" 
 
-    c shocked "What?" 
+    c worried "What?" 
 
     show pani at right
     p "Enough to make you scream? Show me that- WOOW." 
@@ -601,7 +602,7 @@ label prologue_part6_cassie_breakdown:
     c -shocked "The physics don't make sense..." 
 
     hide lou
-    show pani
+    show pani at right
     p "I don't know, it looks like a building to me..." 
 
     c "Even then, I just ripped a hole through it!" 
@@ -729,11 +730,12 @@ label prologue_part7_kitchen_cocktail:
 
     "I don't know her yet, but I'm all too familiar with that feeling. Helping others... but not being able to help yourself." 
 
+    show cassie
     c "Nearsighted, right?" 
 
     "!" 
 
-    m "That must be your first impression of me, right?" 
+    m "That must be your first impression of me?" 
     m "Sorry, you caught me off guard. I was genuinely wondering about that." 
 
     c "How so?" 
@@ -863,7 +865,6 @@ label prologue_part7_kitchen_cocktail:
 
     call travel_to(R_livingRoom, True)
 
-    show carmille at right with move
     show stheno at left
     s "The nerd helped you make it?" 
 
@@ -891,52 +892,67 @@ label prologue_part7_kitchen_cocktail:
 
 label prologue_part8_truth_or_dare:
 
-    show fransk
-    show stheno:
+    hide toggle_Minimap
+
+    show lou with moveinleft:
+        xalign -0.4
+        yalign 1.0
+    show fransk with moveinleft:
+        xalign 0.4
+        yalign 1.0
+    show stheno with move:
         xalign 0.1
         yalign 1.0
-    show lou:
-        xalign 0.25
+    show pani with moveinright:
+        xalign 1.1
         yalign 1.0
-    show pani:
-        xalign 0.75
+    show cassie with move:
+        xalign 0.7
         yalign 1.0
-    show cassie:
-        xalign 0.85
-        yalign 1.0
-    show carmille:
-        xalign 1.0
+    show carmille with moveinright:
+        xalign 1.4
         yalign 1.0
 
+    show fransk at hop
     f laughing "Hey! We're all gathered here!" 
 
     "It's true. Meeting so many people in one night might've been exhausting, but now that they're all gathered I can really tell that their relationship is really something special." 
 
     f "Who wants to play a fucking game!" 
 
+    show stheno at hop
     s "Oh hell yeah!" 
 
     l "Me! Me! Me!" 
 
+    show pani at hop
     p "As long as we can get wasteeeeed." 
 
+    show fransk at hop
     f -laughing "Pani, you're underage." 
 
+    show pani at hop
     p ragebaiting "What?! Wha-wha-what?!" 
     p "Mind you, my license says I'm well past 30." 
 
+    show lou at hop
     l "Dude isn't that your high school picture? Were you even allowed to drive a car then?" 
 
     p "..." 
 
+    show fransk at hop
     f "You know I'm fucking with you Pani, right?" 
 
+    show pani at hop
     p "Huh?!" 
 
+    show fransk at hop
     f "Dude how many times have we drunk together?" 
 
+    show stheno at hop
     s "Yeah, the new guy just made me a drink, and I'm barely 20." 
 
+    show pani at hop
     p -ragebaiting "So we're drinking?" 
 
     f "Uh-huh." 
@@ -947,6 +963,7 @@ label prologue_part8_truth_or_dare:
 
     "In a flash, Pani was standing on the table." 
 
+    show pani at hop
     p laughing "Let's fucking gooooooo!" 
 
     m "So, what are the rules?" 
@@ -962,9 +979,12 @@ label prologue_part8_truth_or_dare:
 
     "Fransk's little run to the garage was honestly stupid, but lighthearted enough to fill the room with warm and bright energy." 
 
-    show fransk with dissolve
+    show fransk with dissolve:
+        xalign 0.35
+        yalign 1.0
     f "Okay! We're playing truth or dare!" 
 
+    show lou at hop
     l laughing "Hell yeah!" 
 
     f -laughing "You know the rules, Maj?" 
@@ -973,22 +993,27 @@ label prologue_part8_truth_or_dare:
 
     f "Exactly, whoever's in the direction of the bottleneck has to either answer truthfully to any question chosen by the person opposite to them or complete an incredibly challenging dare!" 
 
+    show pani at hop
     p "And if you refuse you can just take a shot." 
 
+    show fransk at hop
     f "Ready?" 
 
     l -laughing "Wait- guys-" 
 
+    show fransk at hop
     f "Go!" 
 
     "Franks gives a somewhat strong impulse to the bottom, despite the dangerous precedent of the game my eyes are only drawn to the beauty of this spectacle." 
     "The way the remaining amount of liquid swirls inside of the bottle as it spins, the simple satisfaction that comes from the droplets that drip along the sides, the magnificent refraction of light that creates a mesmerising image at the bottom of the bottle." 
     "And before realising it, the show was over, and it pointed towards..." 
 
+    show pani at hop
     p ragebaiting "Pani! Seems like I get to give you a dare!" 
 
     "Cassie's face failed to hide her naughty intentions." 
 
+    show cassie at hop
     c "Pani! You get to-" 
 
     p -ragebaiting "Can I just take a shot?" 
@@ -997,56 +1022,72 @@ label prologue_part8_truth_or_dare:
 
     p "Yeah I don't wanna do something gross I just wanna drink." 
 
+    show lou at hop
     l "That... that's a huge design flaw!" 
     l "It's really obvious that this game lacked any kind of QA testing!" 
 
+    show cassie at hop
     c -shocked "Pani, let me finish my dare." 
 
     p "Sure bro, but I'm drinking." 
 
+    show cassie at hop
     c smiling "I dare you... to motorboat Lou's pecs..." 
 
+    show lou at hop
     l panic "The fuck!" 
 
     p "Yea not doing that-" 
 
+    show cassie at hop
     c "-and then take 3 shots!" 
 
     "Without a moment of hesitation Pani lunges at Lou's torso." 
 
+    show lou panic at hop
     l "H-Hey! What the fucking hell?!" 
 
+    show pani at trembling
     "{i}*brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr*{/i}" 
 
+    show lou at hop
     l "That- That's enough!" 
 
+    show pani at hop
     p "Hmph!" 
 
     "Pulling her head back at incredible speed Pani takes a quick moment to breathe." 
 
+    show pani at hop
     p ragebaiting "Goddamn Lou! You've got a great rack!" 
 
     l "Don't ever say that again." 
 
+    show pani at hop
     p "Now for the cherry on top!" 
 
     "I thought the shots were meant to be some kind of incentive, but that choice of words makes me think that she didn't hate doing that as much as she pretended to." 
 
+    show pani at hop
     p "And one!" 
 
     s "Ugh I can smell the vodka from here." 
 
+    show pani at hop
     p "And two!" 
 
     f "Yo take y-" 
 
+    show pani at hop
     p "And three!" 
 
     l "How did she down them so fucking fast!" 
 
-    p angry "YEEEEEE-HAW! Who's turn is iiiiiittttttttttt!" 
+    p angry "YEEEEEE-HAW! Who's turn is iiiiiittttttttttt!"
+    show pani angry at jumping
 
     "Without even consulting with us Pani just slaps the bottle's neck, making it whirl so fast that it is almost impossible to tell where it could land." 
+    show pani at neutral
 
     m "Wow... this might spin for a little while..." 
 
@@ -1072,12 +1113,14 @@ label prologue_part8_truth_or_dare:
 
     m "Let's see..." 
 
+    show fransk serious at hop
     f serious "MAJ WAIT-" 
 
     "I didn't notice it before but it seems like that gargantuan piece of furniture started wobbling in horrifying fashion." 
 
     m "Wowowo WHAT THE FUCK?!" 
 
+    show fransk serious at hop
     f "GET OUT OF HERE!" 
 
     "Fransk grasps the side of the shelf in a bear hug clench, helping slowly steady the bookshelf as I kneel in front, powerless. The struggle last for a small moment before Franks finally releases his grasp." 
@@ -1096,7 +1139,7 @@ label prologue_part8_truth_or_dare:
 
     "My eyes focus on one specific spine that I take great pleasure in pulling out." 
 
-    f "Find something you like?" 
+    f -serious "Find something you like?" 
 
     m "Yup, hey Stheno. This is my pick!" 
 
@@ -1137,12 +1180,16 @@ label prologue_part8_truth_or_dare:
 
     "{i}*whistle*{/i}" 
 
+    show lou at hop
     l "Go Maj!" 
 
+    show carmille smiling at hop
     v smiling "That was beautiful!" 
 
+    show cassie smiling at hop
     c smiling "Yeah!" 
 
+    show lou laughing at hop
     l laughing "Whoop whoop!" 
 
     "As they start to applaud, my eyes can't help but remain stuck on Sthen's glasses, until she leans forwards to pull out a liquor flask, briefly allowing me to look at her close eyes." 
@@ -1179,6 +1226,8 @@ label prologue_part8_truth_or_dare:
 label prologue_part9_investigation_intro:
 
     "{i}*ruffle* *ruffle* *ruffle* *ruffle*{/i}" 
+
+    show stheno
 
     l panic "Uuuuh- hey guys?" 
 
