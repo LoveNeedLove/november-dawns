@@ -44,17 +44,17 @@ screen livre(): # Bouton basique pour récupérer un objet dans son inventaire
     imagebutton:
         xpos 90
         ypos 450
-        idle "Gray_book.png"
+        idle "map_icon.png"
         at custom_zoom
         action [Hide("coucou"),
-                Function(createAndAddProofToInventory, "le livre", "cest un beau livre", "Gray_book.png", "Salon", 10, 10),
+                Function(createAndAddProofToInventory, "le livre", "cest un beau livre", "map_icon.png", "Salon", 10, 10),
                 Call("recuperer_item", "livregris")]
 
 transform custom_zoom:
     zoom 0.35
 
 transform main_buttons_zoom:
-    zoom 0.5
+    zoom 0.4
 
 screen inventory: # Montre tous les objets de l'inventaire
     frame:
@@ -70,7 +70,7 @@ screen inventory: # Montre tous les objets de l'inventaire
 screen inventory_toggle: # Ouvre et ferme l'inventaire
     imagebutton:
         xalign 1.0
-        idle "Gray_book.png"
+        idle "GUI/map_icon.png"
         at main_buttons_zoom
         action Function(toggle_Inventory)
 
@@ -78,7 +78,7 @@ screen minimap_toggle: # Ouvre et ferme la minimap
     imagebutton:
         xalign 1.0
         ypos 200
-        idle "Gray_book.png"
+        idle "GUI/map_icon.png"
         at main_buttons_zoom
         action Function(toggle_Minimap)
 
@@ -99,8 +99,8 @@ screen minimap() layer 'screens': # Montre la minimap
             hotspot (381, 48, 300, 171) action [Function(toggle_Minimap), Function(minimap_Travel, R_F1parentsRoom)]
             hotspot (683, 96, 204, 266) action [Function(toggle_Minimap), Function(minimap_Travel, R_F1fransksRoom)]
 
-screen proofs_on_minimap() layer 'front_sprites': # Ajoute toutes les preuves obtenues sur la minimap comme des boutons clickables
-    zorder 3
+screen proofs_on_minimap() layer 'screens': # Ajoute toutes les preuves obtenues sur la minimap comme des boutons clickables
+    zorder 13
     for proof in store.inventory:
         imagebutton:
             idle proof.icon
@@ -110,8 +110,8 @@ screen proofs_on_minimap() layer 'front_sprites': # Ajoute toutes les preuves ob
             ypos proof.posY
             mouse "click"
 
-screen proof_info(proof) layer 'front_sprites':
-    zorder 4
+screen proof_info(proof) layer 'screens':
+    zorder 14
     if proof is not None:
         frame:
             xalign 1.0

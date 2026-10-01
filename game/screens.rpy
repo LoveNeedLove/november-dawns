@@ -313,7 +313,8 @@ screen room_screen(at_anim=None, all_screen=False) layer "backgrounds":
 
             for h in current_room.hotspots:
                 if h.is_active():
-                    hotspot h.rect action Jump(h.action)
+                    $ rx, ry, rw, rh = [int(round(v * zoom)) for v in h.rect]
+                    hotspot (rx, ry, rw, rh) action Jump(h.action)
 
 ## Make the namebox available for styling through the Character object.
 init python:

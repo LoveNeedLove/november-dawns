@@ -1304,6 +1304,9 @@ label hotspot_couch:
     l "So?" 
     m "We have to look someplace else."
     hide lou
+    
+    $ eventMgr.unlock("hotspot_couch")
+
     return
 
 label talk_stheno_living_room:
@@ -1315,6 +1318,9 @@ label talk_stheno_living_room:
     "It makes sense, multiple people have even sat by it ever since I arrived." 
     m "Thanks for the intel." 
     hide stheno
+
+    $ eventMgr.unlock("talk_stheno_living_room")
+
     return
 
 label talk_lou_living_room:
@@ -1345,6 +1351,8 @@ label talk_lou_living_room:
                             "vape_liquid")
     $ addProofToInventory(vape_liquid)
     $ renpy.notify("Vape added to evidence !")
+    
+    $ eventMgr.unlock("talk_lou_living_room")
 
     return
 
@@ -1360,6 +1368,9 @@ label hotspot_kitchen:
     v "Yup, Franks was obviously here first but I really can't remember how long it took for each of us to come and get our drink." 
     m "That's interesting to know."
     hide carmille
+    
+    $ eventMgr.unlock("hotspot_kitchen")
+
     return
 
 label hotspot_garage_garden:
@@ -1372,6 +1383,8 @@ label hotspot_garage_garden:
     v "So yeah, long story short, none of us would dare go there alone, not even Lou." 
     m "I'll trust you on that." 
     hide carmille
+    
+    $ eventMgr.unlock("hotspot_garage_garden")
     return
 
 label transition_to_bedroom:
@@ -1393,8 +1406,8 @@ label transition_to_bedroom:
     $ eventMgr.add_event(QE_part9_2)
 
     # Adding Convos and Hotspot for the upstairs investigation
-    $ R_F1fransksRoom.convos.append(Convo("stheno", "talk_stheno_bedroom"))
-    $ R_F1fransksRoom.convos.append(Convo("fransk","talk_fransk_bedroom"))
+    $ R_F1fransksRoom.convos.append(Convos("stheno", "talk_stheno_bedroom"))
+    $ R_F1fransksRoom.convos.append(Convos("fransk","talk_fransk_bedroom"))
     $ R_F1fransksRoom.hotspots.append(HotspotData("hotspot_bedroom_bed", (237, 517, 542, 277)))
     $ R_F1fransksRoom.hotspots.append(HotspotData("hotspot_bedroom_window",(1603, 556, 332, 362)))
 
@@ -1406,6 +1419,8 @@ label hotspot_bedroom_bed:
     m "No vape here either..." 
     l "Yeah, if it ain't here then we can safely assume that it was in my pocket." 
     hide lou
+    
+    $ eventMgr.unlock("hotspot_bedroom_bed")
     return
 
 
@@ -1433,6 +1448,8 @@ label hotspot_bedroom_window:
     $ renpy.notify("Living Room Window added to evidence !")
     hide fransk
 
+    $ eventMgr.unlock("hotspot_bedroom_window")
+
     return
 
 
@@ -1451,6 +1468,8 @@ label talk_fransk_bedroom:
     l panic "I CAN'T I'M PEE SHY."
     hide fransk
     hide lou
+    
+    $ eventMgr.unlock("talk_fransk_bedroom")
     return
 
 
@@ -1463,6 +1482,8 @@ label talk_stheno_bedroom:
     s "You have to be a huge moron for people to fuck with you that often." 
     "So it's entirely possible that this is a recurring prank."
     hide stheno 
+    
+    $ eventMgr.unlock("talk_stheno_bedroom")
     return
 
 
@@ -1547,7 +1568,7 @@ label prologue_part10_searches_and_trial:
     s "I'll stay here to finish the search." 
 
     hide stheno
-    $ travel_to(R_entryHallway, True)
+    call travel_to(R_entryHallway, True)
     show carmille:
         xalign 0.2
         yalign 1.0
