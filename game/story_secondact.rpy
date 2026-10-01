@@ -160,7 +160,8 @@ label scene_lou_werewolf_discovery:
     "Lou... is..."
     
     $ R_livingRoom.cutscene = "scene_living_room_return"
-    call travel_to(R_livingRoom)
+    $ R_livingRoom.image = "living_room_2.png"
+    call travel_to(R_livingRoom) from _call_travel_to_5
     return
 
 
@@ -206,7 +207,7 @@ label scene_living_room_return:
     "Spending time with people sure is nice, but I can't help but shake that image of Lou out of my mind."
     "Those eyes..."
 
-    call travel_to(R_kitchen,in_dialogue = True)
+    call travel_to(R_kitchen,in_dialogue = True) from _call_travel_to_6
     show stheno angry at hop
     s "You're gonna mix my drink forever or what!"
     m "!"
@@ -223,7 +224,7 @@ label scene_living_room_return:
     p "Just go before me bro, you're acting weird as hell lmaooo."
     m "... yeah thanks."
     hide pani
-    call travel_to(R_entryHallway,in_dialogue = True)
+    call travel_to(R_entryHallway,in_dialogue = True) from _call_travel_to_7
     show carmille with dissolve
     v "Going in?"
     m "Yeah..."
@@ -232,7 +233,7 @@ label scene_living_room_return:
     hide carmille with dissolve
 
     "{i}*shut!*{/i}"
-    call travel_to(R_F1bathroom,in_dialogue = True, trans_in=fade)
+    call travel_to(R_F1bathroom,in_dialogue = True, trans_in=fade) from _call_travel_to_8
 
     "When life's too much to bear... pissing is always here to give you a break... break..."
     "..."
@@ -243,7 +244,7 @@ label scene_living_room_return:
 
     "{i}*washhhhhhhhhh* *close!*{/i}"
     "{i}*open*{/i}"
-    call travel_to(  R_entryHallway,in_dialogue = True)
+    call travel_to(  R_entryHallway,in_dialogue = True) from _call_travel_to_9
     show pani with vpunch
     m "Ah! Pani!"
     show pani at hop_bounce
@@ -255,7 +256,7 @@ label scene_living_room_return:
     
 
     "...I feel bad for taking her turn. Now to the garden..."
-    call travel_to(R_garden,in_dialogue = True)
+    call travel_to(R_garden,in_dialogue = True) from _call_travel_to_10
     m "Huh, this looks nice!"
     v "Hey Maj! Over here!"
     show carmille
@@ -402,7 +403,7 @@ label scene_phones_missing_pani_faint:
     p "Guys..."
     v "Maybe there's another basket just like it? Then it could be in the kitchen."
     s "Kitchen? Got it."
-    call travel_to( R_kitchen,in_dialogue = True)
+    call travel_to( R_kitchen,in_dialogue = True) from _call_travel_to_11
     s "{i}*rummage rummage rummage*{/i}"
     v "Any signs?"
     show stheno at hop
@@ -501,7 +502,7 @@ label cx_pani_poisoning:
     m "Excuse me?"
     s "You're the only one that could've done it!"
 
-    call figure_it_out_anim
+    call figure_it_out_anim from _call_figure_it_out_anim_2
     $ current_cx = CrossExamination([
         Statement(s, "Pani's our best friend, you're the only one that could've done it."),
         Statement(s, "You probably drugged her before she went to the bathroom.",
@@ -547,7 +548,7 @@ label cx_pani_objection_success:
         "Cassie",
         "None of them"],
         3
-    )
+    ) from _call_menu_choice_loop_3
 
 
 
@@ -596,7 +597,7 @@ label choice_none_of_them_success:
         "Pani's Weight",
         "Time for the medication to take effect"],
         2
-    )
+    ) from _call_menu_choice_loop_4
 
 
 label choice_pani_weight_success:
@@ -841,7 +842,8 @@ label scene_fransk_first_murder:
     hide lou with dissolve
 
     "Fransk told me he needed to rest, I have no choice but to wake him up now."
-    call travel_to( R_F1fransksRoom, in_dialogue = True)
+    $ R_F1fransksRoom.image = "backgrounds/fransks_room_murder_1.png"
+    call travel_to( R_F1fransksRoom, in_dialogue = True) from _call_travel_to_12
 
     m "Fransk you have to know abou-!"
 
@@ -849,7 +851,7 @@ label scene_fransk_first_murder:
 
     with vpunch
     "{b}AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA!{/b}"
-    call travel_to( R_entryHallway,in_dialogue = True)
+    call travel_to( R_entryHallway,in_dialogue = True) from _call_travel_to_13
     show cassie at enter_from_left(0.15)
     c "Maj?"
     m "Guys! GUYS!"
@@ -890,6 +892,10 @@ label scene_fransk_first_murder:
     c "Can't remember his mom's birthday?"
     l "When did he get that bouquet?"
     "How... how... how... did I end up here again..."
+
+    $ R_livingRoom.image = "living_room_1.png"
+    $ R_F1fransksRoom.image = "backgrounds/fransks_room_murder_2.png"
+    call travel_to( R_F1fransksRoom, in_dialogue = True) from _call_travel_to_12
 
     show carmille at enter_from_left(0.35)
     v "Maj! It took a while but I have some birthday dates!"
@@ -932,7 +938,7 @@ label scene_fransk_first_murder:
     s "...okay?"
     l "Now let's check on Fransk!"
     v "He's right... there's no time to lose."
-    call travel_to( R_F1hallway, in_dialogue = True)
+    call travel_to( R_F1hallway, in_dialogue = True) from _call_travel_to_14
 
     "You're not strong enough. You can't open this door. What waits beyond. Is stronger than us."
     "Shut-up... Stop following me..."
@@ -944,7 +950,7 @@ label scene_fransk_first_murder:
     m "SHUT UP!"
 
     "In one fell swing. I open the door."
-    call travel_to(R_F1fransksRoom,in_dialogue = True)
+    call travel_to(R_F1fransksRoom,in_dialogue = True) from _call_travel_to_15
 
     v "!"
     show lou at trembling(8, 0.05)
@@ -993,7 +999,7 @@ label scene_confronting_cassie_ghost:
 
     m "Let's step out for a bit, I've looked at everything I can..."
     l "Yeah, good idea."
-    call travel_to( R_F1hallway,in_dialogue = True)
+    call travel_to( R_F1hallway,in_dialogue = True) from _call_travel_to_16
     show lou:
         xalign 0.75 yalign 1.0
     with dissolve
@@ -1049,7 +1055,7 @@ label scene_confronting_cassie_ghost:
         "She's hemophobic",
         "She's homophobic"],
         0
-    )
+    ) from _call_menu_choice_loop_5
 
 
 label choice_cassie_cant_enter_success:
@@ -1064,7 +1070,7 @@ label choice_cassie_cant_enter_success:
     c "..."
     m "The reason you can't enter is because of..."
 
-    call force_present_proof("dreamcatchers")
+    call force_present_proof("dreamcatchers") from _call_force_present_proof_1
     jump choice_dreamcatchers_success
 
 label choice_dreamcatchers_success:
@@ -1148,7 +1154,7 @@ label choice_dreamcatchers_success:
     hide lou with dissolve
     hide cassie with dissolve
     $ R_livingRoom.cutscene = "cx_murder_scent_investigation"
-    call travel_to( R_F1hallway)
+    call travel_to( R_F1hallway) from _call_travel_to_17
 
     return
 
@@ -1171,7 +1177,7 @@ label cx_murder_scent_investigation:
     m "I want to hear your theories, if we can reach a consensus then we might find the murderer."
     "I have to keep their potential abilities in mind. Stheno and Carmille are still human, but considering the fact that 3 of them have lied already then I can't be too sure."
 
-    call figure_it_out_anim
+    call figure_it_out_anim from _call_figure_it_out_anim_3
     $ current_cx = CrossExamination([
         Statement(v, "Fransk was probably murdered during one of his naps."),
         Statement(l, "The murderer is potentially an outsider."),
@@ -1210,7 +1216,7 @@ label cx_smell_order_success:
         "The grassy guy",
         "Lou's mistake"],
         1
-    )
+    ) from _call_menu_choice_loop_6
 
 
 label choice_the_murderer_stairs_success:
@@ -1226,7 +1232,7 @@ label choice_the_murderer_stairs_success:
 
     "I must have some proof laying around. Let's think about it."
 
-    call force_present_proof("garden_window")
+    call force_present_proof("garden_window") from _call_force_present_proof_2
     jump choice_garden_window_success
 
 
@@ -1262,7 +1268,7 @@ label choice_garden_window_success:
         "A secret passageway",
         "Using a special ability"],
         0
-    )
+    ) from _call_menu_choice_loop_7
 
 
 label choice_stairs_again_success:
@@ -1273,7 +1279,7 @@ label choice_stairs_again_success:
 
     "Is there a way to hide your smell from Lou's snout?"
 
-    call force_present_proof("lous_jacket")
+    call force_present_proof("lous_jacket") from _call_force_present_proof_3
     jump choice_lous_jacket_success
 
 
@@ -1349,7 +1355,7 @@ label choice_lous_jacket_success:
         "Lou",
         "Cassie"],
         1
-    )
+    ) from _call_menu_choice_loop_8
 
 
 label choice_carmille_culprit_success:
@@ -1360,7 +1366,7 @@ label choice_carmille_culprit_success:
     s "You're forgetting something! Carmille was in the living room! With no access whatsoever to Fransk's room!"
     m "I'd beg to differ, this qualifies as a passageway!"
 
-    call force_present_proof("living_room_window")
+    call force_present_proof("living_room_window") from _call_force_present_proof_4
     jump choice_window_living_room_carmille_success
 
 
@@ -1429,7 +1435,7 @@ label choice_window_living_room_carmille_success:
         "Echolocation",
         "Your feet"],
         0
-    )
+    ) from _call_menu_choice_loop_9
 
 label choice_bat_mouth_success:
 
@@ -1448,7 +1454,7 @@ label choice_bat_mouth_success:
     v "... Maj..."
     m "On it. The proof that implicates Carmille is:"
 
-    call force_present_proof("living_room_window")
+    call force_present_proof("living_room_window") from _call_force_present_proof_5
     jump choice_window_proof_carmille_success
 
 
@@ -1466,7 +1472,7 @@ label choice_window_proof_carmille_success:
         "Faulty Handle",
         "It stayed open"],
         3
-    )
+    ) from _call_menu_choice_loop_10
 
 
 label choice_window_stayed_open_success:
@@ -1541,7 +1547,7 @@ label scene_carmille_death:
     s "DON'T GET UNDER THE COUCH DUMBASS, LIGHT CAN GET DOWN THERE!"
     show cassie at hop
     c "Carm! Try to go out!"
-    call travel_to( R_entryHallway,in_dialogue = True)
+    call travel_to( R_entryHallway,in_dialogue = True) from _call_travel_to_18
     "{i}*rattle rattle rattle*{/i}"
     show stheno at hop
     s "Who locked the front fucking door?!"
@@ -1829,6 +1835,8 @@ label scene_garden_smoke_break:
     "Is that kid involved in Fransk's murder?"
     m "We have to investigate again, Carm mentioned that he hid something behind the closet. I also want to figure out why the front doors wouldn't open."
 
+    $ R_livingRoom.image = "living_room_1.png"
+
     $ eventMgr.add_event(QuickEvent("second_murder",{"hotspot_bookshelf_rope","hotspot_fatal_closet","hotspot_bloody_carpet_found","hotspot_black_cloth_recheck"},"stheno_scream"))
     
     #After carmille's death
@@ -1947,7 +1955,7 @@ label fin_garage_investigation:
 
 label cx_kid_interrogation:
 
-    call force_present_proof("tied_up_shelf")
+    call force_present_proof("tied_up_shelf") from _call_force_present_proof_6
     jump choice_kid_shelf_trick_success
 
 
@@ -1965,7 +1973,7 @@ label choice_kid_shelf_trick_success:
     l "Using rope to mislead us? That's-"
     m "A lie. The rope was always part of your plan."
 
-    call force_present_proof("shed_message")
+    call force_present_proof("shed_message") from _call_force_present_proof_7
     jump choice_shed_message_success
 
 
@@ -1981,12 +1989,13 @@ label choice_shed_message_success:
     k "! *whistleeee*"
     m "No need to tell me. I know."
 
-    call force_present_proof("garden_hole")
+    call force_present_proof("garden_hole") from _call_force_present_proof_8
     jump choice_hole_in_garden_success
 
 
 label choice_hole_in_garden_success:
-
+    $ R_F1fransksRoom.image = "backgrounds/fransks_room_murder_3.png"
+    call travel_to( R_F1fransksRoom, in_dialogue = True) from _call_travel_to_12
     m "You found the hole in the fence, right?"
     show kid at hop
     k "! Sherlock Holmes?!"
@@ -2022,7 +2031,7 @@ label choice_hole_in_garden_success:
 
     s "GET BACK HERE LITTLE FUCKER!"
     l "He's already in the hall! Stheno and Cassie must've failed to catch him..."
-    call travel_to( R_entryHallway,in_dialogue = True)
+    call travel_to( R_entryHallway,in_dialogue = True) from _call_travel_to_19
     show stheno at enter_from_left(0.1)
     s "I'M GONNA GET YOUR LITTLE-"
     l "Hey Sthen, is everything okay?"
@@ -2118,7 +2127,7 @@ label choice_hole_in_garden_success:
     m "! This sound!"
     "MAY THE SPARK OF SIN PUT AN END TO YOURS"
     m "Fransk! Wait"
-    call travel_to( R_F1hallway,in_dialogue = True)
+    call travel_to( R_F1hallway,in_dialogue = True) from _call_travel_to_20
 
     # [Entry hall cinématique]
     m "DON'T OPEN THE DOOR"
@@ -2223,7 +2232,7 @@ label cx_kid_final_testimony:
     m "?"
     s "Just try."
 
-    call figure_it_out_anim
+    call figure_it_out_anim from _call_figure_it_out_anim_4
     $ current_cx = CrossExamination([
         Statement(k, "BLBLBLBLBLBLBLBL"),
         Statement(k, "I won't talk to you meanies!"),
@@ -2311,7 +2320,7 @@ label cx_kid_candy_success:
     m "I see, you're lying. We only have to check this piece of evidence to make it obvious."
 
     
-    call force_present_proof("bloody_carpet")
+    call force_present_proof("bloody_carpet") from _call_force_present_proof_9
     jump choice_kid_bloody_carpet_success
 
 
@@ -2348,7 +2357,7 @@ label choice_kid_bloody_carpet_success:
     k "What?!"
     m "Please, tell us what you know."
 
-    call figure_it_out_anim
+    call figure_it_out_anim from _call_figure_it_out_anim_5
     $ current_cx = CrossExamination([
         Statement(k, "I waited for everyone to get out of the kitchen and into the garden."),
         Statement(k, "When the last girl went to the bathroom, I bolted and reached the stairs."),
@@ -2471,7 +2480,7 @@ label scene_final_confrontation_cassie:
         "To look mysterious",
         "She resents being human"],
         1
-    )
+    ) from _call_menu_choice_loop_11
 
 
 label choice_cassie_alibi_motive_success:
@@ -2481,7 +2490,7 @@ label choice_cassie_alibi_motive_success:
 
     "No reason in keeping this going, let's just spell it out for them."
 
-    call force_present_proof("dreamcatchers")
+    call force_present_proof("dreamcatchers") from _call_force_present_proof_10
     jump choice_final_dreamcatchers_success
 
 
@@ -2505,7 +2514,7 @@ label choice_final_dreamcatchers_success:
     m "Sure, but he could've been attacked without even knowing."
     l "How?"
 
-    call force_present_proof("blood_pouch")
+    call force_present_proof("blood_pouch") from _call_force_present_proof_11
     jump choice_blood_pouch_attack_success
 
 
@@ -2515,7 +2524,7 @@ label choice_blood_pouch_attack_success:
     c "And how exactly would that have led to his stabbing?"
     m "It all makes sense when you consider what was injected into the pouch..."
 
-    call force_present_proof("nyctozepam")
+    call force_present_proof("nyctozepam") from _call_force_present_proof_12
     jump choice_nyctozepam_pouch_success
 
 
@@ -2537,7 +2546,7 @@ label choice_nyctozepam_pouch_success:
     c "Right, 'cause I totally could've done it with my single set of clothes, and the footprints at the scene clearly resembled mine..."
     m "Sarcasm, at this time? You better not underestimate us."
 
-    call force_present_proof("black_robe")
+    call force_present_proof("black_robe") from _call_force_present_proof_13
     jump choice_black_robe_proof_success
 
 
@@ -2572,7 +2581,7 @@ label choice_black_robe_proof_success:
     m "I know how they were done."
     c "Really? Please tell us."
 
-    call force_present_proof("smart_home_remote")
+    call force_present_proof("smart_home_remote") from _call_force_present_proof_14
     jump choice_remote_tag_reveal_success
 
 
@@ -2616,7 +2625,7 @@ label choice_remote_tag_reveal_success:
         "The remote was glitching",
         "Someone else did it"],
         0
-    )
+    ) from _call_menu_choice_loop_12
 
 
 label choice_something_went_wrong_success:
@@ -2634,7 +2643,7 @@ label choice_something_went_wrong_success:
         "The garlic",
         "The announcements"],
         3
-    )
+    ) from _call_menu_choice_loop_13
 
 
 label choice_the_announcements_success:
@@ -2662,7 +2671,7 @@ label choice_the_announcements_success:
         "The living room window",
         "Fransk's last words"],
         3
-    )
+    ) from _call_menu_choice_loop_14
 
 label choice_fransk_last_words_success:
 

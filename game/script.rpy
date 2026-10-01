@@ -35,7 +35,7 @@ label travel_to(destination, in_dialogue=False, trans_duration=0.4, trans_in=Non
     if current_room.cutscene is not None:
         $ cutscene_to_play = current_room.cutscene
         $ current_room.cutscene = None
-        call expression cutscene_to_play
+        call expression cutscene_to_play from _call_expression
 
     if in_dialogue:
         return
@@ -72,7 +72,7 @@ label room_loop:
 
 
 label start:
-    call initialisation
+    call initialisation from _call_initialisation
 
     $ current_room = R_livingRoom
     jump prologue_part1_arrival

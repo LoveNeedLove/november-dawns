@@ -26,7 +26,7 @@ label prologue_part1_arrival:
     $ renpy.pause(1.2, hard=True)
 
     # [NOVEMBER DAWNS]
-    call show_game_title
+    call show_game_title from _call_show_game_title
 
     m "Hey, Fransk! Sorry for the voice message, I don't really like them myself but... I'm close by and carrying luggage so if you could pick me up that'd be really appreciated!" 
 
@@ -109,7 +109,7 @@ label prologue_part1_arrival:
 
 
     $ R_entryHallway.cutscene = "prologue_part2_entrance_stheno"
-    call travel_to(R_entryHallway)
+    call travel_to(R_entryHallway) from _call_travel_to
     
 
     return
@@ -209,7 +209,7 @@ label prologue_part2_entrance_stheno:
     s "Welcome to Rose Springs, Wyoming" 
     s "Where dreams come to die !" 
 
-    call prologue_part3_carmille
+    call prologue_part3_carmille from _call_prologue_part3_carmille
 
     return
 
@@ -517,7 +517,7 @@ label prologue_part5_trick_or_treater:
     hide fransk
 
     $ R_livingRoom.cutscene = "prologue_part6_cassie_breakdown"
-    call travel_to(R_livingRoom)
+    call travel_to(R_livingRoom) from _call_travel_to_1
 
     return
 
@@ -877,7 +877,7 @@ label prologue_part7_kitchen_cocktail:
 
     c "Stheno! I have your drink!" 
 
-    call travel_to(R_livingRoom, True)
+    call travel_to(R_livingRoom, True) from _call_travel_to_2
 
     show stheno at left
     s "The nerd helped you make it?" 
@@ -897,7 +897,7 @@ label prologue_part7_kitchen_cocktail:
 
     "I should've expected that." 
 
-    call prologue_part8_truth_or_dare
+    call prologue_part8_truth_or_dare from _call_prologue_part8_truth_or_dare
 
     return
 
@@ -1230,7 +1230,7 @@ label prologue_part8_truth_or_dare:
 
     "We interlock our arms to take the shots, almost like a viking ritual." 
 
-    call prologue_part9_investigation_intro
+    call prologue_part9_investigation_intro from _call_prologue_part9_investigation_intro
 
     return
 
@@ -1580,7 +1580,7 @@ label prologue_part10_searches_and_trial:
     s "I'll stay here to finish the search." 
 
     hide stheno
-    call travel_to(R_entryHallway, True)
+    call travel_to(R_entryHallway, True) from _call_travel_to_3
     show carmille:
         xalign 0.1
         yalign 1.0
@@ -1649,7 +1649,7 @@ label prologue_part10_searches_and_trial:
     m "Let me prove it to you!" 
 
     # [FIGURE IT OUT - CROSS EXAMINATION 1]
-    call figure_it_out_anim
+    call figure_it_out_anim from _call_figure_it_out_anim
     $ current_cx = CrossExamination([
         Statement(s, "Lou's vape wasn't found in his jacket."),
         Statement(s, "It wasn't found in this whole ass house."),
@@ -1689,7 +1689,7 @@ label cx1_objection_success:
         "On someone"
         ],
         2
-    )
+    ) from _call_menu_choice_loop
 
 
 label choice_on_someone_success:
@@ -1712,7 +1712,7 @@ label choice_on_someone_success:
         "Pani",
         "Fransk"],
         0
-    )
+    ) from _call_menu_choice_loop_1
 
 
 label choice_cassie_success:
@@ -1723,7 +1723,7 @@ label choice_cassie_success:
     v worried "Sorry Maj but I can't back you up on that one." 
 
     # [FIGURE IT OUT - CROSS EXAMINATION 2]
-    call figure_it_out_anim
+    call figure_it_out_anim from _call_figure_it_out_anim_1
     $ current_cx = CrossExamination([
         Statement(v, "Cassie was standing in the middle of the room."),
         Statement(v, "If she hid it around the bookshelf or couch area I definitely would've seen her."),
@@ -1776,7 +1776,7 @@ label cx2_objection_success:
         "Stheno searched upstairs",
         "Fransk hid it again"],
         0
-    )
+    ) from _call_menu_choice_loop_2
 
 
 label choice_stheno_searched_success:
@@ -1865,7 +1865,7 @@ label choice_stheno_searched_success:
     hide cassie
     hide stheno
 
-    call travel_to(R_F1hallway, True)
+    call travel_to(R_F1hallway, True) from _call_travel_to_4
     
 
     m "Lou? Fransk is coming! Do you need anything?" 

@@ -47,7 +47,7 @@ label after_proof_presented:
     else:
         # Échec : réplique d'erreur puis on redemande
         "No, that doesn't prove anything right now."
-        call force_present_proof(store.expected_proof_id)
+        call force_present_proof(store.expected_proof_id) from _call_force_present_proof
 
 # Pour avoir des choix de type "menu" qui bouclent. Attention, bonne_reponse est un index qui commence à 0
 label menu_choice_loop(question, choice, good_answer, fail_text="No, this doesn't make sense. I have to think again."):
