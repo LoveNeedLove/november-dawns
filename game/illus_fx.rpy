@@ -6,7 +6,7 @@
 # appels  show screen illus("images/illus/xxx.png")  à sa signature.
 # ==============================================================================
 
-## Dossier supposé des illustrations : game/images/illu/
+## Dossier supposé des illustrations : game/images/illus/
 ## Hauteur de la zone d'illustration : tout l'écran par défaut.
 ## Mets DLG_TOP pour que l'illustration s'arrête au-dessus du cadre de dialogue.
 define ILLUS_H = config.screen_height
@@ -41,12 +41,15 @@ screen illus(img, bg="#000000"):
 # ------------------------------------------------------------------------------
 # CARTE TITRE DU JEU
 # ------------------------------------------------------------------------------
+## Séquence complète (entrée, maintien, sortie) gérée par l'ATL lui-même :
+## l'écran est invisible à la fin même si l'événement "hide" n'est jamais reçu.
+define TITLE_DURATION = 4.2
+
 transform card_fade:
-    on show:
-        alpha 0.0
-        linear 0.9 alpha 1.0
-    on hide:
-        linear 0.9 alpha 0.0
+    alpha 0.0
+    linear 0.9 alpha 1.0
+    pause TITLE_DURATION - 1.8
+    linear 0.9 alpha 0.0
 
 transform title_rise:
     alpha 0.0
@@ -88,10 +91,13 @@ screen title_card(title="NOVEMBER DAWNS"):
                 xalign 0.5
                 at title_line
 
+    ## Filet de sécurité : l'écran se retire tout seul à la fin.
+    timer TITLE_DURATION action Function(renpy.hide_screen, "title_card", layer="overlay")
+
 label show_game_title:
     show screen title_card
-    $ renpy.pause(3.6, hard=True)
-    hide screen title_card
+    $ renpy.pause(TITLE_DURATION, hard=True)
+    $ renpy.hide_screen("title_card", layer="overlay")
     return
 
 
@@ -100,12 +106,13 @@ label show_game_title:
 # ------------------------------------------------------------------------------
 ## Les lettres apparaissent une à une (petit rebond), puis un trait cyan
 ## (#33dbe7, la couleur du cadre de dialogue) se déploie sous le texte.
+define FIO_DURATION = 2.7
+
 transform fio_root:
-    on show:
-        alpha 0.0
-        linear 0.2 alpha 1.0
-    on hide:
-        linear 0.35 alpha 0.0
+    alpha 0.0
+    linear 0.2 alpha 1.0
+    pause FIO_DURATION - 0.55
+    linear 0.35 alpha 0.0
 
 transform fio_letter(d=0.0):
     alpha 0.0
@@ -150,10 +157,12 @@ screen figure_it_out(words=("FIGURE", "IT", "OUT")):
             yalign 0.52
             at fio_bar
 
+    timer FIO_DURATION action Function(renpy.hide_screen, "figure_it_out")
+
 ## À appeler juste avant le "$ current_cx = CrossExamination(...)" :
 ##     call figure_it_out_anim
 label figure_it_out_anim:
     show screen figure_it_out
-    $ renpy.pause(2.7, hard=True)
+    $ renpy.pause(FIO_DURATION, hard=True)
     hide screen figure_it_out
     return
