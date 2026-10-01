@@ -1582,10 +1582,10 @@ label prologue_part10_searches_and_trial:
     hide stheno
     call travel_to(R_entryHallway, True)
     show carmille:
-        xalign 0.2
+        xalign 0.1
         yalign 1.0
     show pani:
-        xalign 0.0
+        xalign -0.3
         yalign 1.0
 
     l "Okay everyone, get ready to be searched." 
@@ -1596,11 +1596,11 @@ label prologue_part10_searches_and_trial:
     hide carmille with dissolve
 
     l "Thanks!"
-    show carmille:
-        xalign 0.2
+    show carmille with moveinright:
+        xalign 0.1
         yalign 1.0
-    show cassie:
-        xalign 0.35
+    show cassie with moveinright:
+        xalign 1.0
         yalign 1.0
 
     l "Alright, let's begin!"
@@ -1628,8 +1628,8 @@ label prologue_part10_searches_and_trial:
     l "..." 
     l shocked "Still no vape?!" 
 
-    show stheno:
-        xalign 0.85
+    show stheno with moveinright:
+        xalign 1.25
         yalign 1.0
 
     s "Face it, Lou! I'm sure you left it at home!" 
@@ -1848,17 +1848,25 @@ label choice_stheno_searched_success:
 
     f "GUYS DON'T STAY HERE, GO TO THE LIVING ROOM OR SOMETHING." 
 
-    v worried "S-Sure." 
+    v worried "S-Sure."
+    hide carmille with moveoutright 
 
     l "I shouldn't have come..." 
 
-    "Suddenly, Lou darts beside me, climbing the stairs with blazing speed." 
+    "Suddenly, Lou darts beside me, climbing the stairs with blazing speed."
+    hide lou with moveoutleft
 
     m "Lou?" 
 
     "I instinctively go to follow. A door's slam indicates that he hid in the bathroom." 
 
+    hide fransk
+    hide pani
+    hide cassie
+    hide stheno
+
     call travel_to(R_F1hallway, True)
+    
 
     m "Lou? Fransk is coming! Do you need anything?" 
 
@@ -1869,6 +1877,7 @@ label choice_stheno_searched_success:
     "This isn't good! I need to check on him." 
     "I slowly open the door." 
 
+    show fransk serious with moveinright
     f "MAJ, DON'T." 
 
     "And see..." 
