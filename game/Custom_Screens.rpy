@@ -99,8 +99,8 @@ screen minimap() layer 'screens': # Montre la minimap
             hotspot (381, 48, 300, 171) action [Function(toggle_Minimap), Function(minimap_Travel, R_F1parentsRoom)]
             hotspot (683, 96, 204, 266) action [Function(toggle_Minimap), Function(minimap_Travel, R_F1fransksRoom)]
 
-screen proofs_on_minimap() layer 'front_sprites': # Ajoute toutes les preuves obtenues sur la minimap comme des boutons clickables
-    zorder 3
+screen proofs_on_minimap() layer 'screens': # Ajoute toutes les preuves obtenues sur la minimap comme des boutons clickables
+    zorder 13
     for proof in store.inventory:
         imagebutton:
             idle proof.icon
@@ -110,8 +110,8 @@ screen proofs_on_minimap() layer 'front_sprites': # Ajoute toutes les preuves ob
             ypos proof.posY
             mouse "click"
 
-screen proof_info(proof) layer 'front_sprites':
-    zorder 4
+screen proof_info(proof) layer 'screens':
+    zorder 14
     if proof is not None:
         frame:
             xalign 1.0
