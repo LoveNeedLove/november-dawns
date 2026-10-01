@@ -82,8 +82,8 @@ screen minimap_toggle: # Ouvre et ferme la minimap
         at main_buttons_zoom
         action Function(toggle_Minimap)
 
-screen minimap() layer 'front_sprites': # Montre la minimap
-    zorder 2
+screen minimap() layer 'screens': # Montre la minimap
+    zorder 10
     frame:
         xalign 0.5 yalign 0.5
         xmargin 10 ymargin 10
