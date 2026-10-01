@@ -4,7 +4,10 @@
 
 # --- SCÈNE 1 : DÉCOUVERTE DU SECRET DE LOU ET ACCORD ---
 
+
 label scene_lou_werewolf_discovery:
+
+    $ drHouse.clearHouse()
 
     "..."
 
@@ -61,7 +64,7 @@ label scene_lou_werewolf_discovery:
     "Lou... is..."
     
     $ R_livingRoom.cutscene = "scene_living_room_return"
-    call travel_to(R_livingRoom,trans_in = fade)
+    call travel_to(R_livingRoom)
     return
 
 
@@ -155,12 +158,25 @@ label scene_living_room_return:
     call travel_to(R_garden,in_dialogue = True)
     m "Huh, this looks nice!"
     v "Hey Maj! Over here!"
+    show carmille
     m "Hey, is it okay for us to sit here? These couches are covered by tarp..."
     v "Eh, I'm sure it's okay."
+    show cassie:
+        xalign 0.5
+        yalign 1.0
+    show carmille with move:
+        xalign 1.0
+        yalign 1.0
+
     c "Did Pani go to the bathroom?"
     m "Yup, she couldn't wait for me to get out."
     c "Same for me, I'll go wait my turn."
     m "Sure!"
+    
+    show stheno with moveinleft:
+        xalign 0.2
+        yalign 1.0
+
     s "So... what was up with Lou?"
     m "Lou?"
     v "Does nicotine withdrawal even do that?"
@@ -189,6 +205,10 @@ label scene_living_room_return:
     v "That summer went well but I really sucked at social interactions!"
     v "So I figured, if I want to make more friends, I gotta study people."
     v "So I go-"
+
+    show pani with moveinleft:
+        xalign -0.25
+        yalign 1.0
 
     p "'Sup guys."
     s "Hey! Pani!"
@@ -224,7 +244,9 @@ label scene_living_room_return:
     p "Yayyyyyy :)"
     s "So, where do we put this?"
     v "I remember Fransk storing them in the garage, there's 4 pieces so we should be able to make it in one trip!"
-    m "Sure."  
+    m "Sure." 
+
+    show screen minimap_toggle
 
     $ R_garage.cutscene = "scene_phones_missing_pani_faint"
 
@@ -234,6 +256,16 @@ label scene_living_room_return:
 # --- SCÈNE 3 : LES TÉLÉPHONES DISPARUS ET L'ÉVANOUISSEMENT DE PANI ---
 
 label scene_phones_missing_pani_faint:
+
+    show carmille with dissolve:
+        xalign 1.0
+        yalign 1.0
+    show stheno with dissolve:
+        xalign 0.2
+        yalign 1.0
+    show pani with dissolve:
+        xalign -0.25
+        yalign 1.0
 
     m "Is here okay?"
     s "Probably..."
@@ -248,6 +280,10 @@ label scene_phones_missing_pani_faint:
 
     "She's right, there's no phone to be seen."
 
+
+    show cassie with moveinleft:
+        xalign 0.5
+        yalign 1.0
     c "What are yall doing in the garage?"
     m "We couldn't find the phones. Could you check the living room?"
     c "Sure, I'm already there."
@@ -292,7 +328,6 @@ label scene_phones_missing_pani_faint:
 
     "Shit! I have to check her pulse!"
     "... Okay."
-    "She's breathing... but definitely unconscious."
 
     m "She's breathing... but definitely unconscious."
     s "How the fuck...?"
@@ -331,12 +366,11 @@ label scene_phones_missing_pani_faint:
     $ eventMgr.add_event(QuickEvent("pani_faint",{"talk_carmille_investigation_pani","talk_stheno_investigation_pani", "talk_cassie_investigation_pani"},"cx_pani_poisoning"))
 
     #Pani Faint
-    $ R_kitchen.convos.append(Convo("carmille","talk_carmille_investigation_pani"))
-    $ R_kitchen.convos.append(("stheno","talk_stheno_investigation_pani"))
-    $ R_kitchen.convos.append(Convo("cassie","talk_cassie_investigation_pani"))
+    $ R_kitchen.convos.append(Convos("carmille","talk_carmille_investigation_pani"))
+    $ R_kitchen.convos.append(Convos("stheno","talk_stheno_investigation_pani"))
+    $ R_kitchen.convos.append(Convos("cassie","talk_cassie_investigation_pani"))
 
     return
-
 
 # --- CONTRE-INTERROGATOIRE : QUI A DROGUÉ PANI ? ---
 
@@ -2440,6 +2474,7 @@ label talk_carmille_investigation_pani:
                             1850, 800, 
                             "nyctozepam")
     $ addProofToInventory(P_nyctozepam)
+    $ renpy.notify("Nyctozepam added to evidence !")
 
     $ eventMgr.unlock("talk_carmille_investigation_pani")
     return
@@ -2460,6 +2495,7 @@ label talk_stheno_investigation_pani:
                             450, 900, 
                             "bathroom_order")
     $ addProofToInventory(P_bathroom_order)
+    $ renpy.notify("Bathroom order added to evidence !")
 
     $ eventMgr.unlock("talk_stheno_investigation_pani")
     return
@@ -2517,6 +2553,7 @@ label hotspot_investigation_body:
                             1250, 300, 
                             "body_info")
     $ addProofToInventory(P_body_info)
+    $ renpy.notify("Information about the body added to evidence !")
     
     l "...Let's put it back the way we found it..."
     m "Yeah... Wait a sec-"
@@ -2541,7 +2578,8 @@ label hotspot_investigation_body:
                             R_F1fransksRoom, 
                             1300, 400, 
                             "black_robe")
-    $ addProofToInventory(P_black_robe)   
+    $ addProofToInventory(P_black_robe)
+    $ renpy.notify("Black Robe added to evidence !")
 
     $ eventMgr.unlock("hotspot_investigation_body")
     return
@@ -2583,6 +2621,7 @@ label hotspot_investigation_dreamcatchers:
                             1550, 500, 
                             "dreamcatchers")
     $ addProofToInventory(P_dreamcatchers)
+    $ renpy.notify("Dreamcatchers added to evidence !")
 
     $ eventMgr.unlock("hotspot_investigation_dreamcatchers")
     return
@@ -2610,6 +2649,7 @@ label hotspot_investigation_closet:
                             1400, 500, 
                             "lous_jacket")
     $ addProofToInventory(P_lous_jacket)
+    $ renpy.notify("Lou's Jacket added to evidence !")
 
     $ eventMgr.unlock("hotspot_investigation_closet")
     return
@@ -2638,6 +2678,7 @@ label hotspot_investigation_window_living:
                             850, 800, 
                             "living_room_window")
     $ addProofToInventory(P_living_window)
+    $ renpy.notify("Living Room Window added to evidence !")
 
     $ eventMgr.unlock("hotspot_investigation_window_living")
     return
@@ -2671,6 +2712,7 @@ label hotspot_investigation_window_garden:
                             1700, 500, 
                             "garden_window")
     $ addProofToInventory(P_garden_window)
+    $ renpy.notify("Garden Window added to evidence !")
     
     $ eventMgr.unlock("hotspot_investigation_window_garden")
     return
@@ -2796,6 +2838,7 @@ label talk_lou_investigation_murder:
                             400, 350, 
                             "smell_order")
     $ addProofToInventory(P_lous_smell) 
+    $ renpy.notify("Lous smell added to evidence !")
     
     $ eventMgr.unlock("talk_lou_investigation_murder")
     return
@@ -2859,7 +2902,8 @@ label hotspot_bookshelf_rope:
                             R_livingRoom, 
                             900, 1000, 
                             "tied_up_shelf")
-    $ addProofToInventory(P_tied_bookshelf) 
+    $ addProofToInventory(P_tied_bookshelf)
+    $ renpy.notify("Tied Up Bookshelf added to evidence !")
     
     $ eventMgr.unlock("hotspot_bookshelf_rope")
     jump room_loop
@@ -2892,6 +2936,7 @@ label hotspot_fatal_closet:
                             400, 900, 
                             "deadly_closet")
     $ addProofToInventory(P_deadly_closet) 
+    $ renpy.notify("Deadly closet added to evidence !")
     
     $ eventMgr.unlock("hotspot_fatal_closet")
     jump room_loop
@@ -2917,6 +2962,7 @@ label hotspot_bloody_carpet_found:
                             400, 1000, 
                             "bloody_carpet")
     $ addProofToInventory(P_bloody_carpet)
+    $ renpy.notify("Bloody Carpet added to evidence !")
     
     $ eventMgr.unlock("hotspot_bloody_carpet_found")
     jump room_loop
@@ -2940,6 +2986,7 @@ label hotspot_black_cloth_recheck:
                             1300, 400, 
                             "black_robe_marks_cuff")
     $ addProofToInventory(P_black_robe)
+    $ renpy.notify("Black Robe added to evidence !")
     
     $ eventMgr.unlock("hotspot_black_cloth_recheck")
     jump room_loop
@@ -2980,6 +3027,7 @@ label hotspot_garage_caulk_gun:
                             2300, 800, 
                             "caulk_gun")
     $ addProofToInventory(P_caulk_gun)
+    $ renpy.notify("Caulk Gun added to evidence !")
     
     $ eventMgr.unlock("hotspot_garage_caulk_gun")
     jump room_loop
@@ -3017,6 +3065,7 @@ label hotspot_fransk_bed_drawer:
                             1800, 700, 
                             "blood_pouch")
     $ addProofToInventory(P_IV_pouch)
+    $ renpy.notify("Pierced IV pouch added to evidence !")
 
     m "Wait, what's this? It looks like some sort of remote holder... There's 3 slots..."
     l "His phone charger's wedged into this left one, so we can assume that he kept his phone there at night. There's a remote in this middle one... got it! What the fuck is that for?"
@@ -3050,6 +3099,7 @@ label hotspot_fransk_bed_drawer:
                             1900, 750, 
                             "smart_home_remote")
     $ addProofToInventory(P_house_remote)
+    $ renpy.notify("Smart House Remote added to evidence !")
     
     $ eventMgr.unlock("hotspot_fransk_bed_drawer")
     jump room_loop
@@ -3091,6 +3141,7 @@ label hotspot_parent_room_mom_nightstand:
                             1000, 450, 
                             "hard_candy")
     $ addProofToInventory(P_hard_candy)
+    $ renpy.notify("Hard Candy added to evidence !")
     
     $ eventMgr.unlock("hotspot_parent_room_mom_nightstand")
     jump room_loop

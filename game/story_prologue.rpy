@@ -6,6 +6,8 @@
 
 label prologue_part1_arrival:
 
+    $ drHouse.clearHouse()
+
     "I made it."
     "After many years, I finally made it." 
     "Made it out of there." 
@@ -892,7 +894,7 @@ label prologue_part7_kitchen_cocktail:
 
 label prologue_part8_truth_or_dare:
 
-    hide toggle_Minimap
+    hide minimap_toggle
 
     show lou with moveinleft:
         xalign -0.4
@@ -1285,8 +1287,8 @@ label prologue_part9_investigation_intro:
     $ eventMgr.add_event(QE_part9)
 
     # Adding Convos and Hotspot for the investigation
-    $ R_livingRoom.convos.append(Convo("lou","talk_lou_living_room"))
-    $ R_livingRoom.convos.append(Convo("stheno","talk_stheno_living_room"))
+    $ R_livingRoom.convos.append(Convos("lou","talk_lou_living_room"))
+    $ R_livingRoom.convos.append(Convos("stheno","talk_stheno_living_room"))
     $ R_livingRoom.hotspots.append(HotspotData("hotspot_couch",(6, 544, 620, 412)))
     $ R_kitchen.hotspots.append(HotspotData("hotspot_kitchen", (697, 381, 649, 516)))
     $ R_kitchen.hotspots.append(HotspotData("hotspot_garage_garden", (1326, 394, 344, 394)))
@@ -1307,7 +1309,7 @@ label hotspot_couch:
 label talk_stheno_living_room:
     show stheno
     m "Did you witness anything suspicious? Like someone roaming around the couch area." 
-    s "Why the fuck would I pay attention to this guy's fucking jacket. I'm like 90% sure that he claimed it from the school's lost and found." 
+    s "Why the fuck would I pay attention to this guy's fucking jacket. I'm like 90\% sure that he claimed it from the school's lost and found." 
     m "So you didn't see anyone." 
     s angry "No! In fact anyone could've carried the crime without anyone noticing. Lou arrived first alongside Cassie at the party, and nobody cares enough to actively monitor a fucking jacket!" 
     "It makes sense, multiple people have even sat by it ever since I arrived." 
@@ -1342,6 +1344,7 @@ label talk_lou_living_room:
                             500, 500, 
                             "vape_liquid")
     $ addProofToInventory(vape_liquid)
+    $ renpy.notify("Vape added to evidence !")
 
     return
 
@@ -1427,6 +1430,7 @@ label hotspot_bedroom_window:
                             650, 500, 
                             "fransk_window")
     $ addProofToInventory(fransk_window)
+    $ renpy.notify("Living Room Window added to evidence !")
     hide fransk
 
     return
@@ -1586,6 +1590,7 @@ label prologue_part10_searches_and_trial:
                             750, 700, 
                             "body_searches")
     $ addProofToInventory(body_searches)
+    $ renpy.notify("Body Searches added to evidence !")
 
     l "..." 
     l shocked "Still no vape?!" 

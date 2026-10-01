@@ -220,11 +220,11 @@ screen room_hud() layer 'dialogue':
             hbox:
                 xalign 0.5
                 yalign 0.5
-                spacing 30
+                spacing 5
                 for c in current_room.convos:  
                     imagebutton:
-                        idle c.chara
-                        hover Transform(c.chara, matrixcolor=BrightnessMatrix(0.2))
+                        idle Transform(c.chara, zoom=0.5, matrixcolor=BrightnessMatrix(0.0))
+                        hover Transform(c.chara, zoom=0.5, matrixcolor=BrightnessMatrix(0.2))
                         action Jump(c.action)
 
 

@@ -119,7 +119,6 @@ screen proof_info(proof) layer 'front_sprites':
             vbox:
                 text proof.name
                 text proof.description
-                text proof.room.id
                 
                 # Le bouton apparaît en Cross-Exam OU en mode présentation forcée
                 if store.in_cross_examination or store.in_proof_present:
@@ -130,6 +129,7 @@ screen proof_info(proof) layer 'front_sprites':
                         text_size 50
 
 
+# Pour les illustrations ponctuelles (copie )
 screen illus(bgimage, at_anim=None, all_screen=False) layer "backgrounds":
 
     $ crop_y = getattr(current_room, "bg_crop_y", 1.0)
