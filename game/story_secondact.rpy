@@ -1,3 +1,94 @@
+# ------------------------------------------------------------------------------
+# TRANSFORMS & ÉCRANS LOCAUX À L'ACTE 2 (complètent animations.rpy)
+# ------------------------------------------------------------------------------
+## Entrées de personnage à une position précise (x = xalign, t = durée)
+##     show lou at enter_from_right(0.7)
+transform enter_from_left(x=0.3, t=0.4):
+    xalign x yalign 1.0
+    xoffset -config.screen_width
+    easeout_cubic t xoffset 0
+
+transform enter_from_right(x=0.7, t=0.4):
+    xalign x yalign 1.0
+    xoffset config.screen_width
+    easeout_cubic t xoffset 0
+
+## Coupe un trembling / jumping en cours : remet le sprite à plat
+transform calm:
+    xoffset 0
+    yoffset 0
+
+## Pareil, mais enchaîne directement sur un saut (évite deux "show" consécutifs)
+transform calm_hop(h=40):
+    xoffset 0
+    yoffset 0
+    easeout_quad 0.12 yoffset -h
+    easein_quad 0.16 yoffset 0
+
+## Tremblement court (peur, gêne, mastication...) : s'arrête tout seul
+transform shake_short(strength=12, n=5):
+    linear 0.04 xoffset strength
+    linear 0.04 xoffset -strength
+    repeat n
+    linear 0.04 xoffset 0
+
+## Perso qui s'effondre / est plaqué au sol (glisse vers le bas + s'assombrit)
+transform faint_fall:
+    function _init_brightness
+    parallel:
+        easein_quad 0.6 yoffset 260
+    parallel:
+        linear 0.6 matrixcolor BrightnessMatrix(-0.2)
+
+## Se relève (inverse de faint_fall)
+transform get_up:
+    function _init_brightness
+    parallel:
+        easeout_quad 0.4 yoffset 0
+    parallel:
+        linear 0.4 matrixcolor BrightnessMatrix(0.0)
+
+## Ronflement : le sprite est déjà à terre (après faint_fall)
+transform snore_here:
+    ease 1.2 yoffset 252
+    ease 1.2 yoffset 268
+    repeat
+
+## Idem, mais en plaçant directement le sprite à terre (x = xalign)
+transform snore(x=0.88):
+    xalign x yalign 1.0
+    yoffset 260
+    ease 1.2 yoffset 252
+    ease 1.2 yoffset 268
+    repeat
+
+## Massage cardiaque (sprite à terre) / retour à l'immobilité
+transform cpr_pump:
+    easein 0.12 yoffset 275
+    easeout 0.12 yoffset 260
+    repeat
+
+transform lie_still:
+    yoffset 260
+
+## Pétrification (Stheno) : le sprite perd toute sa couleur
+transform petrify:
+    matrixcolor SaturationMatrix(1.0)
+    linear 0.8 matrixcolor SaturationMatrix(0.0)
+
+## Cendres : le sprite s'élève un peu et disparaît (à suivre d'un "hide")
+transform dust_away:
+    parallel:
+        easeout 1.5 yoffset -40
+    parallel:
+        easeout 1.5 alpha 0.0
+
+## Lumière violette de la mort de Carmille
+screen purple_light():
+    zorder 50
+    add Solid("#7a1fd155")
+
+
 # ==============================================================================
 # ACTE 2 : HISTOIRE NARRATIVE ET CONTRE-INTERROGATOIRES
 # ==============================================================================
@@ -17,11 +108,13 @@ label scene_lou_werewolf_discovery:
     "Why does he... look... like this?"
 
     m "Do you need any-"
+    with hpunch
     l "Get OUT!"
     show fransk serious at pop_from_right
     f "Maj! Let me handle this."
     m "!"
 
+    with hpunch
     "{b}*SLAM!*{/b}"
 
     m "Franks... you saw that, he-"
@@ -41,6 +134,7 @@ label scene_lou_werewolf_discovery:
     m "Did you know, Fransk?"
     f "..."
     m "Look, I'm aware that I'm the new guy. But you gotta trust me!"
+    show fransk at hop
     f curious "Trust you?"
     f -curious "What the hell, it's not like I can do anything to shut you up."
     f "Maj, we're a team now."
@@ -76,22 +170,24 @@ label scene_living_room_return:
     s "HOW'S LOU, ASSHOLE!"
     m "Ah!"
     hide stheno
-    show carmille worried
+    show carmille worried at shake_short(6, 3)
     v "Is he okay? Can we come check on him?"
     m "Right now Lou... is resting up. The chase almost made him faint."
     show carmille at right with move
     show stheno with moveinleft
+    show stheno at hop
     s angry "The fuck? He's supposed to be a quarterback!"
     c "We shouldn't have fucked with him that much Sthen... he was probably stressed or suffering from nicotine withdrawal..."
     show stheno at left with move
     s sighing "Ugh..."
     s -sighing "Nicotine withdrawal...?"
+    show stheno at hop
     s "We gotta get this bitch to stop!"
     v -worried "Stheno you have to calm down a bit..."
     v "Let's get us some drinks shall we?"
     hide stheno with dissolve
     hide carmille with dissolve
-    show cassie smiling at center
+    show cassie smiling at center, hop
     c "Yeah! We could even go to the garden if you want!"
     hide cassie
     show pani at center
@@ -109,7 +205,7 @@ label scene_living_room_return:
     "Those eyes..."
 
     call travel_to(R_kitchen,in_dialogue = True)
-    show stheno angry
+    show stheno angry at hop
     s "You're gonna mix my drink forever or what!"
     m "!"
     s "Stop zoning out, man."
@@ -140,6 +236,7 @@ label scene_living_room_return:
     "..."
     "..."
     "...............!!!!!!"
+    with vpunch
     "Urgh! I really gotta go and join the others! Staying alone isn't great for my mental stability."
 
     "{i}*washhhhhhhhhh* *close!*{/i}"
@@ -151,6 +248,7 @@ label scene_living_room_return:
     p "Fuckk you're finally doneee, LET ME IN!"
     hide pani with moveoutleft
 
+    with hpunch
     "{b}*SLAM!*{/b}"
     
 
@@ -215,6 +313,7 @@ label scene_living_room_return:
     v "I was just telling Maj abo-"
     p "What the hell are you sitting on?"
     s "? on the sofa."
+    show pani at hop
     p "You fucking morons, the tarp's there to protect the fabric!"
     s "Yeah?"
     p "The friction with the tarp can really ruin it! You either sit directly on it or sit someplace else!"
@@ -224,10 +323,13 @@ label scene_living_room_return:
     "Carm's stare speaks for itself..."
 
     p "Are you aware of your insolence?"
+    show stheno at hop
     s "My what? Say that again?"
     p "This couch is worth at least 10 thousand dollars! I won't let you damage it!"
     s "It's their fault for buying this piece of shit for that much."
+    show pani at hop_bounce
     p "YOU DON'T UNDERSTAND!"
+    show carmille at hop
     v "Sthen! Please! Let's comply! You know how much Pani cares about these things!"
     s "Nah."
     p "So you choose to die on this hill..."
@@ -241,6 +343,7 @@ label scene_living_room_return:
     m "..."
     m "Let's just remove the fucking tarp, no need to make a scene."
     s "Fine, jeez yall are such fucking goody two-shoes."
+    show pani at hop
     p "Yayyyyyy :)"
     s "So, where do we put this?"
     v "I remember Fransk storing them in the garage, there's 4 pieces so we should be able to make it in one trip!"
@@ -290,6 +393,7 @@ label scene_phones_missing_pani_faint:
 
     s "What the hell?"
     s "{i}*rummage rummage rummage*{/i}"
+    show stheno at hop
     s "Where's my fucking phone?!"
     v "Fransk must've put them somewhere, no?"
     s "But when? and where?"
@@ -299,6 +403,7 @@ label scene_phones_missing_pani_faint:
     call travel_to( R_kitchen,in_dialogue = True)
     s "{i}*rummage rummage rummage*{/i}"
     v "Any signs?"
+    show stheno at hop
     s "Help me look, asshole!"
     v "I'll check a few closets..."
     p "Sink."
@@ -314,7 +419,9 @@ label scene_phones_missing_pani_faint:
     p "{i}*pouuuuuuuuuuur*{/i}"
     s "I've got like, so many apps and shit on it!"
     p "{i}*GLUG GLUG GLUG GLUG GLUG*{/i}"
+    show stheno at hop
     s "WOULD YOU STOP FUCKING DRINKING?"
+    show pani at cover(dx=10, t=0.8, dark=0.12)
     p "Sorry Sthen..."
     p "I just..."
     s "?"
@@ -322,7 +429,11 @@ label scene_phones_missing_pani_faint:
     s "Pani, you okay?"
     p "don't... feel...."
     p "..."
+    show pani at faint_fall
+    with vpunch
     p "{b}*SLAM!*{/b}"
+    show carmille at hop
+    show stheno at hop
     v "Pani!"
     s "What the fuck?"
 
@@ -330,6 +441,7 @@ label scene_phones_missing_pani_faint:
     "... Okay."
 
     m "She's breathing... but definitely unconscious."
+    show pani at snore_here
     s "How the fuck...?"
     c "Is she alright?"
     m "I don't know, she just fainted out of nowhere!"
@@ -402,6 +514,14 @@ label cx_pani_poisoning:
 
 
 label cx_pani_objection_success:
+    show stheno:
+        xalign 0.15 yalign 1.0
+    show carmille:
+        xalign 0.38 yalign 1.0
+    show cassie:
+        xalign 0.62 yalign 1.0
+    show pani at snore(0.88)
+    with dissolve
     m "Could I have? I don't think so."
     s "What do you mean?"
     m "Think about the window of opportunity. She had her eyes on the drink the whole time."
@@ -434,11 +554,13 @@ label choice_none_of_them_success:
 
     m "None of us could've done it."
     s "?"
+    show cassie at hop
     c "What!?"
     v "I see, could she have done it to herself?"
     m "No, she wouldn't have any reason to do it. The drug just straight up knocks you out."
     v "In 15 minutes, right?"
     m "Yeah, if you're of average weight, which seems to be Pani's case."
+    show stheno at hop
     s "Damn right it is, fat shaming is not allowed!"
 
     "We're missing something, the key to this whole entire situation."
@@ -481,15 +603,18 @@ label choice_pani_weight_success:
     s "How so?"
     m "If Pani's weight is significantly superior to that of the average person..."
     s "What the fuck are you saying?!"
+    show cassie at hop
     c "That's really offensive, Maj!"
     m "I- But it could widen the timeframe where the medication could've been taken!"
     c "Yeah but Pani is a beautiful, totally thin, smoking hot young woman!"
     m "People can be that AND heavy."
     v "Dude... you're not looking good in this debate."
     m "I... Let's just try and pick her up!"
+    show stheno at hop
     s "You're not getting your hands anywhere near her, asshole!"
     s "Look, I can lift her mys-"
     m "?"
+    show stheno at trembling(6, 0.04)
     s "Urggggggg......!"
     s "What the hell?"
     s "GRRRRRRRRRRRRRRRRR"
@@ -500,6 +625,7 @@ label choice_pani_weight_success:
     c "What the hell are you talking about, girl?"
     s "Try it! You take the legs, I take the arms."
     c "Sure"
+    show cassie at trembling(6, 0.04)
     c "{i}*RAAAAAAAAAAAAAAAAAAAAAAAH*{/i}"
     m "They're giving it their all, huh..."
     v "If you were right then I don't know what to say to you bro..."
@@ -509,6 +635,9 @@ label choice_pani_weight_success:
     "{i}*clatter*{/i}"
     m "What was that sound?"
     s "PUT HER DOWN MY ARMS ARE ABOUT TO TEAR!"
+    show stheno at calm
+    show cassie at calm
+    with vpunch
     "{b}*THUD!*{/b}"
     c "Is she okay?!"
     p "{i}*SNOOOOOOOOOOORE*{/i}"
@@ -533,6 +662,7 @@ label choice_pani_weight_success:
     s "*snicker* BAHAHAHAHAHAHAHAHAHA, that stupid fucking junkie."
     m "Don't call her that!"
     s "She's so fucking pathetic, coming to a party with fucking drugs, it's like she hates being with us *snicker*"
+    with hpunch
     m "SHUT UP!"
     s "?"
     m "Stop doing this! She literally fainted, it could've been terrible."
@@ -544,7 +674,9 @@ label choice_pani_weight_success:
     m "Maybe you should treat your friends better instead of insulting them."
     s "You're saying I don't care?"
     m "I'm saying you're showing your love and worry in the worst way possible, stop acting so selfish and be honest with yourself."
+    show stheno at hop
     s "I'm gonna knock you the fuck out little bitch!"
+    show carmille at hop
     v "Sthen, Maj, STOP IT!"
     m "!"
     m "!"
@@ -561,6 +693,8 @@ label choice_pani_weight_success:
     v "What is it again?"
     s "She... She... h-her dress!"
     c "Is something wrong?"
+    show stheno at hop_bounce
+    with vpunch
     "{b}*THUD*{/b}"
     "What could've made her recoil like that?"
     s "It's... her ass..."
@@ -579,12 +713,15 @@ label choice_pani_weight_success:
     c "Cut this part out..."
     c "And there you g-"
     c "!"
+    show cassie at hop_bounce
+    with vpunch
     c "What the hell!!!"
     m "What's wrong Cass-"
 
     "And then I saw them. Under that dress. Two. ... A pair of... Hooves."
 
     m "!"
+    show carmille at hop
     v "Cassie! Hide them!"
     c "Shit!"
     "She re-does the bottom of the dress to the best of her abilities, but it's way too late."
@@ -599,11 +736,13 @@ label choice_pani_weight_success:
     c "What?!"
     s "We can't, that would put Pani in danger."
     c "..."
+    show stheno at highlight
     s "We have to protect her, no matter what."
     s "Because we're friends."
     v "..."
 
     "Monsters... they're real? Lou... and now Pani. There's no mistaking it, they are not human. They're..."
+    show stheno at neutral
 
     s "Maj!"
     m "!"
@@ -627,6 +766,7 @@ label choice_pani_weight_success:
 
 label scene_fransk_first_murder:
 
+    show lou at enter_from_right(0.7)
     l "Hey Maj!"
     m "Lou?"
     l "Is something going on?"
@@ -642,19 +782,23 @@ label scene_fransk_first_murder:
     m "Lou... did you know about Pani?"
     l "What's with Pani?"
     m "She's... like you."
+    show lou at hop
     l "What? I'm not a fucking junkie like her! She's not like me at all!"
     m "No, you don't get it."
     l "?"
     m "She's also... part... animal?"
     l "!"
+    show lou at hop
     l "What?! She's... one of us?"
     m "Her feet, in their stead were... hooves, like that of a horse."
+    show lou at hop
     l "A horse... so she's not like me!"
     m "?"
     l "I'm closer to a dog, you see?"
     m "A... dog?"
     l "How did you see her feet? She took off her weird dress? Or maybe watched the full moon?"
     m "Stenho kinda felt her ass when searching for her pocket..."
+    show lou at hop_bounce
     l "What?! Felt her ass? What the fuck were y'all doing down there!"
     m "She was just trying to put back the meds!"
     l "I see... Well, to answer your question, I didn't know!"
@@ -665,6 +809,7 @@ label scene_fransk_first_murder:
     m "How can you say that so casually?"
     m "Just suggesting that she's a monster!"
     m "It... it's not possible, this has to be a prank!"
+    show lou at highlight
     l "Hey Maj, listen."
     m "!"
     l "When you see me again, I'll be back to normal."
@@ -687,8 +832,10 @@ label scene_fransk_first_murder:
     l "I see... Well, I can't wait to see you when I'm better!"
     m "Sure. Maybe you'll teach me about books or the NFL."
     l "You have no idea..."
+    show lou at neutral
     l "Oh, yeah! Go tell Fransk about the whole Pani situation, he'll handle it!"
     m "Allright!"
+    hide lou with dissolve
 
     "Fransk told me he needed to rest, I have no choice but to wake him up now."
     call travel_to( R_F1fransksRoom, in_dialogue = True)
@@ -697,21 +844,26 @@ label scene_fransk_first_murder:
 
     "What... Fransk? ... ... ? ... ..."
 
+    with vpunch
     "{b}AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA!{/b}"
     call travel_to( R_entryHallway,in_dialogue = True)
+    show cassie at enter_from_left(0.15)
     c "Maj?"
     m "Guys! GUYS!"
     c "Why are you screaming?"
     m "It's Fransk, he's... he's fucking injured or dead!"
     c "?"
+    show stheno at enter_from_right(0.85)
     s "What do you mean?"
     m "Come up!"
     "{i}*rattle* *rattle* *rattle* *rattle*{/i}"
     m "It's locked? Wasn't it just open?"
+    show carmille at enter_from_left(0.35)
     v "There's like a pad for a code here."
     l "You guys okay?"
     m "Lou! It's Fransk, he's... he's..."
     "{i}*rattle* *rattle* *rattle*{/i}"
+    with hpunch
     m "F-FUCK, OPEN UP"
     v "Try Fransk's birthday, it's 08-30-03"
     "{i}*beep beep boop beep* *BEEEEEP*{/i}"
@@ -721,7 +873,9 @@ label scene_fransk_first_murder:
     s "Breathe!"
     v "Okay, we trust you, just stay here with Cassie."
     v "I'll go check the living room shelf for birthdays and potential passcodes."
+    hide carmille with moveoutleft
     s "There's a window to his room in the garden. I'll try to climb or reach it in some way."
+    hide stheno with moveoutright
     m "...thanks..."
 
     "What is going on..."
@@ -734,6 +888,7 @@ label scene_fransk_first_murder:
     l "When did he get that bouquet?"
     "How... how... how... did I end up here again..."
 
+    show carmille at enter_from_left(0.35)
     v "Maj! It took a while but I have some birthday dates!"
     m "Huh?"
     v "When searching through the library I found his parents' old passports!"
@@ -742,6 +897,7 @@ label scene_fransk_first_murder:
     "{i}*BEEEEEEP* *BEEEEEEEEP*{/i}"
     m "Fuck ! One more wrong try and the alarm rings!"
     v "I- I'll go get Stheno!"
+    hide carmille with moveoutleft
     m "..."
     c "Please, Maj, don't panic."
     m "..."
@@ -755,14 +911,20 @@ label scene_fransk_first_murder:
     c "...Okay."
 
     "What is he doing... can he really do it?"
+    with hpunch
     "{b}*CRAAAACK*{/b}"
 
     m "!"
+    show lou at enter_from_right(0.7)
     l "...This is me now."
     m "Lou!"
     l "I'm stronger in this form... Now let's check on Fransk. We have no time to lose."
+    show carmille at enter_from_left(0.35)
+    show stheno at enter_from_right(0.9)
     v "We're ba-AAAAAAAAACK!"
+    show stheno at hop
     s "Lou! What the hell! Are you some kind of werewolf?"
+    show lou at hop
     l "DOG, I'm a WERE-DOG. Not some kind of wild animal!"
     s "...okay?"
     l "Now let's check on Fransk!"
@@ -775,16 +937,21 @@ label scene_fransk_first_murder:
     "Stop... Stop talking.... Stop. Stop. Fransk needs us."
     "Does he ? You're nothing but a-"
 
+    with vpunch
     m "SHUT UP!"
 
     "In one fell swing. I open the door."
     call travel_to(R_F1fransksRoom,in_dialogue = True)
 
     v "!"
+    show lou at trembling(8, 0.05)
     l "No! No! NOOOOOO!"
+    show cassie at hop
     c "There's no way!"
+    show stheno at hop
     s "Who... who the fuck... did this?"
 
+    with vpunch
     "A bloodbath... but something's wrong."
 
     m "It changed."
@@ -797,14 +964,15 @@ label scene_fransk_first_murder:
     c "Do we call the police?"
     s "Maybe if we had a phone. And I won't call them while Lou looks like... that."
     c "...Yeah, that's fair enough."
+    show lou at calm
     m "Let's investigate..."
 
     $ eventMgr.add_event(QuickEvent("first_fransk_investigation",{"hotspot_investigation_body","hotspot_investigation_carpet", "hotspot_investigation_dreamcatchers","hotspot_investigation_closet","hotspot_investigation_window_living","hotspot_investigation_window_garden","talk_carmille_investigation_murder","talk_lou_investigation_murder","talk_stheno_investigation_murder"},"scene_confronting_cassie_ghost"))
 
     #Fransk Murder 1
-    $ R_F1fransksRoom.convos.append(Convo("carmille","talk_carmille_investigation_murder"))
-    $ R_F1fransksRoom.convos.append(Convo("lou","talk_lou_investigation_murder"))
-    $ R_F1fransksRoom.convos.append(Convo("stheno","talk_stheno_investigation_murder"))
+    $ R_F1fransksRoom.convos.append(Convos("carmille","talk_carmille_investigation_murder"))
+    $ R_F1fransksRoom.convos.append(Convos("lou","talk_lou_investigation_murder"))
+    $ R_F1fransksRoom.convos.append(Convos("stheno","talk_stheno_investigation_murder"))
     $ R_F1fransksRoom.hotspots.append(HotspotData("hotspot_investigation_body",(286, 489, 433, 194)))
     $ R_F1fransksRoom.hotspots.append(HotspotData("hotspot_investigation_carpet",(148, 762, 729, 250)))
     $ R_F1fransksRoom.hotspots.append(HotspotData("hotspot_investigation_dreamcatchers",(677, 416, 88, 116)))
@@ -823,16 +991,22 @@ label scene_confronting_cassie_ghost:
     m "Let's step out for a bit, I've looked at everything I can..."
     l "Yeah, good idea."
     call travel_to( R_F1hallway,in_dialogue = True)
+    show lou:
+        xalign 0.75 yalign 1.0
+    with dissolve
     l "Any more places you wanna check?"
     m "Not really..."
     l "Alright bro... ... Huh?"
     m "What is it?"
     l "HEY CASS!"
+    show cassie at enter_from_left(0.2)
     c "Don't fucking scream like that!"
     l "Sorry... Aren't you gonna look? You're more clever than any of us, I'm sure you'd notice something we missed."
+    show cassie at cover(dx=25)
     c "Sorry... I can't..."
     m "Is the blood too much to bear?"
     c "Y-Yea, that's right..."
+    show lou at hop
     l "What!? You used to love those true crime videos, they were borderline gore, bro!"
     m "Lou! This isn't some random stranger's blood we're talking about!"
     l "Yeah sure but I remember her talking about becoming a detective and loving forensics or something..."
@@ -844,6 +1018,7 @@ label scene_confronting_cassie_ghost:
     "Something's wrong, she clearly can't push herself to enter the room... Blood doesn't seem to bother her... and yet..."
 
     m "Was Fransk special to you?"
+    show lou at hop
     l "What, no! Never!"
     c "Why are you answering that question for me!"
     l "Sorry! I just know what he liked, and you're not even close to his standards..."
@@ -892,6 +1067,7 @@ label choice_cassie_cant_enter_success:
 label choice_dreamcatchers_success:
 
     m "Those dreamcatchers in Fransk's room..."
+    show cassie at hop
     c "!"
     m "Lou said that you were always scared to enter his room, right?"
     c "..."
@@ -904,9 +1080,12 @@ label choice_dreamcatchers_success:
     m "Sure, then you won't mind if Lou brings one of the dreamcatchers over here then."
     c "!"
     l "I can do that, if you want, he even had spares in his..."
+    show cassie at hop
     c "Don't! Alright? Don't!"
     m "... Tell us the truth."
+    show cassie at highlight
     c "I'm... a ghost, a wandering soul..."
+    show lou at hop
     l "What!"
     c "I roam around this world to take revenge for the life that I lost..."
     l "N-No way!"
@@ -933,6 +1112,7 @@ label choice_dreamcatchers_success:
     c "My life was robbed away from me during my life as a political activist."
     m "!"
     c "The government had me assassinated! All I ever wanted was to gain access to proper education!"
+    show lou at hop_bounce
     l "A suffragette ghost! That's fucking awesome!"
     m "...Alright, at least that clears things up... you're a ghost... that stole some baby's body... to get educated..."
     c "That sums it up quite well."
@@ -962,6 +1142,8 @@ label choice_dreamcatchers_success:
     l "Then they probably used a supernatural way to escape!"
     m "That's right. And I must figure that out. For now, let's gather up everyone in the living room."
     
+    hide lou with dissolve
+    hide cassie with dissolve
     $ R_livingRoom.cutscene = "cx_murder_scent_investigation"
     call travel_to( R_F1hallway)
 
@@ -972,6 +1154,15 @@ label choice_dreamcatchers_success:
 
 label cx_murder_scent_investigation:
 
+    show stheno:
+        xalign 0.15 yalign 1.0
+    show carmille:
+        xalign 0.38 yalign 1.0
+    show cassie:
+        xalign 0.62 yalign 1.0
+    show lou:
+        xalign 0.85 yalign 1.0
+    with dissolve
     m "Thanks for joining me everyone."
     v "So, figure anything out?"
     m "I want to hear your theories, if we can reach a consensus then we might find the murderer."
@@ -994,6 +1185,7 @@ label cx_murder_scent_investigation:
 
 label cx_smell_order_success:
     m "This couldn't have happened."
+    show lou at hop
     l "What! It makes sense to me!"
     m "If you simply recall the scent's order then the contradiction will reveal itself."
     l "First the grassy guy... then Fransk... Wait a minute!"
@@ -1020,6 +1212,7 @@ label cx_smell_order_success:
 label choice_the_murderer_stairs_success:
 
     m "The person Lou must've smelled at the time was probably the murderer themselves."
+    show lou at hop
     l "No, I can't let you say that!"
     m "?"
     l "Someone covered their scent using Fransk's blood? Is that what you're affirming?"
@@ -1038,6 +1231,7 @@ label choice_garden_window_success:
     m "Lou smelled the guy that smelled like grass first, which was soon followed by the smell of Fransk."
     m "If we think about that set-up for an instant, then the full image starts to appear."
     m "And it all starts with the garden window."
+    show lou at hop
     l "Ah! I see what you mean!"
     m "It was obviously locked from the inside, which means that the person who locked it..."
     l "Must've remained inside..."
@@ -1050,6 +1244,7 @@ label choice_garden_window_success:
     s "The Fransk smelling dude probably was the one to alter the crime scene, no?"
     l "No way, Maj discovered the body way after that, and he'd have seen them when he entered the room."
     m "Something's bothering me... How did the Fransk smelling guy even get up there?"
+    show cassie at hop
     c "I know! The both of them worked together, right? Grassy could've easily opened the window and reeled Fake Fransk from the garden using a rope or blanket!"
     m "This would require one of them to access the garden in the first place... which would've been difficult when considering the fact that we were all in its general idea."
     m "I could easily imagine someone escaping from the window while we were putting the tarp in the garage, but that whole stratagem seems highly unlikely."
@@ -1083,6 +1278,7 @@ label choice_lous_jacket_success:
     m "Lou, can you smell yourself?"
     l "What? I mean... I always do! So it just gets in the way mostly!"
     m "Then... What if they wore your jacket while going up?"
+    show lou at hop_bounce
     l "That... THAT WOULD TOTALLY WOOOOORK!"
     s "Isn't his jacket in this living room?"
     l "Nope, during investigation we found it deep inside Fransk's closet."
@@ -1098,16 +1294,20 @@ label choice_lous_jacket_success:
     l "...This is crazy!"
     m "That individual is in our midst, that I'm sure of."
     s "...You fucking-"
+    show stheno at hop_bounce
+    with hpunch
     "{b}*SLAM*{/b}"
     v "Stheno!"
 
     "That punch just came out of nowhere!"
 
+    show stheno at trembling(8, 0.04)
     s "I'm going to fucking KILL YOU asshole!"
     s "We're friends! We wouldn't fucking do this to each other!"
     m "..."
     c "Stheno, you have to calm down!"
     c "He actually backed up his claims, if you can prove him wrong, then I'm begging you to do so!"
+    show stheno at calm
     s "!"
     v "I don't want to doubt us! We've known each other forever! But the jacket being found up there can only mean that one of us was involved!"
     s "N-No! It can't be!"
@@ -1119,6 +1319,7 @@ label choice_lous_jacket_success:
     s "Th-There's.... There's tha- There's... ... Hold on, I need to get my thoughts straight. ... ... ...! There's... none."
     l "..."
     c "Sh-shit!"
+    show carmille at highlight
     v "There actually is."
     m "!"
     v "The shuffle. You came down after finding the body, Grassy was in the garden or gone somewhere, and \"the one\" that did it was back amongst us."
@@ -1128,6 +1329,7 @@ label choice_lous_jacket_success:
     c "No, it can't be! We were actively talking to each other from underneath the doors, I can guarantee that he stayed in the upstairs bathroom!"
     l "Yeah, I was going to mention that, thanks Cassie!"
     v "So, we're back to square one?"
+    show carmille at neutral
     m "No, we aren't. What you said just makes a ton of sense. The shuffle could only have happened when the doors were locked."
     v "Lou could've unlocked the door himself, no? It would also reframe our entire point of view."
     l "No, Fransk locked me up with a key, the only way I could open the door was by destroying the door."
@@ -1150,6 +1352,7 @@ label choice_carmille_culprit_success:
 
     m "It's you, Carmille, Isn't it?"
     v "That's..."
+    show stheno at hop
     s "You're forgetting something! Carmille was in the living room! With no access whatsoever to Fransk's room!"
     m "I'd beg to differ, this qualifies as a passageway!"
 
@@ -1160,15 +1363,20 @@ label choice_carmille_culprit_success:
 label choice_window_living_room_carmille_success:
 
     m "This window could've been used to reach Fransk's room!"
+    show stheno at hop
     s "Are you fucking mad?! Not only was it CLOSED, but it's also way out of reach for a runt like him!"
     m "Not when you factor in his special ability."
     s "Special abilities?"
+    show cassie at hop
     c "That's fucking unfair! If we're considering those then Stenho can also be scrutinised! What if she's a monster that phases through widows or shit! Then she's just as sus as Carm is!"
     m "The living room window was opened sometime after Fransk died, this leaves the living room window as the most likely entryway."
     c "Yeah, but Stenho not only could've opened it she also could've pretended to make it locke-"
+    show carmille at hop
+    with vpunch
     v "That's not what Stenho's power does!"
     m "!"
     c "!"
+    show stheno at hop
     s "Carm!"
     l "You... Did you just confirm that she has an ability?"
     v "So what if I did? She couldn't have gone through the window, so let's review the facts..."
@@ -1186,8 +1394,10 @@ label choice_window_living_room_carmille_success:
     s "As if I can tell you that!"
     m "Then we have no choice but to get other parties involved! This isn't the time to protect each other!"
     s "Shut the fuck up you-"
+    show carmille at highlight
     v "I'm a vampire."
     m "!"
+    show stheno at hop
     s "Carm, no!"
     m "...Is that true?"
     v "Yes, it is. A bloodsucking, nefarious vampire..."
@@ -1224,6 +1434,8 @@ label choice_bat_mouth_success:
     v "..."
     m "All you had to do was let yourself fall while making sure to avoid the shelf, and then just fly again through the opening. Am I right?"
     v "So you-"
+    show carmille at neutral
+    show stheno at hop
     s "There's no proof that he accomplished that!"
     v "Sthen..."
     s "You're just making this shit up as you go."
@@ -1260,7 +1472,9 @@ label choice_window_stayed_open_success:
     m "But the fact remains, it was open."
     s "!"
     m "This can only mean one thing, the window was used to enter Fransk's room! And the culprit was unable to close it on his way out. Carmille is the only plausible suspect."
+    show stheno at hop
     s "N-No! He can't be!"
+    show carmille at highlight
     v "Stop it Sthen."
     m "!"
     v "You got it all figured out Maj."
@@ -1306,19 +1520,26 @@ label choice_window_stayed_open_success:
 
 label scene_carmille_death:
 
+    with vpunch
     "IT IS NOW TIME FOR THE SECOND TRAITOR TO RECEIVE HIS PUNISHMENT"
     m "?"
     "MAY THE LIGHT PUT AN END TO ENDLESS SLAUGHTER!"
     l "The hell is this?"
 
     # (the lights turn purple)
+    show screen purple_light
+    show carmille at trembling(10, 0.04)
     v "AAAAAAAH"
     v "THIS LIGHT! MY SKIN! IT BURNS!"
+    show lou at hop
     l "Sh-Shit! Get him some shade!"
+    show stheno at hop
     s "DON'T GET UNDER THE COUCH DUMBASS, LIGHT CAN GET DOWN THERE!"
+    show cassie at hop
     c "Carm! Try to go out!"
     call travel_to( R_entryHallway,in_dialogue = True)
     "{i}*rattle rattle rattle*{/i}"
+    show stheno at hop
     s "Who locked the front fucking door?!"
     v "Th-The closet! I have my special hoodie in there!"
     s "GO GET IT!"
@@ -1329,16 +1550,22 @@ label scene_carmille_death:
     "Since when has it been unlocked?"
 
     s "I see it!"
+    with hpunch
     "{b}*THUNK*{/b}"
+    show carmille at trembling(14, 0.03)
     v "AAAAAAAAAAAAAAH"
+    show cassie at hop
     c "What the fuck!"
     l "His skin's it's... sizzling!"
+    show stheno at hop
     s "G-Garlic! It's garlic!"
     v "RAAAAAAAARGH!"
     s "I'll get it off! AAAACK IT BURNS! FUCK IT! GRAAAAAAAARGH"
+    with vpunch
     "{b}*RIP*{/b}"
     m "!"
     s "HIS SKIN'S COMING OFF WITH IT! ... SH-SHIT, HE'S LOSING CONSCIOUSNESS!"
+    show carmille at cover(dx=10, t=1.0, dark=0.35)
     v "Sthen..."
     s "CARM, WE'LL GET YOU SOME SHADE! I'LL CARRY YOU TO THE GARDEN!"
     v "Tell Fransk... I'm... I'm sorry..."
@@ -1347,8 +1574,12 @@ label scene_carmille_death:
     s "CARM!!!"
     v "Coward."
 
+    show carmille at dust_away
     "Dust. It's like there's already nothing left of him. Just, dust."
+    hide carmille
+    hide screen purple_light with dissolve
 
+    show stheno at trembling(4, 0.06)
     s "Why?! He didn't deserve to die! *sobs*"
     c "Carmille..."
     s "Don't leave me Carm... *sobs*"
@@ -1365,6 +1596,7 @@ label scene_carmille_death:
 
     "The others are still bottling up their feelings, but it seems that Stenho's and mine have fused into an oasis of sorrow."
 
+    show lou at trembling(4, 0.06)
     l "Sh-Shit! I can't c-cry, not now! I can't... I just *THUD* *sob sob sob*"
     c "Carmille! *sob*"
 
@@ -1373,16 +1605,21 @@ label scene_carmille_death:
     "..."
     "..."
 
+    show pani at enter_from_left(0.38)
     p "Guys?"
     m "!"
     p "Did something happen?"
     s "Pani, you're awake!"
     l "Hey... it's me."
+    show pani at hop_bounce
     p "Lou! Holy shit you're so puppy coded I love youuuuuu *rub rub rub rub*"
     c "Pani... this isn't the time..."
     p "Oh shit really? My bad"
+    show lou at jumping(5, 0.09)
     l "KEEP GOING!"
     p "Oki puppyyy *rub rub rub rub rub rub rub rub*"
+    show lou at calm
+    show stheno at calm
     s "Pans."
     p "'Sup?"
     s "Fransk... and Carm... they're dead...."
@@ -1407,6 +1644,15 @@ label scene_carmille_death:
 
 label scene_garden_smoke_break:
 
+    show stheno:
+        xalign 0.15 yalign 1.0
+    show lou:
+        xalign 0.4 yalign 1.0
+    show cassie:
+        xalign 0.65 yalign 1.0
+    show pani:
+        xalign 0.88 yalign 1.0
+    with dissolve
     "The autumn breeze brushes up against my cheek... Nothing has ever felt more real than this."
 
     s "You really brought a blunt? You'll never fail to surprise me."
@@ -1426,6 +1672,7 @@ label scene_garden_smoke_break:
 
     s "Take it Cass."
     "{i}*PFFFFF* *PHEW*{/i}"
+    show stheno at hop
     s "Fuck! Carm's fucking dead!"
     c "Sthen..."
     s "I can't believe this shit..."
@@ -1434,6 +1681,7 @@ label scene_garden_smoke_break:
     m "I don't know, maybe we can use Cassie as a messenger."
     p "The hell's that supposed to mean?"
     m "We didn't tell you? She's a ghost apparently."
+    show cassie at hop
     c "Shut the fuck up and take your turn asshat!"
 
     "Looks like it's my turn."
@@ -1448,11 +1696,15 @@ label scene_garden_smoke_break:
     m "Holy shit this sucks, hahahahahaha"
     s "Pffffff, the fuck you laughing for."
     m "I don't fucking know *snickers*"
+    show lou at trembling(8, 0.05)
     l "WEWEWEWEEWEWE"
+    show stheno at trembling(8, 0.05)
     s "The fuck kinda laugh is that?! HAHAHAHAHAHAHA"
 
     "...Could it be the drugs? Or just an irrepressible need to let it all out? I don't think I'll ever know the answer, but what I know is that letting it out it feels really fucking great."
 
+    show lou at calm
+    show stheno at calm
     l "Fuck... fuck... I haven't laughed that hard since..."
     p "Since?"
     l "Since integration week with Fransk."
@@ -1483,6 +1735,7 @@ label scene_garden_smoke_break:
     l "Remember when he improvised a whole ass presentation to bail you out in high school?"
     c "Yeah... That was the first time we met too... I had forgotten to do the assignment and was panicking and he just gave me his notes and slides... When his turn came he just got up and acted out the geopolitical intricacies of the cold war..."
     l "Can't believe he got a passing grade with that bullshit, he even did a stupid ass russian accent."
+    show cassie at hop
     c "I really can't believe he's - SHIT!"
     s "What the hell did you just call him?"
     c "It's not that! Pani's cheap ass joint just broke down all over my skirt!"
@@ -1493,6 +1746,9 @@ label scene_garden_smoke_break:
     l "Gross."
     s "..."
 
+    hide cassie with moveoutright
+    hide pani with moveoutright
+    hide lou with moveoutright
     "There they go... Wait, don't leave me alone with Stheno!"
 
     s "Hey, about earlier..."
@@ -1507,6 +1763,7 @@ label scene_garden_smoke_break:
     m "You're more of an edgelord, like Shadow the Hedgehog."
     s "The fuck did you just say?"
     m "Sorry, it's a nerdy video game thi-"
+    show stheno at hop_bounce
     s "I FUCKING LOVE SONIC."
     m "For real? Which one is your favorite?"
     s "It's not that popular but it's Sonic Rush..."
@@ -1515,6 +1772,7 @@ label scene_garden_smoke_break:
     m "I spent weeks trying to beat Blaze 'cause I couldn't mash fast enough."
     s "HA- You fucking suck-"
 
+    show cassie at enter_from_left(0.4)
     c "Guys?"
     m "Is everything okay?"
     c "Sorry to interrupt but you have to check something out."
@@ -1526,9 +1784,15 @@ label scene_garden_smoke_break:
     c "Right here, on the wall."
     m "What the-"
 
+    with vpunch
     "{b}THE WEIGHT OF YOUR SINS WILL RAIN UPON YOUR HEADS.{/b}"
 
     m "Who the fuck wrote that?!"
+    show pani:
+        xalign 0.62 yalign 1.0
+    show lou:
+        xalign 0.85 yalign 1.0
+    with dissolve
     l "It wasn't written this morning, that's for sure."
     p "The paint's already drying, it must've been written approximately 2 hours ago."
     m "2 hours? So I was already here..."
@@ -1537,12 +1801,14 @@ label scene_garden_smoke_break:
     m "There must be some hidden way to access the garden from outside. We would've noticed someone coming in during the icebreaker."
     l "This fence is quite high... there's no way som- ..."
     m "Weren't you saying something?"
+    show lou at shake_short(5, 6)
     l "{i}*sniff sniff sniff sniff sniff sniff sniff*{/i}"
     "His snout twitching is kind of adorable."
     l "Here, behind the shed... there's a particular smell... Yeah! Right here!"
     m "Is that... a hole?!"
     l "Yeah, it seems like there's a small hole in the fence, small enough for something like a dog to go through, but any adult would definitely get stuck... A kid could fit though."
     "My hunch might just be correct!"
+    show lou at hop
     l "More than that. This hole really stinks!"
     m "Stinks? Like what?"
     l "Like... freshly cut lawn or something like that..."
@@ -1553,11 +1819,11 @@ label scene_garden_smoke_break:
     "Is that kid involved in Fransk's murder?"
     m "We have to investigate again, Carm mentioned that he hid something behind the closet. I also want to figure out why the front doors wouldn't open."
 
-    $ eventMgr.add_event(QuickEvent("second_murder",{"hotspot_bookshelf_rope","hotspot_fatal_closet","hotspot_bloody_carpet_found","hotspot_black_cloth_recheck"}),"stheno_scream")
+    $ eventMgr.add_event(QuickEvent("second_murder",{"hotspot_bookshelf_rope","hotspot_fatal_closet","hotspot_bloody_carpet_found","hotspot_black_cloth_recheck"},"stheno_scream"))
     
     #After carmille's death
     $ R_livingRoom.convos.append(HotspotData("hotspot_bookshelf_rope",(1311, 247, 618, 397)))
-    $ R_entryHall.convos.append(HotspotData("hotspot_fatal_closet",(280, 231, 391, 789)))
+    $ R_entryHallway.convos.append(HotspotData("hotspot_fatal_closet",(280, 231, 391, 789)))
     $ R_F1fransksRoom.hotspots.append(HotspotData("hotspot_bloody_carpet_found",(1188, 273, 376, 491)))
     $ R_F1fransksRoom.hotspots.append(HotspotData("hotspot_black_cloth_recheck",(286, 489, 433, 194)))
 
@@ -1570,6 +1836,7 @@ label scene_garden_smoke_break:
 
 
 label stheno_scream:
+    with hpunch
     s "WHAT THE FUCK?!"
     l "What's going on?"
     m "Was that Stheno? We should get to the kitchen as soon as possible."
@@ -1583,8 +1850,14 @@ label stheno_scream:
     return
 
 label scene_kitchen_door_locked_chase:
+    show stheno:
+        xalign 0.2 yalign 1.0
+    show lou:
+        xalign 0.8 yalign 1.0
+    with dissolve
     s "Fuck! Shit!"
     l "Is everything alright?"
+    show stheno at hop
     s "The fucking door to the garden's shut. We're stuck!"
     l "How's that even possible?"
     s "Look, the lock's completely covered with... glue?"
@@ -1596,6 +1869,7 @@ label scene_kitchen_door_locked_chase:
     m "And this is the only way to get to the garden?"
     l "Yeah."
     m "! If this lock can only be accessed from the inside, then it means that whoever just did this-"
+    show lou at hop
     l "Should've also locked themselves!"
     m "Shit, they can exit through Fransk's window!"
     l "We were just there! They're probably close!"
@@ -1605,6 +1879,9 @@ label scene_kitchen_door_locked_chase:
 
 #EVENT HERE
 label fin_garage_investigation:
+    show lou:
+        xalign 0.3 yalign 1.0
+    with dissolve
     l "That asshole's really in the garage?'"
     m "Yeah, he probably locked the kitchen door while everyone was busy investigating the trap and shit."
     l "The garage's pretty small... we should be able to catch him quick- ... *sniff sniff sniff sniff sniff sniff* No way!"
@@ -1615,16 +1892,22 @@ label fin_garage_investigation:
     "Lou rushes to open... the freezer?"
 
     l "HEY LITTLE GUY! THIS COULD KILL YOU!"
+    show kid:
+        xalign 0.7 yalign 1.0
+    with dissolve
     k "{i}*brrrrrrrrrr*{/i}"
     m "! This kid!"
     l "What, you know him?"
+    show kid at trembling(4, 0.04)
     k "{i}*clack clack clack clack clack*{/i}"
     m "He's the one that rang earlier... a trick-or-treater..."
     l "WHAT ARE YOU DOING IN HERE, KID?!"
+    show kid at calm
     k "How'd you know my name?"
     l "What? Kid?"
     k "Yeah!"
     l "Uh, lucky guess?"
+    show kid at hop_bounce
     k "Woa! Your costume is awesome!"
     l "Huh?"
     k "Mister werewolf! You look great! How did you get the teeth right?"
@@ -1640,6 +1923,7 @@ label fin_garage_investigation:
     "This kid's ignoring me!"
     l "Answer him, child! Or the big bad wolf will devour you!"
     m "What happened to you being a dog?"
+    show kid at hop
     k "HAHAHAHA, I like you wolfie! I'm here to pull out an insane trick!"
     m "A trick?"
     k "But I won't tell youuuu, *blblblblblblblbl*!"
@@ -1660,6 +1944,7 @@ label cx_kid_interrogation:
 label choice_kid_shelf_trick_success:
 
     m "This rope was set up around the time where we were all gathered in the garden."
+    show kid at shake_short(8, 3)
     k "!"
     m "It must be the \"trick\" you were talking about..."
     k "Can I go? You're boring..."
@@ -1693,6 +1978,7 @@ label choice_shed_message_success:
 label choice_hole_in_garden_success:
 
     m "You found the hole in the fence, right?"
+    show kid at hop
     k "! Sherlock Holmes?!"
     l "Wait, the hole?"
     m "Have you tried smelling him Lou? I had my suspicions but it would pretty much confirm it."
@@ -1712,19 +1998,25 @@ label choice_hole_in_garden_success:
     m "Like... upstairs?"
     k "Nuh huh! I didn't!"
     m "But you-"
+    show kid at hop
     k "STOP BOTHERING ME! MEANIE!"
     m "It's just tha-"
     k "I'll just go now!"
 
     "This kid's running away!"
+    show kid at leave_to_left(0.3)
+    $ renpy.pause(0.3)
+    hide kid
     l "This little- He just sneaked between my legs!"
     m "Let's chase him!"
 
     s "GET BACK HERE LITTLE FUCKER!"
     l "He's already in the hall! Stheno and Cassie must've failed to catch him..."
     call travel_to( R_entryHallway,in_dialogue = True)
+    show stheno at enter_from_left(0.1)
     s "I'M GONNA GET YOUR LITTLE-"
     l "Hey Sthen, is everything okay?"
+    show stheno at hop_bounce
     s "! ... H-How?!"
     l "Yeah, that kid's fast as hell."
     m "We better get up soon before he unfastens the lock in Fransk's window."
@@ -1737,11 +2029,17 @@ label choice_hole_in_garden_success:
     "This shouldn't be possible."
 
     # [Illu de Fransk debout]
+    show lou at hop_bounce
+    with vpunch
     l "F-FRANSK?!"
+    show fransk at enter_from_right(0.55, 0.6)
     f "...What the fuck happened here?"
+    show stheno at hop
     s "Y-you had a fucking hole in your chest! How are you... even alive!?"
     f "...Lou? You chose to come out of the bathroom? Good for you man!"
+    show cassie at enter_from_right(0.75, 0.3)
     c "Fransk!"
+    show pani at enter_from_right(0.93, 0.3)
     p "Yo! You missed the blunt rotation!"
     f "Sorry guys, I have some explanations to give yall..."
     m "... I'm... so glad!"
@@ -1765,6 +2063,7 @@ label choice_hole_in_garden_success:
 
     f "Anyways, what the fuck happened to me in my sleep? I must've dozed off like fucking crazy."
     m "You were kinda... stabbed. Right in the torso. You lost so much blood..."
+    show fransk at hop
     f "Fuck, really! Then that explains everything."
     m "?"
     f "My heart beats thanks to a sort of pacemaker, it's super sensitive to current but without it blood wouldn't get to my body."
@@ -1782,21 +2081,29 @@ label choice_hole_in_garden_success:
 
     "No special abilities, my ass!"
 
+    show fransk at hop
     f "Where's Carm? I wanna see the guy!"
     c "!"
     l "..."
     m "Carm is..."
     s "Carm died."
+    show fransk at hop_bounce
+    with vpunch
     f "What?!"
     s "Someone knew about his identity and set up a fucked up trap using garlic."
+    show fransk at trembling(8, 0.05)
     f "...Wh-What?! Carm? Carm's dead? How!?"
     l "We don't know... we heard this weird announcement, then the light turned fucking purple and he just started panicking-"
+    show fransk at jumping(10, 0.06)
     f "Lights!? FUCK! FUCK FUCK FUCK! CARM!"
+    show fransk at leave_to_right(0.3)
     m "Calm dow-"
 
     "And there he goes, rushing up the stairs."
+    hide fransk
     m "I'll go get-"
 
+    with vpunch
     "TRAITOR, TIME TO PAY FOR YOUR LIES"
     m "! This sound!"
     "MAY THE SPARK OF SIN PUT AN END TO YOURS"
@@ -1805,13 +2112,20 @@ label choice_hole_in_garden_success:
 
     # [Entry hall cinématique]
     m "DON'T OPEN THE DOOR"
+    show fransk:
+        xalign 0.55 yalign 1.0
+    with Fade(0.1, 0.0, 0.4, color="#ffffff")
     "{i}*clack* *ZZAAAAAAAAAAPPPP*{/i}"
+    show fransk at trembling(14, 0.03)
     f "GRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH"
+    show fransk at faint_fall
+    with vpunch
     "{b}*THUD*{/b}"
     m "FRANSK!"
     f "My chest... hurts... My heart...!"
     m "Shut up! I know CPR, the others will get you some help!"
     f "... Tell Carm... No... He's dead..."
+    show fransk at cpr_pump
     m "1, 2, 3, 4. Stay with me! CALL AN AMBULANCE! 1, 2, 3, 4."
     f "I get why... she'd do that."
     m "1, 2, 3, 4."
@@ -1829,10 +2143,12 @@ label choice_hole_in_garden_success:
     m "1, 2, 3, 4. I'M MAKING HIS HEART BEAT! 1, 2, 3, 4."
     p "The seams..."
     m "1, 2, 3, 4."
+    show fransk at lie_still
     p "They're broken Maj..."
     m "1... 2..."
 
     "She was right... performing CPR on a disembodied torso isn't going to save anyo- Isn't going to save- Isn't..."
+    with vpunch
     "{b}*THUD*{/b}"
     m "FUCK! FUCK! FUCK! FUCK!"
     c "Fransk... we just got him back too..."
@@ -1878,8 +2194,17 @@ label final_investigation_end:
     $ R_garage.cutscene = "cx_kid_final_testimony"
 
 label cx_kid_final_testimony:
+    show stheno:
+        xalign 0.12 yalign 1.0
+    show lou:
+        xalign 0.35 yalign 1.0
+    show kid menacing:
+        xalign 0.75 yalign 1.0
+    with dissolve
     s "You fucking brat... I fucking hate running... I'll make you regret that..."
+    show kid at hop
     k "BLBLBLBL I HATE YOU UGLY LADY!"
+    show stheno at hop
     s "Who are you calling ugly?!"
     m "Sthen! Leave him to us! That kid might've witnessed the stabbing!"
     s "... Aight, but that fucker won't talk."
@@ -1905,28 +2230,37 @@ label cx_kid_candy_success:
     m "You're tricking us because of the candy situation, right?"
     k "Of course, it's trick or treat after all!"
     m "Well, here's a treat for you."
+    show kid at hop_bounce
     k "Really?!"
+    show lou at hop
     l "HEY! Aren't those for me?"
     m "... We should be able to talk now, right? No need in keeping grudges."
+    show kid at shake_short(4, 8)
     k "Okay *MUNCH MUNCH* What *MUNCH* do you *MUNCH* wanna know?"
     m "I-"
     k "*MUNCH*"
     m "... What happened to you up-"
     k "Wanna know how I planned to trick you?"
     m "With the shelf, right?"
+    show kid at hop
     k "Yeah, but first I hid your phones!"
+    show stheno at hop
     s "WHAT? WHERE ARE THEY?"
     k "I found 'em in a basket and just dumped them out through that window. I was going to wait for one of them to ring before dropping the shelf to surprise you!"
+    show stheno at hop
     s "This window?! It's like the one in the living room! It barely fucking opens! Lou, come here!"
     l "What?"
     s "Use your lanky ass arms to reach for our phones! I know you can do it!"
+    show lou at trembling(6, 0.04)
     l "Sure... HUUUUUUUUUUUUUUUURG... Shit, they're way out of reach, Sthen!"
     s "Come on! You can do it! You're a good boy!"
     l "Am I? Really?"
     s "Yup, if you get the phones at least."
     l "RAAAAAAAAAAAAAAAAH"
     m "..."
+    show lou at calm_hop
     l "I GOT ONE!"
+    show stheno at hop
     s "YEAH YOU'RE THE BEST BOY!"
     l "I couldn't get the rest though..."
     m "At least we can use it to contact the authorities! Whose phone is it?"
@@ -1943,16 +2277,21 @@ label cx_kid_candy_success:
     "Her face is turning red!"
 
     m "Did you find anything?"
+    show stheno at shake_short(8, 4)
     s "NOTHING IMPORTANT! NOT RELEVANT!"
     l "Can we see?"
+    show stheno at hop
     s "No! Trust me! It's private!"
     m "...Alright."
     s "I'll go join Pani and Cassie in the living room, I wanna hear their opinions before calling the police or anything."
     m "That makes sense."
+    hide stheno with moveoutleft
+    show kid at hop
     k "Can I go join Pani and Cassie too? I wanna play Subway Surfers on that phone!"
     m "No, we still have a few questions for you."
     k "Sure, I tied up the shelf usin-"
     m "What happened upstairs?"
+    show kid at shake_short(8, 3)
     k "!"
     m "You went to Fransk's room earlier, right? What happened there."
     k "I didn't!"
@@ -1968,12 +2307,15 @@ label choice_kid_bloody_carpet_success:
     m "See these small shoe-prints?"
     k "Yeah?"
     m "Mind showing us your sneakers? I bet they'll look awfully similar."
+    show kid at shake_short(8, 3)
     k "N-No!"
     l "Kid, please."
     k "?"
     l "Our friend almost died because of what happened. You have to tell us the truth."
     k "... Died? The zombie guy?"
     l "Yeah the tall one with the varsity jacket."
+    show kid at hop_bounce
+    with vpunch
     k "! Died?!"
     "What's so shocking?"
     k "It wasn't a trick?!"
@@ -2019,14 +2361,17 @@ label cx_kid_caulk_gun_success:
     m "Then why glue the locks shut?"
     k "!"
     m "Kid, tell us the truth. You won't get in trouble, only the grown up will."
+    show kid at trembling(4, 0.06)
     k "...*sniffle sniffle*"
     l "Shit, you're gonna make him cry..."
+    show kid at trembling(8, 0.04)
     k "I DIDN'T WANT TO BE A BAD GUYYYYYYYYY"
     m "!"
     k "THE- THE KILLER- THEY SAID I WAS GOING TO HELP THEM- THEY NEVER SAID IT WAS A PRANK, I ONLY ASSUMED!"
     m "It's alright! Stay calm!"
     k "TH-THEY GAVE ME THIS PHONEEEE!"
     m "!"
+    show lou at hop
     l "It's Fransk's!"
     k "AND THEY SAID THEY'D MESSAGE ME!"
     l "Shit, someone removed the password on it! And he's not lying! There's multiple texts coming from the same hidden number!"
@@ -2041,6 +2386,7 @@ label cx_kid_caulk_gun_success:
     m "!"
     l "Cassie has a brother?"
     m "Wait a second, do you know Cassie's secret?"
+    show kid at calm
     k "*sniff sniff* What secret?"
     m "She told us everything, about the pendant and all."
     k "The pendant? Oh! That secret? It's nothing much, our grammy offered it to her for christmas when she was smaller."
@@ -2055,6 +2401,7 @@ label cx_kid_caulk_gun_success:
     k "She gave me a monster-truck that Christmas! I still have it! It looks like this biiiig car here, and it has keys like these ones!"
     l "Are those the car keys? Where'd you find them?"
     k "In the freezer! They kept poking me while I was hiding."
+    show lou at hop
     l "Hell yeah dude! You rock! We can-"
     m "Lou."
     l "?"
@@ -2070,11 +2417,20 @@ label cx_kid_caulk_gun_success:
 
 label scene_final_confrontation_cassie:
 
+    show stheno:
+        xalign 0.1 yalign 1.0
+    show pani:
+        xalign 0.3 yalign 1.0
+    show cassie:
+        xalign 0.55 yalign 1.0
+    with dissolve
+    show lou at enter_from_right(0.8)
     l "Guys! We have the car keys! We also found Fransk's phone!"
     s "Fished it out of the window?"
     l "Nah, the kid had it, said the killer gave it to him."
     s "Did he see the killer?"
     l "No, but they threatened him by leveraging-"
+    show cassie at highlight
     m "Cassie."
     c "? What's up?"
     m "Did you lie?"
@@ -2084,9 +2440,12 @@ label scene_final_confrontation_cassie:
     m "..."
     l "Maj, what are you saying?"
     m "You're not a ghost, right?"
+    show lou at hop
     l "! Wait, is that what you meant?!"
     m "..."
+    show stheno at hop
     s "Bullshit!"
+    show cassie at hop
     c "Why would I lie about that?!"
     m "Depends on how long you've kept that lie going, but for tonight there's enough of a reason."
     
@@ -2117,6 +2476,7 @@ label choice_final_dreamcatchers_success:
     m "Being a ghost must suck, holding a grudge, roaming the earth for eternity..."
     c "Yes, it does."
     m "Worst of all, you can get sucked into something as inconspicuous as a tiny dreamcatcher."
+    show cassie at hop
     c "!"
     m "Turns out, a ghost wouldn't have been able to stab Fransk, with his love of those ghost repelling trinkets."
     c "..."
@@ -2180,9 +2540,13 @@ label choice_black_robe_proof_success:
     m "Face it Cassie, you're the only one who could've done it, beyond the shadow of a doubt."
     c "... So what?"
     m "!"
+    show cassie at hop
+    with vpunch
     c "I stabbed Fransk. Why does it matter?"
     s "You..."
+    show pani at hop
     p "How could you say that?"
+    show lou at trembling(5, 0.05)
     l "*Growl...*"
     c "If I said that I knew about his regenerative abilities, wouldn't that be enough to affirm that it was nothing but a harmless prank?"
     m "!"
@@ -2202,9 +2566,13 @@ label choice_remote_tag_reveal_success:
 
     m "Fransk's house automation remote is missing."
     c "House automation! As if I had access to-"
+    with hpunch
     l "SHUT THE FUCK UP!"
     m "!"
 
+    show lou at calm_hop
+    show cassie at faint_fall
+    with hpunch
     "In a flash Lou pins Cassie on the floor next to the bookshelf."
 
     m "Lou! Don't!"
@@ -2213,12 +2581,17 @@ label choice_remote_tag_reveal_success:
     l "You set up the traps this morning! And you even removed the rubber coverings on the handle!"
     c "Stop...choking...me...you...mutt!"
     p "LOU LET HER GO!"
+    show pani at hop_bounce
+    show lou at hop_bounce
+    with hpunch
     "{b}*kick*{/b}"
 
     "Pani's kick looked like it hurt like hell, can't imagine how tough her hooves must be."
 
     m "Fuck! Pani!"
+    show cassie at get_up
     c "*huff* *huff*"
+    show stheno at hop
     s "Cassie, you better explain yourself, now!"
     s "I don't have any remote, Maj is a fucking liar! Think about it! Why would I have set up two different plans to murder Fransk!"
 
@@ -2299,6 +2672,10 @@ label choice_fransk_last_words_success:
     m "You harbored feelings for one of them, and discovered their secret relationship-"
     c "Stop right there."
     m "!"
+    show cassie at highlight
+    show stheno at cover
+    show pani at cover
+    show lou at cover
     c "It is true, all of it."
     s "!"
     l "!"
@@ -2311,13 +2688,15 @@ label choice_fransk_last_words_success:
     c "My goal was clear, I needed to warn Fransk! But after I told him... he started avoiding me... At first, I didn't understand, but the thought grew increasingly strong: \"He must've been swayed by the monster! He's rejecting his humanity!\" That's when I started to pretend..."
     c "For a bit, I had gained everything I ever wished for. His attention, his secrets, his fears and worries. He never told me about his immortality, but for everything else I became his confidant. I even gained the trust of Carmille, who saw me as one of his peers."
     c "I was content, making progress and then my world turned upside-down again! There they were, in his room, on his bed, having sex! Passionate, disgusting, heartbreaking, monstrous INTERCOURSE. It's only then that I saw the true monsters they were. The way Carm hid from the sun itself, the disgusting stitches on Fransk's body. I rejected my humanity, and all for that?! I gave my heart to this atrocity!"
+    show lou at highlight
     l "Don't talk about them like this, they were our FRIENDS!"
-    v "Lou, stay calm."
+    m "Lou, stay calm."
     c "Friends? Really?"
     l "They loved each other, you're the one that needed to move on!"
     c "Love? From a monster?"
     l "FUCK YOU MEAN \"FROM A MONSTER\"?"
-    v "Lou!"
+    m "Lou!"
+    show cassie at trembling(6, 0.04)
     c "YOU'LL NEVER UNDERSTAND WHAT IT MEANS TO BE HUMAN, YOU'RE ALL ATROCITIES."
     l "You fucking-"
     c "Had I known about the three of you I would've KILLED YOU, or sent you to rot!"
@@ -2325,6 +2704,9 @@ label choice_fransk_last_words_success:
     c "You're one to talk? Maj? Only a few hours with these animals and you're forgetting the most important part? It's us against them."
     m "Us? There's no humanity in your words."
     c "Then you're just like the rest of them, and just as deserving of eternal suffer-"
+    show lou at hop_bounce
+    show cassie at faint_fall
+    with hpunch
     l "THAT'S ENOUGH! I'LL SHUT YOU UP, FOR FUCKING GOOD. JUST FOR SAYING THAT CARM AND FRANSK DESERVED IT-"
     m "Lou!"
     c "*gasp*...*gasp*"
@@ -2332,26 +2714,35 @@ label choice_fransk_last_words_success:
     l "YEAH?! DID SHE GIVE A FUCK WHEN SHE TORTURED CARMILLE?"
     s "Stop it!"
     m "Lou! There's-"
+    show kid at enter_from_right(0.95, 0.25)
     k "LEAVE MY SISTER ALONE!"
     "{i}*tuggggg*{/i}"
     "I can't comprehend the situation."
+    show lou at faint_fall
+    with vpunch
     "{b}*CRASHHH*{/b}"
     "All I can see now is Cassie's free and..."
     m "Lou!"
+    show lou at trembling(6, 0.04)
     l "GRRAAAAH TH-THIS SHIT'S HEAVY AS FUCK!"
     m "Hold on, wait for me!"
     "I try to support the falling shelf with all of my might, but Lou was right, we won't last long."
+    show kid at trembling(5, 0.05)
     k "I'M SORRY WOLFIE, I ONLY WANTED TO HELP LET ME PUSH WITH YOU!"
     "It might sound dumb but the kid's really giving me the strength I needed, we might just make it!"
     l "Come on guys! Push! I feel it! We can do it! Kid, Maj! You're giving me the strength I need!"
     m "Yeah, we'll get you out of this! Pani, Stheno! Come and help-"
+    show stheno at hop
+    with hpunch
     s "ABBY WATCH OUT!"
 
+    show cassie at get_up
     "Suddenly, I feel it. My strength sapped away from me. I've accepted it, Cassie's hand just pulled me away from my burden, and in a second it will all come crashing down. I don't have a choice, Lou doesn't stand a chance. In desperation I throw out my hand."
 
     m "KID, QUICK!"
     "I pull with all of my might but..."
 
+    with vpunch
     "{b}*SLAAAAAAAAAAAAAAAAAAAAAAAAAAM*{/b}"
     m "GRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH"
 
@@ -2368,13 +2759,19 @@ label choice_fransk_last_words_success:
     c "The young are meant to serve their elders. I don't care for his death."
     m "How... you??"
     "How could she say something so... awful? All of that while digging through her bag..."
+    show cassie at hop
     c "If you liked Fransk so much, then you'll kill you with the same knife."
     m "PANI, STHEN, RUN!"
+    with Fade(0.1, 0.0, 0.3, color="#ffffff")
+    with vpunch
     "{b}*SHATTER*{/b}"
+    show stheno at hop
     s "Maj, look away!"
 
     "For a moment, I saw it. Stheno's true form."
+    with vpunch
     "{b}*THUD*{/b}"
+    show cassie at petrify
     "Cassie, petrified, the face of pure hatred forever carved onto stone."
 
     s "Pani, free him, quick."
@@ -2433,12 +2830,14 @@ label choice_fransk_last_words_success:
     m "Keep going, I was curious to hear what you had to say..."
     p "Well, you'll have to find the answer yourself, seems like there's a whole ass medical crew ready for your arrival!"
     m "!"
+    show stheno at highlight
     s "Come here, Abby. I wish I could've seen you, but I wouldn't want to turn you to stone. Take this hug as a \"see you!\""
     m "Sthen..."
     "{i}*CLICK*{/i}"
     "Are you Abdul-Majid?"
     p "That's him, guys!"
     "Okay, GO! GO! GO!"
+    show pani at hop_bounce
     p "Bye bye! See you soon!"
 
     "As the doctors set me on the stretcher I can't help but feel... My consciousness.... fade...."
