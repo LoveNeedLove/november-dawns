@@ -1466,6 +1466,8 @@ label talk_stheno_bedroom:
 
 label prologue_part10_searches_and_trial:
 
+    drHouse.clearHouse()
+
     show lou
     show stheno:
         xalign 0.25
