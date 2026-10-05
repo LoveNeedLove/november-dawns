@@ -33,7 +33,7 @@ init -10 python:
     BLIP_CHANNEL = "blip"
     BLIP_SILENT = u" \t\r\n.,;:!?…-–—\"'“”‘’«»()[]{}*_/\\¡¿"
 
-    BLIP_DEBUG = True    # passe à False quand tout fonctionne
+    BLIP_DEBUG = False    # passe à False quand tout fonctionne
 
     def blip_log(msg, notify=False):
         """Écrit dans log.txt et la console (Shift+O), et peut afficher une notification."""
