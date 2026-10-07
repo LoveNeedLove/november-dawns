@@ -1068,7 +1068,7 @@ label choice_cassie_cant_enter_success:
     c "..."
     m "The reason you can't enter is because of..."
 
-    call force_present_proof("dreamcatchers") from _call_force_present_proof_1
+    call force_present_proof("dreamcatchers")
     jump choice_dreamcatchers_success
 
 label choice_dreamcatchers_success:
@@ -1178,7 +1178,7 @@ label cx_murder_scent_investigation:
         Statement(v, "Fransk was probably murdered during one of his naps."),
         Statement(l, "The murderer is potentially an outsider."),
         Statement(l, "They had this distinct smell of grass, and headed towards Fransk's room."),
-        Statement(s, "They probably opened the door, and stabbed poor Fransk in the stomach.",
+        Statement(s, "They probably opened the door, and stabbed poor Fransk in the stomach. Before leaving again.",
                 correct_evidence_id="smell_order",
                 contradiction_label="cx_smell_order_success"),
         Statement(v, "Now all that's left to figure out is their escape route!")
@@ -1228,7 +1228,7 @@ label choice_the_murderer_stairs_success:
 
     "I must have some proof laying around. Let's think about it."
 
-    call force_present_proof("garden_window") from _call_force_present_proof_2
+    call force_present_proof("Garden_Window")
     jump choice_garden_window_success
 
 
@@ -2428,7 +2428,7 @@ label cx_kid_caulk_gun_success:
     m "... Kid, stay in the garage okay? We're going to warn your sister." 
     "... Why would she lie? Why lie about THAT?"
     $ R_livingRoom.cutscene = "scene_final_confrontation_cassie"
-    return
+    jump room_loop
 
 
 # --- CONFRONTATION FINALE : CASSIE ANDERSON ---
@@ -2485,7 +2485,7 @@ label choice_cassie_alibi_motive_success:
 
     "No reason in keeping this going, let's just spell it out for them."
 
-    call force_present_proof("dreamcatchers") from _call_force_present_proof_10
+    call force_present_proof("Dreamcatchers") from _call_force_present_proof_10
     jump choice_final_dreamcatchers_success
 
 
@@ -2897,7 +2897,7 @@ label talk_carmille_investigation_pani:
     $ renpy.notify("Nyctozepam added to evidence !")
 
     $ eventMgr.unlock("talk_carmille_investigation_pani")
-    return
+    jump room_loop
 
 label talk_stheno_investigation_pani:
     s "15 minutes... that's approximately the time where we got our drinks."
@@ -2918,7 +2918,7 @@ label talk_stheno_investigation_pani:
     $ renpy.notify("Bathroom order added to evidence !")
 
     $ eventMgr.unlock("talk_stheno_investigation_pani")
-    return
+    jump room_loop
 
 label talk_cassie_investigation_pani:
     m "You were gone for a little bit. Let me recap everything that happened."
@@ -2935,7 +2935,7 @@ label talk_cassie_investigation_pani:
     c "I'm glad we talked earlier, at least we got acquainted."
     m "Yeah, I'm happy too."
     $ eventMgr.unlock("talk_cassie_investigation_pani")
-    return
+    jump room_loop
 
 
 
@@ -3002,7 +3002,7 @@ label hotspot_investigation_body:
     $ renpy.notify("Black Robe added to evidence !")
 
     $ eventMgr.unlock("hotspot_investigation_body")
-    return
+    jump room_loop
 
 label hotspot_investigation_carpet:
     v "Check this flooring out."
@@ -3014,7 +3014,7 @@ label hotspot_investigation_carpet:
     m "Let's keep an eye out for it, okay? If the killer bothered with hiding it then it must be important."
     
     $ eventMgr.unlock("hotspot_investigation_carpet")
-    return
+    jump room_loop
 
 label hotspot_investigation_dreamcatchers:
     m "What's that?"
@@ -3034,17 +3034,17 @@ label hotspot_investigation_dreamcatchers:
     "He's doing his best to stay composed but he must feel terrible..."
 
     # [Dreamcatchers added to evidence]
-    $ P_dreamcatchers = Proof("Dreamcatchers", 
+    $ P_dreamcatchers = Proof("dreamcatchers", 
                             "Fransk allegedly loved these weird trinkets, they apparently helped with his nightmares.", 
                             "images/props/dreamcatchers.png", 
                             R_F1fransksRoom, 
-                            1550, 500, 
+                            893, 190, 
                             "dreamcatchers")
     $ addProofToInventory(P_dreamcatchers)
     $ renpy.notify("Dreamcatchers added to evidence !")
 
     $ eventMgr.unlock("hotspot_investigation_dreamcatchers")
-    return
+    jump room_loop
 
 label hotspot_investigation_closet:
     l "Yeah... that's what I remembered..."
@@ -3072,7 +3072,7 @@ label hotspot_investigation_closet:
     $ renpy.notify("Lou's Jacket added to evidence !")
 
     $ eventMgr.unlock("hotspot_investigation_closet")
-    return
+    jump room_loop
 
 label hotspot_investigation_window_living:
     l "This window... I can't believe they used it to hide my vape."
@@ -3101,7 +3101,7 @@ label hotspot_investigation_window_living:
     $ renpy.notify("Living Room Window added to evidence !")
 
     $ eventMgr.unlock("hotspot_investigation_window_living")
-    return
+    jump room_loop
 
 label hotspot_investigation_window_garden:
     l "The smell of blood is really getting to me, mind if I open these windows?"
@@ -3135,7 +3135,7 @@ label hotspot_investigation_window_garden:
     $ renpy.notify("Garden Window added to evidence !")
     
     $ eventMgr.unlock("hotspot_investigation_window_garden")
-    return
+    jump room_loop
 
 label talk_carmille_investigation_murder:
     v "Fransk..."
@@ -3165,7 +3165,7 @@ label talk_carmille_investigation_murder:
     "If he really had some kind of condition then it would be important to note." 
     
     $ eventMgr.unlock("talk_carmille_investigation_murder")
-    return
+    jump room_loop
 
 label talk_lou_investigation_murder:
     l "I can't believe that he's gone..."
@@ -3261,7 +3261,7 @@ label talk_lou_investigation_murder:
     $ renpy.notify("Lous smell added to evidence !")
     
     $ eventMgr.unlock("talk_lou_investigation_murder")
-    return
+    jump room_loop
 
 label talk_stheno_investigation_murder:
     s "..."
@@ -3301,7 +3301,7 @@ label talk_stheno_investigation_murder:
     s "None of us."
     "...She might be hard to approach but she cares deeply about her friends..."
     $ eventMgr.unlock("talk_stheno_investigation_murder")
-    return
+    jump room_loop
 
 
 # --- ENQUÊTE 4 : APRÈS LE MEURTRE DE CARMILLE (JARDIN, ENTRÉE & GARAGE) ---

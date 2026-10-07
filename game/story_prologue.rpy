@@ -112,8 +112,6 @@ label prologue_part1_arrival:
     call travel_to(R_entryHallway) from _call_travel_to
     
 
-    return
-
 
 # --- PARTIE 2 : L'ENTRÉE ET STHENO ---
 
@@ -211,8 +209,6 @@ label prologue_part2_entrance_stheno:
 
     call prologue_part3_carmille from _call_prologue_part3_carmille
 
-    return
-
 
 # --- PARTIE 3 : RENCONTRE AVEC CARMILLE ---
 
@@ -285,7 +281,7 @@ label prologue_part3_carmille:
     $ R_livingRoom.cutscene = "prologue_part4_living_room"
     show screen minimap_toggle
 
-    return
+    jump room_loop
 
 
 # --- PARTIE 4 : LE SALON, LA BIÈRE ET LE DÉBAT AVEC LOU ET PANI ---
@@ -387,7 +383,7 @@ label prologue_part4_living_room:
 
     $ R_entryHallway.cutscene = "prologue_part5_trick_or_treater"
 
-    return
+    jump room_loop
 
 
 # --- PARTIE 5 : L'INTERRUPTION DU TRICK-OR-TREATER ---
@@ -519,7 +515,6 @@ label prologue_part5_trick_or_treater:
     $ R_livingRoom.cutscene = "prologue_part6_cassie_breakdown"
     call travel_to(R_livingRoom) from _call_travel_to_1
 
-    return
 
 
 # --- PARTIE 6 : LA CRISE D'ANGOISSE DE CASSIE ---
@@ -735,7 +730,7 @@ label prologue_part6_cassie_breakdown:
 
     $ R_kitchen.cutscene = "prologue_part7_kitchen_cocktail"
 
-    return
+    jump room_loop
 
 
 # --- PARTIE 7 : PRÉPARATION DU COCKTAIL AVEC CASSIE DANS LA CUISINE ---
@@ -899,7 +894,6 @@ label prologue_part7_kitchen_cocktail:
 
     call prologue_part8_truth_or_dare from _call_prologue_part8_truth_or_dare
 
-    return
 
 
 # --- PARTIE 8 : ACTION OU VÉRITÉ ---
@@ -1232,7 +1226,6 @@ label prologue_part8_truth_or_dare:
 
     call prologue_part9_investigation_intro from _call_prologue_part9_investigation_intro
 
-    return
 
 
 # --- PARTIE 9 : L'ENQUÊTE DE LA VAPE PERDUE ---
@@ -1305,7 +1298,7 @@ label prologue_part9_investigation_intro:
     $ R_kitchen.hotspots.append(HotspotData("hotspot_kitchen", (697, 381, 649, 516)))
     $ R_kitchen.hotspots.append(HotspotData("hotspot_garage_garden", (1326, 394, 344, 394)))
 
-    return
+    jump room_loop
 
 
 label hotspot_couch:
@@ -1319,7 +1312,7 @@ label hotspot_couch:
     
     $ eventMgr.unlock("hotspot_couch")
 
-    return
+    jump room_loop
 
 label talk_stheno_living_room:
     show stheno
@@ -1333,7 +1326,7 @@ label talk_stheno_living_room:
 
     $ eventMgr.unlock("talk_stheno_living_room")
 
-    return
+    jump room_loop
 
 label talk_lou_living_room:
     show lou
@@ -1366,7 +1359,7 @@ label talk_lou_living_room:
     
     $ eventMgr.unlock("talk_lou_living_room")
 
-    return
+    jump room_loop
 
 label hotspot_kitchen:
     show carmille
@@ -1383,7 +1376,7 @@ label hotspot_kitchen:
     
     $ eventMgr.unlock("hotspot_kitchen")
 
-    return
+    jump room_loop
 
 label hotspot_garage_garden:
     show carmille
@@ -1397,7 +1390,7 @@ label hotspot_garage_garden:
     hide carmille
     
     $ eventMgr.unlock("hotspot_garage_garden")
-    return
+    jump room_loop
 
 label transition_to_bedroom:
     show lou
@@ -1423,7 +1416,7 @@ label transition_to_bedroom:
     $ R_F1fransksRoom.hotspots.append(HotspotData("hotspot_bedroom_bed", (237, 517, 542, 277)))
     $ R_F1fransksRoom.hotspots.append(HotspotData("hotspot_bedroom_window",(1603, 556, 332, 362)))
 
-    return
+    jump room_loop
 
 
 label hotspot_bedroom_bed:
@@ -1433,7 +1426,7 @@ label hotspot_bedroom_bed:
     hide lou
     
     $ eventMgr.unlock("hotspot_bedroom_bed")
-    return
+    jump room_loop
 
 
 label hotspot_bedroom_window:
@@ -1462,7 +1455,7 @@ label hotspot_bedroom_window:
 
     $ eventMgr.unlock("hotspot_bedroom_window")
 
-    return
+    jump room_loop
 
 
 label talk_fransk_bedroom:
@@ -1482,7 +1475,7 @@ label talk_fransk_bedroom:
     hide lou
     
     $ eventMgr.unlock("talk_fransk_bedroom")
-    return
+    jump room_loop
 
 
 label talk_stheno_bedroom:
@@ -1496,7 +1489,7 @@ label talk_stheno_bedroom:
     hide stheno 
     
     $ eventMgr.unlock("talk_stheno_bedroom")
-    return
+    jump room_loop
 
 
 # --- PARTIE 10 : LE CONTRE-INTERROGATOIRE ET LE DÉNOUEMENT ---
@@ -1890,5 +1883,3 @@ label choice_stheno_searched_success:
     # [FIN DU PROLOGUE]
 
     jump scene_lou_werewolf_discovery
-
-    return
