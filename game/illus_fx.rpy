@@ -60,10 +60,6 @@ transform title_rise:
     parallel:
         ease 1.6 yoffset 0
 
-transform title_line:
-    xzoom 0.0
-    pause 1.0
-    ease 1.2 xzoom 1.0
 
 screen title_card(title="NOVEMBER DAWNS"):
     layer "overlay"
@@ -86,10 +82,6 @@ screen title_card(title="NOVEMBER DAWNS"):
                 outlines [ (0, "#33dbe7", 4, 4) ]
                 at title_rise
 
-            add Solid("#33dbe7"):
-                xysize (700, 6)
-                xalign 0.5
-                at title_line
 
     ## Filet de sécurité : l'écran se retire tout seul à la fin.
     timer TITLE_DURATION action Function(renpy.hide_screen, "title_card", layer="overlay")
