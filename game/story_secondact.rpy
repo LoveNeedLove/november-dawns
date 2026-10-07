@@ -162,7 +162,6 @@ label scene_lou_werewolf_discovery:
     $ R_livingRoom.cutscene = "scene_living_room_return"
     $ R_livingRoom.bg = "backgrounds/living_room_2.png"
     call travel_to(R_livingRoom) from _call_travel_to_5
-    return
 
 
 # --- SCÈNE 2 : RETOUR AU SALON ET ÉPISODE DE LA BÂCHE ---
@@ -356,7 +355,7 @@ label scene_living_room_return:
 
     $ R_garage.cutscene = "scene_phones_missing_pani_faint"
 
-    return
+    jump room_loop
 
 
 # --- SCÈNE 3 : LES TÉLÉPHONES DISPARUS ET L'ÉVANOUISSEMENT DE PANI ---
@@ -485,7 +484,7 @@ label scene_phones_missing_pani_faint:
     $ R_kitchen.convos.append(Convos("stheno","talk_stheno_investigation_pani"))
     $ R_kitchen.convos.append(Convos("cassie","talk_cassie_investigation_pani"))
 
-    return
+    jump room_loop
 
 # --- CONTRE-INTERROGATOIRE : QUI A DROGUÉ PANI ? ---
 
@@ -763,7 +762,7 @@ label choice_pani_weight_success:
     "... What is going on here? Fucking monsters? How is that making sense?"
 
     $ R_F1hallway.cutscene = "scene_fransk_first_murder"
-    return
+    jump room_loop
 
 
 # --- SCÈNE 4 : DISCUSSION AVEC LOU ET PREMIER MEURTRE DE FRANSK ---
@@ -988,7 +987,7 @@ label scene_fransk_first_murder:
     $ R_F1fransksRoom.hotspots.append(HotspotData("hotspot_investigation_window_living", (1603, 556, 332, 362)))
     $ R_F1fransksRoom.hotspots.append(HotspotData("hotspot_investigation_window_garden",(820, 393, 150, 190)))
 
-    return
+    jump room_loop
 
 
 # --- CONFRONTATION CASSIE ET LE SECRET DU FANTÔME ---
@@ -1154,8 +1153,6 @@ label choice_dreamcatchers_success:
     hide cassie with dissolve
     $ R_livingRoom.cutscene = "cx_murder_scent_investigation"
     call travel_to( R_F1hallway) from _call_travel_to_17
-
-    return
 
 
 # --- CONTRE-INTERROGATOIRE : L'INTRUS ET L'ODEUR D'HERBE ---
@@ -1522,7 +1519,6 @@ label choice_window_stayed_open_success:
     m "From now on, you have to be truthful, let's get to the bottom of th-"
 
     jump scene_carmille_death
-    return
 
 
 # --- SCÈNE 5 : LA MORT DE CARMILLE ---
@@ -1650,7 +1646,7 @@ label scene_carmille_death:
     m "Sure... I could use the fresh air..."
 
     $ R_garden.cutscene = "scene_garden_smoke_break"
-    return
+    jump room_loop
 
 
 # --- SCÈNE 6 : LE JARDIN, LE SOUVENIR ET LE MESSAGE DU SHED ---
@@ -1844,7 +1840,7 @@ label scene_garden_smoke_break:
     $ R_F1fransksRoom.hotspots.append(HotspotData("hotspot_bloody_carpet_found",(1188, 273, 376, 491)))
     $ R_F1fransksRoom.hotspots.append(HotspotData("hotspot_black_cloth_recheck",(286, 489, 433, 194)))
 
-    return
+    jump room_loop
 
 
 # --- SCÈNE 7 : LE PIÈGE DE LA CUISINE ET LA RENCONTRE DANS LE FREEZER ---
@@ -1864,7 +1860,7 @@ label stheno_scream:
     $ R_garage.hotspots.append(HotspotData("hotspot_garage_car",(391, 308, 610, 488)))
     $ R_garage.hotspots.append(HotspotData("hotspot_garage_caulk_gun", (242, 810, 231, 155)))
 
-    return
+    jump room_loop
 
 label scene_kitchen_door_locked_chase:
     show stheno:
@@ -1892,7 +1888,7 @@ label scene_kitchen_door_locked_chase:
     l "We were just there! They're probably close!"
     m "Let's check out the house!"
     s "I'll stay here, if the motherfucker tries to get upstairs then I'll catch their ass."
-    return
+    jump room_loop
 
 #EVENT HERE
 label fin_garage_investigation:
@@ -2202,7 +2198,7 @@ label choice_hole_in_garden_success:
     $ R_F1parentsRoom.hotspots.append(HotspotData("hotspot_parent_room_mom_nightstand",(1586, 260, 383, 539)))
     $ R_F1parentsRoom.hotspots.append(HotspotData("hotspot_parent_room_dad_nightstand", (1109, 341, 270, 398)))
 
-    return
+    jump room_loop
 
 
 # --- CONTRE-INTERROGATOIRE : LE GAMIN ET LE TÉLÉPHONE RETROUVÉ ---
@@ -2867,7 +2863,7 @@ label choice_fransk_last_words_success:
 
     "As the doctors set me on the stretcher I can't help but feel... My consciousness.... fade...."
 
-    return
+    jump epilogue_november_dawns
 
 
 
